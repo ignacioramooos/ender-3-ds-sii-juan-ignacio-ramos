@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<style id="lumi-runtime">
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:ital,wght@0,300..700;1,300..700&family=Google+Sans+Code:ital,wght,MONO@0,300..700,0..1;1,300..700,0..1&display=swap');
+
+:root {
+  --body-bg: transparent;
+  --ff-sans: 'Google Sans Flex', 'Google Sans Text', 'Google Sans', sans-serif;
+  --ff-mono: 'Google Sans Code', 'Google Sans Mono', monospace;
+
+  --surface: #fdfcfc;
+  --surface-dim: #f2f0f0;
+  --surface-bright: #ffffff;
+  --surface-container: #f2f0f0;
+  --surface-container-high: #e6e6e6;
+  --on-surface: #000000;
+  --on-surface-variant: rgba(0, 0, 0, 0.55);
+  --primary: #3186ff;
+  --accent-container: #dcf1ff;
+  --stroke-default: #e3e3e3;
+  --outline: #727676;
+  --positive: #008052;
+  --positive-container: #daf9d4;
+  --r-s: 8px;
+  --r-m: 12px;
+  --r-full: 999px;
+}
+
+:root[data-theme="dark"], body.dark-mode {
+  --body-bg: #0f0f0f;
+  --surface: #0f0f0f;
+  --surface-dim: #141414;
+  --surface-bright: #1c1c1c;
+  --surface-container: #141414;
+  --on-surface: #e0e0e0;
+  --on-surface-variant: rgba(255, 255, 255, 0.55);
+  --stroke-default: #2d2f38;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--body-bg, transparent);
+  color: var(--on-surface);
+  font-family: var(--ff-sans, system-ui, sans-serif);
+}
+
+.widget-container {
+  width: 100%;
+  padding: 16px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.widget-header {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.widget-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--on-surface);
+}
+
+.widget-subtitle {
+  margin: 0;
+  font-size: 12px;
+  color: var(--on-surface-variant);
+  font-family: var(--ff-mono, monospace);
+}
+
+.main-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 12px;
+  align-items: start;
+}
+
+@media (max-width: 600px) {
+  .main-grid { grid-template-columns: 1fr; }
+}
+
+.graph-card {
+  background: var(--surface-dim);
+  border-radius: var(--r-m);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 1px solid var(--stroke-default);
+}
+
+.card-label-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-title {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--on-surface-variant);
+}
+
+.graph-svg-wrapper {
+  width: 100%;
+  aspect-ratio: 16 / 11;
+  background: var(--surface-bright);
+  border-radius: var(--r-s);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--stroke-default);
+}
+
+.graph-svg-wrapper svg { width: 100%; height: 100%; display: block; user-select: none; }
+
+.link-edge { cursor: pointer; transition: all 0.2s; }
+.link-edge:hover { stroke: var(--primary) !important; stroke-width: 3.5px !important; }
+.link-edge.is-selected { stroke: var(--primary) !important; stroke-width: 4px !important; }
+.link-edge.is-loop { stroke-dasharray: 4 4; }
+
+.node-group { cursor: default; }
+.node-bg { fill: var(--surface-container); stroke: var(--outline); stroke-width: 1.5px; transition: all 0.2s; }
+.node-group.is-active .node-bg { fill: var(--accent-container); stroke: var(--primary); }
+
+.node-text { font-family: var(--ff-sans); font-size: 12px; fill: var(--on-surface); font-weight: 600; text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+.node-sub { font-family: var(--ff-mono); font-size: 11px; fill: var(--on-surface-variant); text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+
+.edge-pill { cursor: pointer; }
+.edge-pill rect { fill: var(--surface-bright); stroke: var(--stroke-default); stroke-width: 1px; }
+.edge-pill:hover rect { fill: var(--accent-container); stroke: var(--primary); }
+.edge-pill.is-selected rect { fill: var(--accent-container); stroke: var(--primary); stroke-width: 1.5px; }
+.edge-pill text { font-family: var(--ff-mono); font-size: 11px; font-weight: 600; fill: var(--on-surface); text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+
+.inspector-card {
+  background: var(--surface-dim);
+  border-radius: var(--r-m);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1px solid var(--stroke-default);
+}
+
+.link-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid var(--stroke-default);
+  padding-bottom: 8px;
+}
+
+.link-name { font-size: 15px; font-weight: 600; margin: 0; }
+.link-type { font-size: 11px; color: var(--primary); font-family: var(--ff-mono); font-weight: 600; background: var(--accent-container); padding: 2px 8px; border-radius: var(--r-full); }
+
+.ddl-section { display: flex; flex-direction: column; gap: 4px; }
+.section-caption { font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--on-surface-variant); }
+
+.ddl-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 4px;
+  background: var(--surface-bright);
+  padding: 6px;
+  border-radius: var(--r-s);
+}
+
+.ddl-item { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.ddl-label { font-family: var(--ff-mono); font-size: 11px; color: var(--on-surface-variant); }
+.ddl-badge {
+  width: 100%;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  font-family: var(--ff-mono);
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--surface-dim);
+  color: var(--on-surface-variant);
+}
+.ddl-badge.is-active { background: var(--positive-container); color: var(--positive); }
+.ddl-badge.is-coupled { background: var(--accent-container); color: var(--primary); }
+
+.torseur-container {
+  background: var(--surface-bright);
+  border-radius: var(--r-s);
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.torseur-header { display: flex; justify-content: space-between; font-family: var(--ff-mono); font-size: 11px; color: var(--on-surface); }
+.torseur-matrix { display: flex; align-items: center; justify-content: center; gap: 8px; }
+.matrix-bracket { font-size: 32px; font-weight: 300; color: var(--on-surface-variant); line-height: 1; user-select: none; }
+.matrix-table { border-collapse: collapse; font-family: var(--ff-mono); font-size: 13px; text-align: right; }
+.matrix-table td { padding: 2px 8px; }
+.col-rot { color: #2575fc; font-weight: 600; }
+.col-tra { color: #228a49; font-weight: 600; }
+
+.torseur-meta { font-size: 11px; color: var(--on-surface-variant); font-family: var(--ff-mono); display: flex; justify-content: space-between; border-top: 1px dashed var(--stroke-default); padding-top: 4px; }
+
+.info-row { display: flex; flex-direction: column; gap: 2px; font-size: 12px; background: var(--surface-bright); padding: 6px 8px; border-radius: var(--r-s); }
+.info-title { font-size: 11px; color: var(--on-surface-variant); font-weight: 600; }
+.info-value { color: var(--on-surface); font-family: var(--ff-sans); }
+
+.control-deck {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  background: var(--surface-dim);
+  border-radius: var(--r-m);
+  border: 1px solid var(--stroke-default);
+}
+
+.chips-row { display: flex; flex-wrap: wrap; gap: 6px; }
+
+button.lumi-chip {
+  padding: 6px 12px;
+  border-radius: var(--r-full);
+  border: 1px solid var(--stroke-default);
+  background: var(--surface-bright);
+  color: var(--on-surface);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.15s ease;
+}
+
+button.lumi-chip.is-active {
+  background: var(--accent-container);
+  color: var(--primary);
+  border-color: var(--primary);
+  font-weight: 600;
+}
+
+.sliders-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+@media (max-width: 500px) {
+  .sliders-grid { grid-template-columns: 1fr; }
+}
+
+.control-item { display: flex; flex-direction: column; gap: 4px; }
+.control-head { display: flex; justify-content: space-between; font-size: 12px; }
+.control-label { font-weight: 500; }
+.control-value { font-family: var(--ff-mono); color: var(--primary); font-weight: 600; }
+.lumi-slider-container { display: flex; align-items: center; width: 100%; }
+.lumi-slider { width: 100%; cursor: pointer; }
+</style>
+  <meta charset="UTF-8">
+  <title>Inspecteur Cinématique Creality Ender 3</title>
+</head>
+<body>
+  <div class="widget-container">
+    <div class="widget-header">
+      <h2 class="widget-title">Creality Ender 3 — Modélisation Cinématique</h2>
+      <p class="widget-subtitle">Graphe des liaisons & Torseurs cinématiques (NF EN ISO 3952)</p>
+    </div>
+
+    <div class="main-grid">
+      <div class="graph-card">
+        <div class="card-label-bar">
+          <span class="card-title">Graphe des Liaisons</span>
+          <span style="font-size: 11px; font-family: var(--ff-mono); color: var(--on-surface-variant);">1 Boucle fermée (Z) + 2 Branches (X,Y)</span>
+        </div>
+        <div class="graph-svg-wrapper">
+          <svg viewBox="0 0 340 230" id="kinematicGraph" preserveAspectRatio="xMidYMid meet">
+            <path id="edge-L01" class="link-edge" d="M 90 162 L 68 88" stroke="var(--outline)" stroke-width="2" fill="none" onclick="selectLink('L01')"/>
+            <path id="edge-L12" class="link-edge" d="M 85 70 L 145 70" stroke="var(--outline)" stroke-width="2" fill="none" onclick="selectLink('L12')"/>
+            <path id="edge-L02" class="link-edge is-loop" d="M 160 88 L 110 162" stroke="var(--outline)" stroke-width="2" fill="none" onclick="selectLink('L02')"/>
+            <path id="edge-L23" class="link-edge" d="M 195 70 L 255 70" stroke="var(--outline)" stroke-width="2" fill="none" onclick="selectLink('L23')"/>
+            <path id="edge-L04" class="link-edge" d="M 125 180 L 225 180" stroke="var(--outline)" stroke-width="2" fill="none" onclick="selectLink('L04')"/>
+
+            <g class="edge-pill" id="pill-L01" onclick="selectLink('L01')"><rect x="62" y="115" width="34" height="18" rx="9"/><text x="79" y="124">L01</text></g>
+            <g class="edge-pill" id="pill-L12" onclick="selectLink('L12')"><rect x="98" y="61" width="34" height="18" rx="9"/><text x="115" y="70">L12</text></g>
+            <g class="edge-pill" id="pill-L02" onclick="selectLink('L02')"><rect x="130" y="122" width="34" height="18" rx="9"/><text x="147" y="131">L02</text></g>
+            <g class="edge-pill" id="pill-L23" onclick="selectLink('L23')"><rect x="208" y="61" width="34" height="18" rx="9"/><text x="225" y="70">L23</text></g>
+            <g class="edge-pill" id="pill-L04" onclick="selectLink('L04')"><rect x="158" y="171" width="34" height="18" rx="9"/><text x="175" y="180">L04</text></g>
+
+            <g class="node-group" id="node-E0"><rect class="node-bg" x="65" y="162" width="70" height="36" rx="18"/><text class="node-text" x="100" y="175">E0 : Bâti</text><text class="node-sub" x="100" y="188">Structure</text></g>
+            <g class="node-group" id="node-E1"><rect class="node-bg" x="25" y="52" width="70" height="36" rx="18"/><text class="node-text" x="60" y="65">E1 : Vis Z</text><text class="node-sub" x="60" y="78">Moteur Z</text></g>
+            <g class="node-group" id="node-E2"><rect class="node-bg" x="135" y="52" width="70" height="36" rx="18"/><text class="node-text" x="170" y="65">E2 : Char. Z</text><text class="node-sub" x="170" y="78">Poutre X</text></g>
+            <g class="node-group" id="node-E3"><rect class="node-bg" x="245" y="52" width="70" height="36" rx="18"/><text class="node-text" x="280" y="65">E3 : Tête X</text><text class="node-sub" x="280" y="78">Extrudeur</text></g>
+            <g class="node-group" id="node-E4"><rect class="node-bg" x="215" y="162" width="70" height="36" rx="18"/><text class="node-text" x="250" y="175">E4 : Plateau</text><text class="node-sub" x="250" y="188">Axe Y</text></g>
+          </svg>
+        </div>
+      </div>
+
+      <div class="inspector-card" id="inspectorCard">
+        <div class="link-header">
+          <div>
+            <h3 class="link-name" id="linkTitle">Liaison L01 — E0 / E1</h3>
+            <span id="linkDesc" style="font-size: 12px; color: var(--on-surface-variant);">Pivot d'axe (O1, z0)</span>
+          </div>
+          <span class="link-type" id="linkTypeBadge">PIVOT</span>
+        </div>
+
+        <div class="ddl-section">
+          <span class="section-caption">Degrés de Liberté (DDL) dans (x0, y0, z0)</span>
+          <div class="ddl-grid">
+            <div class="ddl-item"><span class="ddl-label">Rx</span><div class="ddl-badge" id="ddl-Rx">0</div></div>
+            <div class="ddl-item"><span class="ddl-label">Ry</span><div class="ddl-badge" id="ddl-Ry">0</div></div>
+            <div class="ddl-item"><span class="ddl-label">Rz</span><div class="ddl-badge" id="ddl-Rz">0</div></div>
+            <div class="ddl-item"><span class="ddl-label">Tx</span><div class="ddl-badge" id="ddl-Tx">0</div></div>
+            <div class="ddl-item"><span class="ddl-label">Ty</span><div class="ddl-badge" id="ddl-Ty">0</div></div>
+            <div class="ddl-item"><span class="ddl-label">Tz</span><div class="ddl-badge" id="ddl-Tz">0</div></div>
+          </div>
+        </div>
+
+        <div class="ddl-section">
+          <span class="section-caption">Torseur Cinématique {V(i/j)}</span>
+          <div class="torseur-container">
+            <div class="torseur-header">
+              <span>Rés. Rot. Ω (rad/s)</span>
+              <span>Vect. Vit. V (mm/s)</span>
+            </div>
+            <div class="torseur-matrix">
+              <span class="matrix-bracket">{</span>
+              <table class="matrix-table">
+                <tr><td class="col-rot" id="m-rx">0.0</td><td class="col-tra" id="m-tx">0.0</td></tr>
+                <tr><td class="col-rot" id="m-ry">0.0</td><td class="col-tra" id="m-ty">0.0</td></tr>
+                <tr><td class="col-rot" id="m-rz">10.0</td><td class="col-tra" id="m-tz">0.0</td></tr>
+              </table>
+              <span class="matrix-bracket">}</span>
+            </div>
+            <div class="torseur-meta">
+              <span id="torseurPt">Point de réduction : O1</span>
+              <span id="torseurBase">Base : (x0, y0, z0)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <span class="info-title">SOLUTION CONSTRUCTIVE (CREALITY ENDER 3)</span>
+          <span class="info-value" id="solConstructive">Roulements à billes + Accouplement flexible NEMA 17</span>
+        </div>
+
+        <div class="info-row" style="background: var(--surface-dim);">
+          <span class="info-title">LOI DE COMPORTEMENT CINÉMATIQUE</span>
+          <span class="info-value" id="kinematicLaw" style="font-family: var(--ff-mono); font-size: 12px; color: var(--primary);">
+            ω_10 = 10.00 rad/s (Consigne Moteur Z)
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="control-deck">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <span class="card-title">Sélection Rapide</span>
+        <span style="font-size: 11px; font-family: var(--ff-mono); color: var(--on-surface-variant);">Pas vis Z p_z = 8.0 mm/tr</span>
+      </div>
+
+      <div class="chips-row">
+        <button class="lumi-chip is-active" id="chip-L01" onclick="selectLink('L01')">L01 (Pivot Z)</button>
+        <button class="lumi-chip" id="chip-L12" onclick="selectLink('L12')">L12 (Hélicoïdale Z)</button>
+        <button class="lumi-chip" id="chip-L02" onclick="selectLink('L02')">L02 (Glissière Z)</button>
+        <button class="lumi-chip" id="chip-L23" onclick="selectLink('L23')">L23 (Glissière X)</button>
+        <button class="lumi-chip" id="chip-L04" onclick="selectLink('L04')">L04 (Glissière Y)</button>
+      </div>
+
+      <div class="sliders-grid">
+        <div class="control-item">
+          <div class="control-head">
+            <span class="control-label">Moteur Z ω₁₀</span>
+            <span class="control-value" id="val-omega10">10.0 rad/s</span>
+          </div>
+          <div class="lumi-slider-container">
+            <input type="range" id="slider-omega10" class="lumi-slider" min="0" max="40" step="0.5" value="10">
+          </div>
+        </div>
+
+        <div class="control-item">
+          <div class="control-head">
+            <span class="control-label">Chariot X v₃₂</span>
+            <span class="control-value" id="val-v32">50 mm/s</span>
+          </div>
+          <div class="lumi-slider-container">
+            <input type="range" id="slider-v32" class="lumi-slider" min="0" max="150" step="5" value="50">
+          </div>
+        </div>
+
+        <div class="control-item">
+          <div class="control-head">
+            <span class="control-label">Plateau Y v₄₀</span>
+            <span class="control-value" id="val-v40">40 mm/s</span>
+          </div>
+          <div class="lumi-slider-container">
+            <input type="range" id="slider-v40" class="lumi-slider" min="0" max="150" step="5" value="40">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const state = { selectedLink: 'L01', omega10: 10.0, v32: 50.0, v40: 40.0, pz: 8.0 };
+
+    function getK() { return state.pz / (2 * Math.PI); }
+
+    const LINKS_DATA = {
+      L01: {
+        id: 'L01',
+        title: 'Liaison L01 — E0 (Bâti) / E1 (Vis Z)',
+        type: 'PIVOT (Z)',
+        desc: "Pivot d'axe (O1, z0)",
+        nodes: ['E0', 'E1'],
+        ddl: { Rx: 0, Ry: 0, Rz: 1, Tx: 0, Ty: 0, Tz: 0 },
+        point: 'O1',
+        base: '(x0, y0, z0)',
+        sol: 'Roulements à billes 608ZZ + accouplement flexible aluminium sur arbre Moteur pas-à-pas NEMA 17.',
+        getTorseur: function() { return { rx: '0', ry: '0', rz: state.omega10.toFixed(1), tx: '0', ty: '0', tz: '0' }; },
+        getLaw: function() { return `ω_10 = ${state.omega10.toFixed(2)} rad/s (Entrée Moteur Z)`; }
+      },
+      L12: {
+        id: 'L12',
+        title: 'Liaison L12 — E1 (Vis Z) / E2 (Portique X)',
+        type: 'HÉLICOÏDALE (Z)',
+        desc: "Hélicoïdale d'axe (O2, z0), pas pz = 8 mm/tr (droite)",
+        nodes: ['E1', 'E2'],
+        ddl: { Rx: 0, Ry: 0, Rz: '1*', Tx: 0, Ty: 0, Tz: '1*' },
+        point: 'O2',
+        base: '(x0, y0, z0)',
+        sol: 'Écrou en laiton fixé sur la platine du chariot Z + vis sans fin Trapézoïdale T8x8 (4 filets).',
+        getTorseur: function() {
+          const omega21 = -state.omega10;
+          const v21 = getK() * omega21;
+          return { rx: '0', ry: '0', rz: omega21.toFixed(1), tx: '0', ty: '0', tz: v21.toFixed(2) };
+        },
+        getLaw: function() {
+          const omega21 = -state.omega10;
+          const v21 = getK() * omega21;
+          return `Fermeture cinématique Z: ω_21 = -ω_10 = ${omega21.toFixed(1)} rad/s ⇒ v_21 = ${v21.toFixed(2)} mm/s`;
+        }
+      },
+      L02: {
+        id: 'L02',
+        title: 'Liaison L02 — E0 (Bâti) / E2 (Portique X)',
+        type: 'GLISSIÈRE (Z)',
+        desc: "Glissière équivalente de direction z0",
+        nodes: ['E0', 'E2'],
+        ddl: { Rx: 0, Ry: 0, Rz: 0, Tx: 0, Ty: 0, Tz: 1 },
+        point: 'Tout point',
+        base: '(x0, y0, z0)',
+        sol: 'Guidage par galets V-slot en POM roulant sur le profilé aluminium vertical V-Slot 2040.',
+        getTorseur: function() {
+          const v20 = getK() * state.omega10;
+          return { rx: '0', ry: '0', rz: '0', tx: '0', ty: '0', tz: v20.toFixed(2) };
+        },
+        getLaw: function() {
+          const v20 = getK() * state.omega10;
+          return `Relation globale Z: v_20 = (p_z / 2π) · ω_10 = ${v20.toFixed(2)} mm/s`;
+        }
+      },
+      L23: {
+        id: 'L23',
+        title: 'Liaison L23 — E2 (Portique X) / E3 (Tête X)',
+        type: 'GLISSIÈRE (X)',
+        desc: "Glissière de direction x0",
+        nodes: ['E2', 'E3'],
+        ddl: { Rx: 0, Ry: 0, Rz: 0, Tx: 1, Ty: 0, Tz: 0 },
+        point: 'Tout point',
+        base: '(x0, y0, z0)',
+        sol: 'Courroie crantée GT2 (pas 2mm, 16 dents) entraînée par Moteur NEMA 17 + Galets V-Slot sur profilé 2020.',
+        getTorseur: function() {
+          return { rx: '0', ry: '0', rz: '0', tx: state.v32.toFixed(1), ty: '0', tz: '0' };
+        },
+        getLaw: function() { return `Axe X indépendant: v_32 = ${state.v32.toFixed(1)} mm/s (Consigne Moteur X)`; }
+      },
+      L04: {
+        id: 'L04',
+        title: 'Liaison L04 — E0 (Bâti) / E4 (Plateau Y)',
+        type: 'GLISSIÈRE (Y)',
+        desc: "Glissière de direction y0",
+        nodes: ['E0', 'E4'],
+        ddl: { Rx: 0, Ry: 0, Rz: 0, Tx: 0, Ty: 1, Tz: 0 },
+        point: 'Tout point',
+        base: '(x0, y0, z0)',
+        sol: 'Plateau mobile guidé par 4 galets en V sur le profilé aluminium central V-Slot 4040 + Courroie GT2.',
+        getTorseur: function() {
+          return { rx: '0', ry: '0', rz: '0', tx: '0', ty: state.v40.toFixed(1), tz: '0' };
+        },
+        getLaw: function() { return `Axe Y indépendant: v_40 = ${state.v40.toFixed(1)} mm/s (Consigne Moteur Y)`; }
+      }
+    };
+
+    function selectLink(linkId) {
+      if (!LINKS_DATA[linkId]) return;
+      state.selectedLink = linkId;
+      updateViz();
+    }
+
+    function updateViz() {
+      const activeData = LINKS_DATA[state.selectedLink];
+
+      Object.keys(LINKS_DATA).forEach(id => {
+        document.getElementById(`edge-${id}`)?.classList.toggle('is-selected', id === state.selectedLink);
+        document.getElementById(`pill-${id}`)?.classList.toggle('is-selected', id === state.selectedLink);
+      });
+
+      ['E0', 'E1', 'E2', 'E3', 'E4'].forEach(nodeId => {
+        document.getElementById(`node-${nodeId}`)?.classList.toggle('is-active', activeData.nodes.includes(nodeId));
+      });
+
+      Object.keys(LINKS_DATA).forEach(id => {
+        document.getElementById(`chip-${id}`)?.classList.toggle('is-active', id === state.selectedLink);
+      });
+
+      document.getElementById('linkTitle').textContent = activeData.title;
+      document.getElementById('linkDesc').textContent = activeData.desc;
+      document.getElementById('linkTypeBadge').textContent = activeData.type;
+
+      ['Rx', 'Ry', 'Rz', 'Tx', 'Ty', 'Tz'].forEach(key => {
+        const el = document.getElementById(`ddl-${key}`);
+        if (el) {
+          const val = activeData.ddl[key];
+          el.textContent = val;
+          el.className = 'ddl-badge';
+          if (val === 1 || val === '1') el.classList.add('is-active');
+          else if (typeof val === 'string' && val.includes('*')) el.classList.add('is-coupled');
+        }
+      });
+
+      const torseur = activeData.getTorseur();
+      document.getElementById('m-rx').textContent = torseur.rx;
+      document.getElementById('m-ry').textContent = torseur.ry;
+      document.getElementById('m-rz').textContent = torseur.rz;
+      document.getElementById('m-tx').textContent = torseur.tx;
+      document.getElementById('m-ty').textContent = torseur.ty;
+      document.getElementById('m-tz').textContent = torseur.tz;
+
+      document.getElementById('torseurPt').textContent = `Point de réduction : ${activeData.point}`;
+      document.getElementById('torseurBase').textContent = `Base : ${activeData.base}`;
+      document.getElementById('solConstructive').textContent = activeData.sol;
+      document.getElementById('kinematicLaw').textContent = activeData.getLaw();
+
+      document.getElementById('val-omega10').textContent = `${state.omega10.toFixed(1)} rad/s`;
+      document.getElementById('val-v32').textContent = `${Math.round(state.v32)} mm/s`;
+      document.getElementById('val-v40').textContent = `${Math.round(state.v40)} mm/s`;
+    }
+
+    document.getElementById('slider-omega10').addEventListener('input', (e) => {
+      state.omega10 = parseFloat(e.target.value);
+      updateViz();
+    });
+    document.getElementById('slider-v32').addEventListener('input', (e) => {
+      state.v32 = parseFloat(e.target.value);
+      updateViz();
+    });
+    document.getElementById('slider-v40').addEventListener('input', (e) => {
+      state.v40 = parseFloat(e.target.value);
+      updateViz();
+    });
+
+    updateViz();
+  </script>
+</body>
+</html>

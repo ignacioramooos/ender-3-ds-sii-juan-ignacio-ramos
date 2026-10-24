@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DM1 SII MPSI — Hub d'Étude Creality Ender 3 (Stanislas)</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --radius: 12px;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 30px 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .header-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .header-title h1 { margin: 0; font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
+        .header-title p { margin: 6px 0 0 0; opacity: 0.9; font-size: 15px; }
+        .badge-student {
+            background: rgba(255,255,255,0.18);
+            backdrop-filter: blur(8px);
+            padding: 8px 16px;
+            border-radius: 999px;
+            font-size: 14px;
+            border: 1px solid rgba(255,255,255,0.25);
+        }
+        nav.tabs-nav {
+            background: #ffffff;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            overflow-x: auto;
+            padding: 0 40px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+        .nav-wrapper {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            gap: 6px;
+            width: 100%;
+        }
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 16px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .tab-btn:hover { color: var(--primary); }
+        .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
+        .container {
+            max-width: 1300px;
+            margin: 30px auto;
+            padding: 0 25px;
+        }
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; animation: fadeIn 0.25s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 30px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+            margin-bottom: 25px;
+        }
+        iframe.simulator-frame {
+            width: 100%;
+            height: 720px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: #ffffff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+        }
+        table.sii-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        table.sii-table th, table.sii-table td {
+            border: 1px solid var(--border);
+            padding: 12px 16px;
+            text-align: left;
+        }
+        table.sii-table th { background: #f1f5f9; font-weight: 600; color: #1e293b; }
+        .copy-box {
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+            font-size: 13px;
+            position: relative;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            margin: 15px 0;
+        }
+        .btn-copy {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        .btn-copy:hover { background: #2563eb; }
+        .alert-box {
+            background: #eff6ff;
+            border-left: 4px solid var(--primary);
+            padding: 16px;
+            border-radius: 6px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        .torsor-code {
+            font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+            background: #f1f5f9;
+            padding: 10px 14px;
+            border-radius: 6px;
+            display: inline-block;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-content">
+        <div class="header-title">
+            <h1>DM n°1 SII — Modélisation & Schématisation (MPSI)</h1>
+            <p>Système d'étude : Imprimante 3D Creality Ender 3 (modèle de base) — Lycée Stanislas Cannes</p>
+        </div>
+        <div class="badge-student">
+            <strong>Ignacio RAMOS</strong> | MPSI Stanislas
+        </div>
+    </div>
+</header>
+
+<nav class="tabs-nav">
+    <div class="nav-wrapper">
+        <button class="tab-btn active" onclick="openTab('tab-dossier')">📄 Dossier de Rendu Papier</button>
+        <button class="tab-btn" onclick="openTab('tab-sim1')">🕹️ 3D/2D Switchable</button>
+        <button class="tab-btn" onclick="openTab('tab-sim2')">📊 Graphe & Fermeture Z</button>
+        <button class="tab-btn" onclick="openTab('tab-sim3')">🔍 Inspecteur 6 DDL & Torseurs</button>
+        <button class="tab-btn" onclick="openTab('tab-sim4')">🌐 Modèle 3D Spatial O₀..O₅</button>
+        <button class="tab-btn" onclick="openTab('tab-emails')">✉️ Courriels & Photos</button>
+        <button class="tab-btn" onclick="openTab('tab-prompts')">📋 Boîte à Prompts</button>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- TAB 1 : DOSSIER DE RENDU PAPIER COMPLET -->
+    <div id="tab-dossier" class="tab-panel active">
+        <div class="card">
+            <h2>Corrigé Type Officiel pour le Devoir Maison n°1</h2>
+            <div class="alert-box">
+                <strong>Critères d'évaluation CPGE :</strong> Ce document intègre la totalité des exigences formelles de Mme Prot et M. Cullaz : préambule d'exclusion des pièces déformables/roulantes, inventaire réel exhaustif des classes d'équivalence, tableau des DDL, écriture matricielle des torseurs dans la base fixe $\mathcal{B}_0$, démonstration de Varignon au point $O_2$ avec colinéarité, et graphe des liaisons topologique.
+            </div>
+
+            <h3>1. Classes d'Équivalence Cinématique (CEC)</h3>
+            <p><strong>Préambule :</strong> Sont exclus des classes $E_0$ à $E_4$ les organes déformables (courroies GT2, tube Bowden PTFE, ressorts hélicoïdaux de nivellement, faisceaux électriques, filament PLA), les éléments roulants (13 galets en POM et bagues extérieures de leurs 26 roulements 625ZZ), ainsi que le rotor d'extrusion et les 4 ventilateurs.</p>
+            <table class="sii-table">
+                <tr><th>Classe</th><th>Couleur</th><th>Désignation</th><th>Composants physiques réels (Ender 3)</th></tr>
+                <tr>
+                    <td><strong>E₀</strong></td>
+                    <td><strong>Noir ($\equiv\mkern-10mu\perp$)</strong></td>
+                    <td>Bâti fixe</td>
+                    <td>Traverses latérales en profilé alu 4040 V-Slot avec patins élastomère, profilé central Y 2040 V-Slot, traverse avant 2020, 2 montants verticaux Z 2040, traverse supérieure 2020 avec bouchons ABS, stators des moteurs pas-à-pas NEMA 17 Z et Y, supports tendeurs de courroie Y et axes fixes de poulie, capteurs fin de course Z/Y-Endstop, boîtier carte mère, alimentation 24V 360W, écran LCD et visserie structurelle (vis M4/M5 et écrous T-nuts).</td>
+                </tr>
+                <tr>
+                    <td><strong>E₁</strong></td>
+                    <td><strong>Bleu</strong></td>
+                    <td>Vis Z & Rotor</td>
+                    <td>Rotor et arbre de sortie ($\varnothing 5\text{ mm}$) du moteur Z, manchon d'accouplement rigide fendu en alu avec ses 2 vis radiales M3, vis trapézoïdale Tr8x8 en acier inoxydable ($\varnothing 8\text{ mm}$, 4 filets, avance $p_z = 8\text{ mm/tr}$).</td>
+                </tr>
+                <tr>
+                    <td><strong>E₂</strong></td>
+                    <td><strong>Rouge</strong></td>
+                    <td>Portique X</td>
+                    <td>Profilé horizontal transversal 2020 V-Slot, platines gauche et droite pliées, écrou trapézoïdal en laiton Tr8x8 fixé par 2 vis M3, axes et entretoises lisses/excentriques des 6 galets V-wheels Z avec bagues intérieures de roulements, stator du moteur pas-à-pas NEMA 17 X avec son capot et capteur X-Endstop, support tendeur courroie X, stator moteur extrudeur MK8 et raccord pneumatique PC4-M6.</td>
+                </tr>
+                <tr>
+                    <td><strong>E₃</strong></td>
+                    <td><strong>Vert</strong></td>
+                    <td>Chariot tête</td>
+                    <td>Platine support chariot X avec fentes d'ancrage de courroie, axes et entretoises des 3 galets V-wheels X avec bagues intérieures de roulements, raccord pneumatique PC4-M10, radiateur dissipateur rouge, heatbreak inox, bloc de chauffe alu avec cartouche 40W et thermistance CTN 100k, buse laiton $\varnothing 0{,}4\text{ mm}$ et carénage de ventilation.</td>
+                </tr>
+                <tr>
+                    <td><strong>E₄</strong></td>
+                    <td><strong>Orange</strong></td>
+                    <td>Plateau Y</td>
+                    <td>Platine chariot Y, axes et entretoises des 4 galets V-wheels Y, 4 vis M4 et molettes crantées de nivellement (*solidaires de la platine en fonctionnement*), plaque d'aluminium chauffante 24V 220W avec thermistance CTN, revêtement texturé BuildTak et 4 pinces métalliques.</td>
+                </tr>
+            </table>
+
+            <h3>2. Tableau Synthétique des DDL & Torseurs Cinématiques dans $\mathcal{B}_0$</h3>
+            <table class="sii-table">
+                <tr><th>Liaison</th><th>Classes</th><th>Nature et géométrie</th><th>$T_x$</th><th>$T_y$</th><th>$T_z$</th><th>$R_x$</th><th>$R_y$</th><th>$R_z$</th><th>Mobilités</th></tr>
+                <tr><td><strong>L₀₁</strong></td><td>$E_0 / E_1$</td><td>Pivot d'axe $(O_1, \vec{z}_0)$</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td><strong>1</strong></td><td>1</td></tr>
+                <tr><td><strong>L₁₂</strong></td><td>$E_1 / E_2$</td><td>Hélicoïdale d'axe $(O_2, \vec{z}_0)$, $p_z = 8\text{ mm}$</td><td>0</td><td>0</td><td><strong>1*</strong></td><td>0</td><td>0</td><td><strong>1*</strong></td><td>1 (couplé)</td></tr>
+                <tr><td><strong>L₀₂</strong></td><td>$E_0 / E_2$</td><td>Glissière de direction $\vec{z}_0$ en $O_3$</td><td>0</td><td>0</td><td><strong>1</strong></td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+                <tr><td><strong>L₂₃</strong></td><td>$E_2 / E_3$</td><td>Glissière de direction $\vec{x}_0$ en $O_4$</td><td><strong>1</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+                <tr><td><strong>L₀₄</strong></td><td>$E_0 / E_4$</td><td>Glissière de direction $\vec{y}_0$ en $O_5$</td><td>0</td><td><strong>1</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+            </table>
+
+            <h4>Écriture Matricielle Formelle des Torseurs :</h4>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:15px; margin:15px 0;">
+                <div class="card" style="padding:15px; margin:0;">
+                    <strong>L₀₁ : Pivot (O₁, z₀)</strong>
+                    $$\{\mathcal{V}(E_1/E_0)\} = \begin{Bmatrix} 0 & 0 \\ 0 & 0 \\ \omega_m(t) & 0 \end{Bmatrix}_{O_1, \mathcal{B}_0}$$
+                </div>
+                <div class="card" style="padding:15px; margin:0;">
+                    <strong>L₁₂ : Hélicoïdale (O₂, z₀)</strong>
+                    $$\{\mathcal{V}(E_2/E_1)\} = \begin{Bmatrix} 0 & 0 \\ 0 & 0 \\ \omega_{21}(t) & -\dfrac{p_z}{2\pi}\,\omega_{21}(t) \end{Bmatrix}_{O_2, \mathcal{B}_0}$$
+                </div>
+                <div class="card" style="padding:15px; margin:0;">
+                    <strong>L₀₂ : Glissière (z₀) en O₃</strong>
+                    $$\{\mathcal{V}(E_2/E_0)\} = \begin{Bmatrix} 0 & 0 \\ 0 & 0 \\ 0 & V_z(t) \end{Bmatrix}_{O_3, \mathcal{B}_0}$$
+                </div>
+                <div class="card" style="padding:15px; margin:0;">
+                    <strong>L₂₃ : Glissière (x₀) en O₄</strong>
+                    $$\{\mathcal{V}(E_3/E_2)\} = \begin{Bmatrix} 0 & V_x(t) \\ 0 & 0 \\ 0 & 0 \end{Bmatrix}_{O_4, \mathcal{B}_0}$$
+                </div>
+                <div class="card" style="padding:15px; margin:0;">
+                    <strong>L₀₄ : Glissière (y₀) en O₅</strong>
+                    $$\{\mathcal{V}(E_4/E_0)\} = \begin{Bmatrix} 0 & 0 \\ 0 & V_y(t) \\ 0 & 0 \end{Bmatrix}_{O_5, \mathcal{B}_0}$$
+                </div>
+            </div>
+
+            <h3>3. Fermeture Cinématique Z & Démonstration de Varignon</h3>
+            <p>Sur la boucle fermée $\{E_0 \to E_1 \to E_2 \to E_0\}$ réduite au point $O_2$ :</p>
+            $$\{\mathcal{V}(E_2/E_0)\} = \{\mathcal{V}(E_2/E_1)\} + \{\mathcal{V}(E_1/E_0)\}$$
+            <p><strong>Transport du moment en $O_2$ (Varignon) :</strong></p>
+            $$\vec{V}(O_2, E_1/E_0) = \vec{V}(O_1, E_1/E_0) + \vec{\Omega}(E_1/E_0) \wedge \overrightarrow{O_1 O_2}$$
+            <p>Comme $O_1$ est sur l'axe de la liaison pivot, $\vec{V}(O_1, E_1/E_0) = \vec{0}$. De plus, la vis et l'écrou étant coaxiaux, $\overrightarrow{O_1 O_2} = z_{12}(t)\vec{z}_0$ est colinéaire à $\vec{\Omega}(E_1/E_0) = \omega_m(t)\vec{z}_0$. Le produit vectoriel s'annule :</p>
+            $$\vec{\Omega}(E_1/E_0) \wedge \overrightarrow{O_1 O_2} = (\omega_m \vec{z}_0) \wedge (z_{12} \vec{z}_0) = \vec{0} \quad \Longrightarrow \quad \vec{V}(O_2, E_1/E_0) = \vec{0}$$
+            <p>En projetant sur $\vec{z}_0$ : $\omega_{21} = -\omega_m$ et $V_z(t) = -\frac{p_z}{2\pi}\omega_{21}(t) = \frac{p_z}{2\pi}\omega_m(t)$.</p>
+            $$\boxed{V_z(t) = \frac{p_z}{2\pi} \cdot \omega_m(t)} \quad \Longleftrightarrow \quad \boxed{\Delta Z = \frac{p_z}{2\pi} \cdot \Delta \theta_m}$$
+            <p><strong>Déplacement incrémental pour 1 pas moteur ($1{,}8^\circ = \frac{\pi}{100}\text{ rad}$) :</strong></p>
+            $$\Delta Z_{\text{pas}} = \frac{8\text{ mm}}{2\pi} \times \frac{\pi}{100} = \frac{8}{200} = 0{,}04\text{ mm} = \mathbf{40\ \mu m}$$
+
+            <h3>4. Architecture du Graphe des Liaisons</h3>
+            <div class="copy-box" style="background:#f8fafc; color:#0f172a; border:1px solid var(--border);">
+                               L12 : Hélicoïdale (O2, z0)
+                                     pas pz = 8 mm/tr
+                         ( E1 ) -------------------------- ( E2 )
+                           |                               /    \
+                           |                              /      \  L23 : Glissière (x0)
+        L01 : Pivot (O1, z0)       L02 : Glissière (z0)  /        \       centre O4
+                           |             centre O3      /          \
+                           |                           /            \
+      ( E4 ) ------------ ( E0 ) ----------------------             ( E3 )
+        L04 : Glissière     |
+        (y0), centre O5   =====  <-- Symbole normalisé du bâti fixe (hachures)
+                         ///////
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 2 : SIMULATEUR 1 -->
+    <div id="tab-sim1" class="tab-panel">
+        <iframe class="simulator-frame" src="04_schemas_cinematiques/widget_1_explorateur_3d_2d.html"></iframe>
+    </div>
+
+    <!-- TAB 3 : SIMULATEUR 2 -->
+    <div id="tab-sim2" class="tab-panel">
+        <iframe class="simulator-frame" src="04_schemas_cinematiques/widget_2_graphe_simulateur_z.html"></iframe>
+    </div>
+
+    <!-- TAB 4 : SIMULATEUR 3 -->
+    <div id="tab-sim3" class="tab-panel">
+        <iframe class="simulator-frame" src="04_schemas_cinematiques/widget_3_inspecteur_ddl_torseurs.html"></iframe>
+    </div>
+
+    <!-- TAB 5 : SIMULATEUR 4 -->
+    <div id="tab-sim4" class="tab-panel">
+        <iframe class="simulator-frame" src="04_schemas_cinematiques/widget_4_modele_3d_centres_o0_o5.html"></iframe>
+    </div>
+
+    <!-- TAB 6 : COURRIELS & PHOTOS -->
+    <div id="tab-emails" class="tab-panel">
+        <div class="card">
+            <h2>Courriels Officiels Prêts pour Envoi (Mme Prot)</h2>
+            <h3>1. E-mail de Validation du Système (Partie I)</h3>
+            <div class="copy-box"><button class="btn-copy" onclick="copyText('email1-text')">Copier</button><div id="email1-text">Bonjour Madame Prot,
+
+Je me permets de vous contacter afin de vous soumettre le choix de mon système pour le DM n°1 de SII.
+
+Le support que je possède et souhaite étudier est mon imprimante 3D personnelle : une Creality Ender 3 (modèle de base).
+
+Afin de respecter scrupuleusement la consigne imposant au minimum trois liaisons mécaniques différentes (et d'éviter l'écueil de modéliser uniquement les 3 glissières cartésiennes globales), j'ai choisi d'intégrer dans mon étude la chaîne cinématique d'élévation verticale de l'axe Z (mécanisme de transmission vis-écrou) en boucle cinématique fermée avec le portique X et le bâti.
+
+Mon modèle comporte ainsi 4 liaisons dont 3 familles de liaisons distinctes :
+1. Une liaison Pivot d'axe (O₁, z⃗) : entre le bâti fixe et la vis mère trapézoïdale Z (guidage interne assuré par les roulements du moteur pas-à-pas Z).
+2. Une liaison Hélicoïdale d'axe (O₂, z⃗) à pas à droite (pz = 8 mm/tr) : entre la vis mère Z et l'écrou en laiton solidaire du portique transversal X.
+3. Une liaison Glissière de direction z⃗ : entre le portique horizontal X et les montants verticaux du châssis fixe (guidage par galets profilés en V).
+4. Une liaison Glissière de direction x⃗ : entre le chariot de la tête d'impression (hotend/buse) et le profilé horizontal du portique X.
+
+Ce mécanisme forme la boucle cinématique fermée « Pivot - Hélicoïdale - Glissière » analogue à l'exemple du tube de colle UHU, tout en modélisant le déplacement orthogonal de la tête d'impression.
+
+Vous trouverez en pièce jointe une première photographie de l'imprimante dans son ensemble.
+
+En vous remerciant par avance pour votre retour et votre validation, je vous souhaite une excellente semaine.
+
+Bien cordialement,
+
+Ignacio RAMOS
+Élève en MPSI
+Lycée Stanislas</div></div>
+
+            <h3>2. E-mail de Rendu Numérique (Partie II)</h3>
+            <div class="copy-box"><button class="btn-copy" onclick="copyText('email2-text')">Copier</button><div id="email2-text">Bonjour Madame Prot,
+
+Veuillez trouver ci-joint les documents requis pour le rendu numérique du DM n°1 de SII portant sur la modélisation cinématique de mon imprimante 3D Creality Ender 3 :
+
+1. Mon selfie avec le système (« RAMOS-Selfie.png »).
+2. Une vue détaillée du mécanisme d'entraînement Z et du portique X avec le paramétrage des repères locaux et l'identification des pièces (« RAMOS-Ender3-Details.jpg »).
+
+Concernant l'utilisation de mon selfie :
+- J'autorise l'utilisation de cette photographie pour la réalisation du poster destiné au laboratoire de SII et à notre salle de classe.
+
+Le document papier comportant le paramétrage géométrique, le graphe des liaisons ainsi que les schémas cinématiques 2D et 3D en couleur sera déposé dans le casier de M. Cullaz avant 13h30 le lundi de la rentrée.
+
+En vous souhaitant de très bonnes vacances,
+
+Bien cordialement,
+
+Ignacio RAMOS
+Élève en MPSI
+Lycée Stanislas</div></div>
+        </div>
+    </div>
+
+    <!-- TAB 7 : BOITE A PROMPTS -->
+    <div id="tab-prompts" class="tab-panel">
+        <div class="card">
+            <h2>Boîte à Prompts de Délégation</h2>
+            <p>Ces prompts restent disponibles si vous souhaitez approfondir un point avec un modèle avancé :</p>
+            <div class="copy-box"><button class="btn-copy" onclick="copyText('p4-text')">Copier Prompt 4 (Visualisations)</button><div id="p4-text">Tu es professeur de SII en CPGE MPSI.
+Dans le cadre de mon DM n°1 sur l'imprimante 3D Creality Ender 3, fournis le guide de dessin pas-à-pas avec les cotes relatives pour le tracé manuel aux normes AFNOR NF EN ISO 3952 du schéma cinématique 2D dans le plan (O, x0, z0) et du schéma 3D en perspective isométrique en couleur.</div></div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+function openTab(tabId) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    event.currentTarget.classList.add('active');
+}
+
+function copyText(elementId) {
+    const text = document.getElementById(elementId).innerText;
+    navigator.clipboard.writeText(text).then(() => {
+        alert("Texte copié dans le presse-papiers !");
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    if (typeof renderMathInElement === "function") {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\[', right: '\\]', display: true},
+                {left: '\\(', right: '\\)', display: false}
+            ]
+        });
+    }
+});
+</script>
+
+</body>
+</html>

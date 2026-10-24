@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<style id="lumi-runtime">
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:ital,wght@0,300..700;1,300..700&family=Google+Sans+Code:ital,wght,MONO@0,300..700,0..1;1,300..700,0..1&display=swap');
+
+:root {
+  --body-bg: transparent;
+  --ff-sans: 'Google Sans Flex', 'Google Sans Text', 'Google Sans', sans-serif;
+  --ff-mono: 'Google Sans Code', 'Google Sans Mono', monospace;
+
+  --surface: #fdfcfc;
+  --surface-dim: #141414;
+  --surface-bright: #ffffff;
+  --surface-container: #f2f0f0;
+  --on-surface: #000000;
+  --on-surface-variant: rgba(0, 0, 0, 0.55);
+  --primary: #3186ff;
+  --accent-container: #dcf1ff;
+  --stroke-default: #e3e3e3;
+  --r-s: 8px;
+  --r-m: 12px;
+  --r-full: 999px;
+}
+
+:root[data-theme="dark"], body.dark-mode {
+  --body-bg: #0f0f0f;
+  --surface: #0f0f0f;
+  --surface-dim: #141414;
+  --surface-bright: #1c1c1c;
+  --on-surface: #e0e0e0;
+  --on-surface-variant: rgba(255, 255, 255, 0.55);
+  --stroke-default: #2d2f38;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--body-bg, transparent);
+  color: var(--on-surface);
+  font-family: var(--ff-sans, system-ui, sans-serif);
+  overflow-x: hidden;
+}
+
+.widget-container {
+  width: 100%;
+  padding: 16px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.header-card {
+  background: var(--surface-bright);
+  border-radius: var(--r-m);
+  padding: 12px 16px;
+  border: 1px solid var(--stroke-default);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.header-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.badge-pill {
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: var(--r-full);
+  background: var(--surface-container);
+  border: 1px solid var(--stroke-default);
+}
+
+.legend-deck {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 8px;
+  background: var(--surface-container);
+  border-radius: var(--r-m);
+  border: 1px solid var(--stroke-default);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: var(--r-s);
+  background: var(--surface-bright);
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid var(--stroke-default);
+  cursor: pointer;
+}
+
+.legend-swatch { width: 12px; height: 12px; border-radius: 3px; }
+
+.widget-viewport {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  overflow: hidden;
+  border-radius: var(--r-m);
+  background: #111827;
+  border: 1px solid var(--stroke-default);
+}
+
+.viewport-overlay {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  pointer-events: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  z-index: 5;
+}
+
+.hud-card {
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(8px);
+  border-radius: var(--r-s);
+  padding: 8px 12px;
+  color: #ffffff;
+  font-family: var(--ff-mono);
+  font-size: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  pointer-events: auto;
+}
+
+.hud-title { font-size: 11px; text-transform: uppercase; color: rgba(255, 255, 255, 0.7); margin-bottom: 2px; }
+.hud-value { color: #60a5fa; font-weight: 600; }
+
+.toggle-btn {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--r-full);
+  border: 1px solid var(--stroke-default);
+  background: var(--surface-bright);
+  color: var(--on-surface);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.toggle-btn.is-active {
+  background: var(--primary);
+  color: #fff;
+  border-color: transparent;
+}
+
+.info-card {
+  background: var(--surface-bright);
+  border-radius: var(--r-m);
+  padding: 12px;
+  border: 1px solid var(--stroke-default);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.control-deck {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px;
+  background: var(--surface-container);
+  border-radius: var(--r-m);
+  border: 1px solid var(--stroke-default);
+}
+
+.control-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.control-label { font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 6px; }
+.control-label-tag { font-size: 11px; font-family: var(--ff-mono); padding: 1px 5px; border-radius: 4px; color: #fff; }
+
+.lumi-slider-container { display: flex; align-items: center; gap: 8px; flex: 1; max-width: 320px; }
+.lumi-slider { width: 100%; cursor: pointer; }
+.lumi-slider-value { font-family: var(--ff-mono); font-size: 12px; font-weight: 600; min-width: 55px; text-align: right; }
+</style>
+  <meta charset="UTF-8">
+  <title>Schéma Cinématique 3D Spatial — Creality Ender 3</title>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.146.0/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.146.0/examples/js/controls/OrbitControls.js"></script>
+</head>
+<body>
+  <div class="widget-container">
+    <div class="header-card">
+      <div class="header-title">
+        <span>Schéma Cinématique 3D Spatial — Creality Ender 3</span>
+        <span class="badge-pill">CPGE SII Normalisé</span>
+      </div>
+      <p style="margin:0; font-size:13px; color:var(--on-surface-variant);">Classes d'équivalence cinématique (E0..E4), centres géométriques O1..O5 et pilotage en temps réel</p>
+    </div>
+
+    <div class="legend-deck">
+      <div class="legend-item" onclick="highlightClass(0)"><div class="legend-swatch" style="background: #222222;"></div><span>E0 : Bâti fixe</span></div>
+      <div class="legend-item" onclick="highlightClass(1)"><div class="legend-swatch" style="background: #1E88E5;"></div><span>E1 : Vis Z</span></div>
+      <div class="legend-item" onclick="highlightClass(2)"><div class="legend-swatch" style="background: #E53935;"></div><span>E2 : Portique X</span></div>
+      <div class="legend-item" onclick="highlightClass(3)"><div class="legend-swatch" style="background: #43A047;"></div><span>E3 : Tête X</span></div>
+      <div class="legend-item" onclick="highlightClass(4)"><div class="legend-swatch" style="background: #FB8C00;"></div><span>E4 : Plateau Y</span></div>
+    </div>
+
+    <div class="widget-viewport" id="viewport-zone">
+      <div class="viewport-overlay">
+        <div class="hud-card">
+          <div class="hud-title">Vecteur Position Relative O₅O₄ (Buse / Plateau)</div>
+          <div>O₅O₄ = <span id="vec-readout" class="hud-value">[0, 0, 100]</span> mm</div>
+          <div style="margin-top: 4px;">θ₁ (Vis Z) = <span id="theta-readout" class="hud-value">94.25 rad (5400.0°)</span></div>
+        </div>
+        <button id="toggle-markers" class="toggle-btn is-active" onclick="toggleMarkers()">
+          <span>Repères & Centres O₀..O₅</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="info-card" id="info-box">
+      <div style="font-weight:600; margin-bottom:4px;" id="info-title">Survolez ou cliquez sur une classe cinématique ou un centre</div>
+      <div id="info-desc" style="color:var(--on-surface-variant);">Utilisez les curseurs ci-dessous pour modifier la position des solides en temps réel.</div>
+    </div>
+
+    <div class="control-deck">
+      <div class="control-row">
+        <div class="control-label">
+          <span class="control-label-tag" style="background: #43A047;">E3 / E2</span>
+          <span>Position Tête x(t) [Glissière O₄]</span>
+        </div>
+        <div class="lumi-slider-container">
+          <input type="range" id="slider-x" class="lumi-slider" data-key="x" min="-110" max="110" value="0">
+          <div id="slider-x-val" class="lumi-slider-value">0 mm</div>
+        </div>
+      </div>
+
+      <div class="control-row">
+        <div class="control-label">
+          <span class="control-label-tag" style="background: #FB8C00;">E4 / E0</span>
+          <span>Position Plateau y(t) [Glissière O₅]</span>
+        </div>
+        <div class="lumi-slider-container">
+          <input type="range" id="slider-y" class="lumi-slider" data-key="y" min="-110" max="110" value="0">
+          <div id="slider-y-val" class="lumi-slider-value">0 mm</div>
+        </div>
+      </div>
+
+      <div class="control-row">
+        <div class="control-label">
+          <span class="control-label-tag" style="background: #E53935;">E2 / E0</span>
+          <span>Hauteur Portique z(t) [Liée à θ₁ (E1)]</span>
+        </div>
+        <div class="lumi-slider-container">
+          <input type="range" id="slider-z" class="lumi-slider" data-key="z" min="0" max="250" value="120">
+          <div id="slider-z-val" class="lumi-slider-value">120 mm</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const state = { x: 0, y: 0, z: 120, showMarkers: true };
+
+    let scene, camera, renderer, controls;
+    let groupE0, groupE1, groupE2, groupE3, groupE4, groupMarkers;
+    let markers = {}, vectorLine = null;
+    let raycaster, mouse;
+
+    const CLASS_INFO = {
+      E0: {
+        title: "Classe E0 — Bâti fixe (Noir / Anthracite)",
+        desc: "Profilés alu 4040/2040 de base, montants verticaux Z, traverse supérieure 2020, pieds amortisseurs, stators des moteurs Z et Y."
+      },
+      E1: {
+        title: "Classe E1 — Arbre & Vis Trapézoïdale Z (Bleu)",
+        desc: "Coupleur alu et vis d'entraînement Tr8x8 (pas pz = 8 mm/tour) guidée en pivot en O1 par rapport au bâti E0."
+      },
+      E2: {
+        title: "Classe E2 — Portique mobile X (Rouge)",
+        desc: "Traverse horizontale alu 2020, écrou laiton Tr8x8 en O2 (hélicoïdale avec E1), moteur X, et platines guidées en glissière (O3) sur E0."
+      },
+      E3: {
+        title: "Classe E3 — Chariot Tête d'impression (Vert)",
+        desc: "Platine support mobile le long de E2 (glissière en O4 d'axe x0), radiateur rouge, bloc de chauffe et buse d'extrusion."
+      },
+      E4: {
+        title: "Classe E4 — Plateau chauffant Y (Orange)",
+        desc: "Platine mobile à 4 galets guidée sur le rail central Y de E0 (glissière en O5 d'axe y0), plateau alu chauffant et BuildTak."
+      }
+    };
+
+    const JOINT_INFO = {
+      O0: { title: "Repère d'Origine R₀(O₀, x₀, y₀, z₀)", desc: "Point d'origine fixé au centre de la base arrière du bâti E0." },
+      O1: { title: "Centre O₁ — Liaison Pivot [E0 / E1]", desc: "Axe (O₁, z₀) : Rotation θ₁(t) de la vis Z par rapport au bâti E0." },
+      O2: { title: "Centre O₂ — Liaison Hélicoïdale [E1 / E2]", desc: "Axe (O₂, z₀) : Écrou en laiton sur vis Tr8x8. z(t) = (p_z / 2π) · θ₁(t)." },
+      O3: { title: "Centre O₃ — Liaison Glissière [E0 / E2]", desc: "Direction z₀ : Portique rouge E2 guidé sur les montants du bâti E0." },
+      O4: { title: "Centre O₄ — Liaison Glissière [E2 / E3]", desc: "Direction x₀ : Tête verte E3 guidée sur le portique E2." },
+      O5: { title: "Centre O₅ — Liaison Glissière [E0 / E4]", desc: "Direction y₀ : Plateau orange E4 guidé sur le rail central Y." }
+    };
+
+    function initThreeScene() {
+      const container = document.getElementById('viewport-zone');
+      const w = container.clientWidth || 600;
+      const h = container.clientHeight || 420;
+
+      scene = new THREE.Scene();
+      camera = new THREE.PerspectiveCamera(45, w / h, 1, 2000);
+      camera.position.set(380, 260, 420);
+      camera.lookAt(0, 120, 0);
+
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setSize(w, h);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.shadowMap.enabled = true;
+      container.appendChild(renderer.domElement);
+
+      if (typeof THREE.OrbitControls === 'function') {
+        controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+        controls.target.set(0, 120, 0);
+      }
+
+      scene.add(new THREE.AmbientLight(0xffffff, 0.7));
+      const dirLight = new THREE.DirectionalLight(0xffffff, 0.85);
+      dirLight.position.set(200, 400, 300);
+      scene.add(dirLight);
+
+      groupE0 = new THREE.Group();
+      groupE1 = new THREE.Group();
+      groupE2 = new THREE.Group();
+      groupE3 = new THREE.Group();
+      groupE4 = new THREE.Group();
+      groupMarkers = new THREE.Group();
+
+      scene.add(groupE0);
+      scene.add(groupE1);
+      scene.add(groupE2);
+      groupE2.add(groupE3);
+      scene.add(groupE4);
+      scene.add(groupMarkers);
+
+      const matE0 = new THREE.MeshStandardMaterial({ color: 0x222222, roughness: 0.6 });
+      const matE1 = new THREE.MeshStandardMaterial({ color: 0x1E88E5, roughness: 0.3, metalness: 0.5 });
+      const matE2 = new THREE.MeshStandardMaterial({ color: 0xE53935, roughness: 0.4 });
+      const matE3 = new THREE.MeshStandardMaterial({ color: 0x43A047, roughness: 0.4 });
+      const matE4 = new THREE.MeshStandardMaterial({ color: 0xFB8C00, roughness: 0.4 });
+
+      scene.add(new THREE.GridHelper(500, 20, 0x555555, 0x333333));
+
+      // Build E0
+      const footL = new THREE.Mesh(new THREE.BoxGeometry(40, 40, 380), matE0);
+      footL.position.set(-125, 20, 0); groupE0.add(footL);
+      const footR = footL.clone(); footR.position.set(125, 20, 0); groupE0.add(footR);
+      const railY = new THREE.Mesh(new THREE.BoxGeometry(40, 20, 360), matE0);
+      railY.position.set(0, 30, 0); groupE0.add(railY);
+      const postL = new THREE.Mesh(new THREE.BoxGeometry(20, 360, 40), matE0);
+      postL.position.set(-125, 200, 0); groupE0.add(postL);
+      const postR = postL.clone(); postR.position.set(125, 200, 0); groupE0.add(postR);
+      const topBar = new THREE.Mesh(new THREE.BoxGeometry(270, 20, 20), matE0);
+      topBar.position.set(0, 370, 0); groupE0.add(topBar);
+
+      groupE0.traverse(c => { if (c.isMesh) c.userData = { type: 'E0' }; });
+
+      // Build E1
+      const screw = new THREE.Mesh(new THREE.CylinderGeometry(4, 4, 330, 16), matE1);
+      screw.position.set(-145, 215, -20); groupE1.add(screw);
+      groupE1.traverse(c => { if (c.isMesh) c.userData = { type: 'E1' }; });
+
+      // Build E2
+      const gantryBar = new THREE.Mesh(new THREE.BoxGeometry(290, 20, 20), matE2);
+      groupE2.add(gantryBar);
+      const plateL = new THREE.Mesh(new THREE.BoxGeometry(20, 70, 60), matE2);
+      plateL.position.set(-125, 0, 0); groupE2.add(plateL);
+      const nut = new THREE.Mesh(new THREE.CylinderGeometry(8, 8, 15, 12), matE2);
+      nut.position.set(-145, 0, -20); groupE2.add(nut);
+      const plateR = plateL.clone(); plateR.position.set(125, 0, 0); groupE2.add(plateR);
+
+      groupE2.traverse(c => { if (c.isMesh) c.userData = { type: 'E2' }; });
+
+      // Build E3
+      const headMain = new THREE.Mesh(new THREE.BoxGeometry(45, 50, 45), matE3);
+      headMain.position.set(0, 0, 25); groupE3.add(headMain);
+      const nozzle = new THREE.Mesh(new THREE.ConeGeometry(6, 12, 8), matE3);
+      nozzle.rotation.x = Math.PI; nozzle.position.set(0, -31, 25); groupE3.add(nozzle);
+
+      groupE3.traverse(c => { if (c.isMesh) c.userData = { type: 'E3' }; });
+
+      // Build E4
+      const bedPlate = new THREE.Mesh(new THREE.BoxGeometry(235, 6, 235), matE4);
+      bedPlate.position.set(0, 45, 0); groupE4.add(bedPlate);
+
+      groupE4.traverse(c => { if (c.isMesh) c.userData = { type: 'E4' }; });
+
+      // Markers
+      createMarker('O0', 0x9e9e9e);
+      createMarker('O1', 0x1E88E5);
+      createMarker('O2', 0xE53935);
+      createMarker('O3', 0xE53935);
+      createMarker('O4', 0x43A047);
+      createMarker('O5', 0xFB8C00);
+
+      const lineMat = new THREE.LineDashedMaterial({ color: 0x60a5fa, dashSize: 5, gapSize: 3 });
+      vectorLine = new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(), new THREE.Vector3()]), lineMat);
+      groupMarkers.add(vectorLine);
+
+      raycaster = new THREE.Raycaster();
+      mouse = new THREE.Vector2();
+
+      renderer.domElement.addEventListener('mousemove', onMouseMove);
+      window.addEventListener('resize', onWindowResize);
+
+      updateViz();
+      animate();
+    }
+
+    function createMarker(key, colorHex) {
+      const g = new THREE.Group();
+      const s = new THREE.Mesh(new THREE.SphereGeometry(6, 16, 16), new THREE.MeshBasicMaterial({ color: colorHex }));
+      s.userData = { markerKey: key };
+      g.add(s);
+      g.add(new THREE.ArrowHelper(new THREE.Vector3(1,0,0), new THREE.Vector3(), 25, 0xff0000, 6, 4));
+      g.add(new THREE.ArrowHelper(new THREE.Vector3(0,1,0), new THREE.Vector3(), 25, 0x00ff00, 6, 4));
+      g.add(new THREE.ArrowHelper(new THREE.Vector3(0,0,1), new THREE.Vector3(), 25, 0x0088ff, 6, 4));
+      groupMarkers.add(g);
+      markers[key] = g;
+    }
+
+    function updateViz() {
+      if (!renderer) return;
+      groupE2.position.set(0, state.z, 0);
+      groupE3.position.set(state.x, 0, 0);
+      groupE4.position.set(0, 0, state.y);
+
+      const thetaRad = (2 * Math.PI * state.z) / 8;
+      const thetaDeg = (state.z / 8) * 360;
+      groupE1.rotation.y = thetaRad;
+
+      markers['O0'].position.set(0, 30, 0);
+      markers['O1'].position.set(-145, 42, -20);
+      markers['O2'].position.set(-145, state.z, -20);
+      markers['O3'].position.set(0, state.z, 0);
+      markers['O4'].position.set(state.x, state.z, 25);
+      markers['O5'].position.set(0, 45, state.y);
+
+      const pO5 = markers['O5'].position.clone();
+      const pO4 = markers['O4'].position.clone();
+      vectorLine.geometry.dispose();
+      vectorLine.geometry = new THREE.BufferGeometry().setFromPoints([pO5, pO4]);
+      vectorLine.computeLineDistances();
+      groupMarkers.visible = state.showMarkers;
+
+      const dx = Math.round(pO4.x - pO5.x);
+      const dy = Math.round(pO4.y - pO5.y);
+      const dz = Math.round(pO4.z - pO5.z);
+      document.getElementById('vec-readout').textContent = `[${dx}, ${dy}, ${dz}]`;
+      document.getElementById('theta-readout').textContent = `${thetaRad.toFixed(2)} rad (${thetaDeg.toFixed(1)}°)`;
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+      if (controls) controls.update();
+      if (renderer && scene && camera) renderer.render(scene, camera);
+    }
+
+    function onMouseMove(event) {
+      const rect = renderer.domElement.getBoundingClientRect();
+      mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+      mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+      raycaster.setFromCamera(mouse, camera);
+
+      const targets = [];
+      scene.traverse(o => { if (o.isMesh && (o.userData.type || o.userData.markerKey)) targets.push(o); });
+      const hits = raycaster.intersectObjects(targets);
+
+      if (hits.length > 0) {
+        const hit = hits[0].object;
+        if (hit.userData.markerKey) {
+          const info = JOINT_INFO[hit.userData.markerKey];
+          if (info) displayInfo(info.title, info.desc);
+        } else if (hit.userData.type) {
+          const info = CLASS_INFO[hit.userData.type];
+          if (info) displayInfo(info.title, info.desc);
+        }
+      }
+    }
+
+    function highlightClass(idx) {
+      const info = CLASS_INFO['E' + idx];
+      if (info) displayInfo(info.title, info.desc);
+    }
+
+    function displayInfo(title, desc) {
+      document.getElementById('info-title').textContent = title;
+      document.getElementById('info-desc').textContent = desc;
+    }
+
+    function toggleMarkers() {
+      state.showMarkers = !state.showMarkers;
+      document.getElementById('toggle-markers').classList.toggle('is-active', state.showMarkers);
+      updateViz();
+    }
+
+    function onWindowResize() {
+      const container = document.getElementById('viewport-zone');
+      if (!container || !renderer || !camera) return;
+      camera.aspect = container.clientWidth / container.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(container.clientWidth, container.clientHeight);
+    }
+
+    document.querySelectorAll('.lumi-slider').forEach(s => {
+      s.addEventListener('input', e => {
+        state[e.target.dataset.key] = parseFloat(e.target.value);
+        document.getElementById(`${e.target.id}-val`).textContent = `${e.target.value} mm`;
+        updateViz();
+      });
+    });
+
+    window.addEventListener('DOMContentLoaded', initThreeScene);
+  </script>
+</body>
+</html>

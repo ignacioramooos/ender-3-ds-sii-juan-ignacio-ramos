@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script id="lumi-katex-init">
+(function(){
+  var obs=null;
+  function run(){
+    if (typeof renderMathInElement !== 'function') return;
+    if (obs) obs.disconnect();
+    try{
+      renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}],ignoredTags:['script','noscript','style','textarea','pre','code','option','canvas'],throwOnError:false,output:'htmlAndMathml'});
+    }catch(e){}
+    if (obs && document.body) obs.observe(document.body,{childList:true,subtree:true,characterData:true});
+  }
+  if (typeof MutationObserver !== 'undefined') {
+    obs = new MutationObserver(function(){ run(); });
+  }
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+<style id="lumi-runtime">
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:ital,wght@0,300..700;1,300..700&family=Google+Sans+Code:ital,wght,MONO@0,300..700,0..1;1,300..700,0..1&display=swap');
+
+:root {
+  --body-bg: transparent;
+  --ff-sans: 'Google Sans Flex', 'Google Sans Text', 'Google Sans', sans-serif;
+  --ff-mono: 'Google Sans Code', 'Google Sans Mono', monospace;
+  --lumi-sys-color--surface: #fdfcfc;
+  --lumi-sys-color--surface-dim: #f2f0f0;
+  --lumi-sys-color--surface-bright: #ffffff;
+  --lumi-sys-color--surface-container: #f2f0f0;
+  --lumi-sys-color--surface-container-high: #e6e6e6;
+  --lumi-sys-color--on-surface: #000000;
+  --lumi-sys-color--on-surface-variant: rgba(0, 0, 0, 0.55);
+  --lumi-sys-color--primary: #3186ff;
+  --lumi-sys-color--accent-container: #dcf1ff;
+  --lumi-sys-color--accent-fixed: #3186ff;
+  --lumi-sys-color--outline: #727676;
+  --lumi-sys-color--stroke-default: #e3e3e3;
+
+  --surface: var(--lumi-sys-color--surface, #fdfcfc);
+  --surface-dim: var(--lumi-sys-color--surface-dim, #f2f0f0);
+  --surface-bright: var(--lumi-sys-color--surface-bright, #ffffff);
+  --surface-container: var(--lumi-sys-color--surface-container, #f2f0f0);
+  --surface-container-high: var(--lumi-sys-color--surface-container-high, #e6e6e6);
+  --on-surface: var(--lumi-sys-color--on-surface, #000000);
+  --on-surface-variant: var(--lumi-sys-color--on-surface-variant, rgba(0, 0, 0, 0.55));
+  --primary: var(--lumi-sys-color--primary, #3186ff);
+  --accent-container: var(--lumi-sys-color--accent-container, #dcf1ff);
+  --accent-fixed: var(--lumi-sys-color--accent-fixed, #3186ff);
+  --outline: var(--lumi-sys-color--outline, #727676);
+  --stroke-default: var(--lumi-sys-color--stroke-default, #e3e3e3);
+  --r-s: 8px;
+  --r-m: 12px;
+  --r-full: 999px;
+}
+
+:root[data-theme="dark"], body.dark-mode {
+  --body-bg: #0f0f0f;
+  --lumi-sys-color--surface: #0f0f0f;
+  --lumi-sys-color--surface-dim: #141414;
+  --lumi-sys-color--surface-bright: #1c1c1c;
+  --lumi-sys-color--surface-container: #141414;
+  --lumi-sys-color--surface-container-high: #1c1c1c;
+  --lumi-sys-color--on-surface: #e0e0e0;
+  --lumi-sys-color--on-surface-variant: rgba(255, 255, 255, 0.55);
+  --lumi-sys-color--stroke-default: #2d2f38;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--body-bg, transparent);
+  color: var(--on-surface);
+  font-family: var(--ff-sans, system-ui, sans-serif);
+}
+
+.widget-container {
+  width: 100%;
+  padding: 16px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.header-card {
+  padding: 12px 16px;
+  background: var(--surface-bright);
+  border-radius: var(--r-m);
+  border: 1px solid var(--stroke-default);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.header-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.header-tag {
+  font-family: var(--ff-mono);
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: var(--r-full);
+  background: var(--accent-container);
+  color: var(--primary);
+  font-weight: 500;
+}
+
+.kpi-deck {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.kpi-card {
+  background: var(--surface-dim);
+  padding: 12px;
+  border-radius: var(--r-m);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border: 1px solid var(--stroke-default);
+}
+
+.kpi-label { font-size: 12px; color: var(--on-surface-variant); font-family: var(--ff-mono); }
+.kpi-value { font-size: 18px; font-weight: 600; color: var(--on-surface); font-family: var(--ff-mono); }
+.kpi-sub { font-size: 12px; color: var(--on-surface-variant); }
+
+.viz-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 14px;
+}
+
+@media (max-width: 600px) {
+  .viz-grid { grid-template-columns: 1fr; }
+}
+
+.diagram-card {
+  background: var(--surface-bright);
+  border-radius: var(--r-m);
+  border: 1px solid var(--stroke-default);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.inspector-card {
+  background: var(--surface-dim);
+  border-radius: var(--r-m);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1px solid var(--stroke-default);
+}
+
+.inspector-title {
+  font-size: 15px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.inspector-badge {
+  font-family: var(--ff-mono);
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: var(--r-s);
+  background: var(--surface-container-high);
+  color: var(--on-surface-variant);
+}
+
+.torsor-box {
+  background: var(--surface-bright);
+  border: 1px dashed var(--outline);
+  border-radius: var(--r-s);
+  padding: 10px 12px;
+  font-family: var(--ff-mono);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.advice-box {
+  background: var(--accent-container);
+  color: var(--on-surface);
+  border-radius: var(--r-s);
+  padding: 10px 12px;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.advice-header {
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--primary);
+  margin-bottom: 4px;
+  display: block;
+}
+
+.sii-node { cursor: pointer; }
+.sii-node:hover rect, .sii-node:hover circle { stroke: var(--primary); stroke-width: 2px; }
+.sii-edge { cursor: pointer; }
+.sii-pill { cursor: pointer; }
+.sii-pill:hover rect { fill: var(--surface-bright); stroke: var(--primary); }
+
+.is-selected rect { stroke: var(--primary) !important; stroke-width: 2px !important; fill: var(--accent-container) !important; }
+.is-selected line { stroke: var(--primary) !important; stroke-width: 2.5px !important; }
+
+.control-deck {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  background: var(--surface-dim);
+  border-radius: var(--r-m);
+  border: 1px solid var(--stroke-default);
+}
+
+.presets-row { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.preset-btn {
+  font-family: var(--ff-sans);
+  font-size: 12px;
+  padding: 5px 12px;
+  border-radius: var(--r-full);
+  border: 1px solid var(--stroke-default);
+  background: var(--surface-bright);
+  color: var(--on-surface);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.preset-btn:hover { background: var(--surface-container-high); }
+.preset-btn.is-active { background: var(--primary); color: #fff; border-color: transparent; font-weight: 600; }
+
+.control-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.control-label { font-size: 13px; min-width: 140px; }
+
+.lumi-slider-container { display: flex; align-items: center; gap: 10px; flex: 1; }
+.lumi-slider { flex: 1; cursor: pointer; }
+.lumi-slider-value { font-family: var(--ff-mono); font-size: 13px; font-weight: 600; min-width: 80px; text-align: right; }
+</style>
+  <meta charset="UTF-8">
+  <title>Axe Z Creality Ender 3 - Graphe & Fermeture Z</title>
+</head>
+<body>
+  <div class="widget-container">
+    <div class="header-card">
+      <div class="header-title-row">
+        <h2 style="margin: 0; font-size:18px;">Axe Z — Creality Ender 3</h2>
+        <span class="header-tag">Graphe SII &amp; Cinématique</span>
+      </div>
+      <p style="margin: 0; color: var(--on-surface-variant); font-size:13px;">
+        Modélisation normalisée des liaisons et simulateur dynamique de la loi d'entrée-sortie.
+      </p>
+    </div>
+
+    <div class="kpi-deck">
+      <div class="kpi-card">
+        <span class="kpi-label">Déplacement &Delta;Z</span>
+        <span class="kpi-value" id="kpi-dz">8,00 mm</span>
+        <span class="kpi-sub" id="kpi-dz-um">8 000 &mu;m</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Vitesse V<sub>z</sub></span>
+        <span class="kpi-value" id="kpi-vz">8,00 mm/s</span>
+        <span class="kpi-sub" id="kpi-omega">&omega;<sub>m</sub> = 6,28 rad/s</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Rotation Vis &theta;<sub>1/0</sub></span>
+        <span class="kpi-value" id="kpi-rot">360,0&deg;</span>
+        <span class="kpi-sub" id="kpi-rot-rad">2,00 &pi; rad</span>
+      </div>
+    </div>
+
+    <div class="viz-grid">
+      <div class="diagram-card" id="diagram-zone">
+        <svg viewBox="0 0 520 280" style="width:100%; max-width:520px; height:auto; display:block; margin:0 auto;" id="sii-svg">
+          <defs>
+            <marker id="lumi-caret-active" viewBox="0 0 10 10" refX="7.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto">
+              <path d="M 3 1.2 L 7.5 5 L 3 8.8" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </marker>
+            <pattern id="sii-hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+              <line x1="0" y1="0" x2="0" y2="8" stroke="var(--outline)" stroke-width="1" />
+            </pattern>
+          </defs>
+
+          <!-- CONNECTORS (Edges) -->
+          <g class="sii-edge" id="edge-E0-E1" onclick="selectItem('E0-E1')">
+            <line x1="260" y1="215" x2="110" y2="75" fill="none" stroke="var(--on-surface)" stroke-width="1.5" stroke-dasharray="0 4" stroke-linecap="round"/>
+          </g>
+
+          <g class="sii-edge" id="edge-E0-E2" onclick="selectItem('E0-E2')">
+            <line x1="260" y1="215" x2="410" y2="75" fill="none" stroke="var(--on-surface)" stroke-width="1.5" stroke-dasharray="0 4" stroke-linecap="round"/>
+          </g>
+
+          <g class="sii-edge" id="edge-E1-E2" onclick="selectItem('E1-E2')">
+            <line x1="110" y1="75" x2="410" y2="75" fill="none" stroke="var(--on-surface)" stroke-width="1.5" stroke-dasharray="0 4" stroke-linecap="round"/>
+          </g>
+
+          <!-- Closed-loop Arrow (Center) -->
+          <g transform="translate(260, 125)">
+            <path id="loop-arrow" d="M -25 -5 A 28 20 0 1 1 20 -10" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-dasharray="3 3" marker-end="url(#lumi-caret-active)"/>
+            <text x="0" y="24" text-anchor="middle" font-family="var(--ff-mono)" font-size="12" fill="var(--primary)" font-style="italic">
+              &sum; {V(O₂)} = 0
+            </text>
+          </g>
+
+          <!-- EDGE PILLS -->
+          <g class="sii-pill" id="pill-E0-E1" onclick="selectItem('E0-E1')">
+            <rect x="142" y="132" width="90" height="24" rx="12" fill="var(--surface-dim)" stroke="var(--stroke-default)" stroke-width="1"/>
+            <text x="187" y="148" text-anchor="middle" font-family="var(--ff-mono)" font-size="11" fill="var(--on-surface)">Pivot (O₁, z₀)</text>
+          </g>
+
+          <g class="sii-pill" id="pill-E0-E2" onclick="selectItem('E0-E2')">
+            <rect x="290" y="132" width="100" height="24" rx="12" fill="var(--surface-dim)" stroke="var(--stroke-default)" stroke-width="1"/>
+            <text x="340" y="148" text-anchor="middle" font-family="var(--ff-mono)" font-size="11" fill="var(--on-surface)">Glissière (z₀)</text>
+          </g>
+
+          <g class="sii-pill" id="pill-E1-E2" onclick="selectItem('E1-E2')">
+            <rect x="200" y="62" width="120" height="24" rx="12" fill="var(--surface-dim)" stroke="var(--stroke-default)" stroke-width="1"/>
+            <text x="260" y="78" text-anchor="middle" font-family="var(--ff-mono)" font-size="11" fill="var(--on-surface)">Hélicoïdale (O₂, z₀)</text>
+          </g>
+
+          <!-- NODES -->
+          <g class="sii-node" id="node-E0" onclick="selectItem('E0')">
+            <rect x="210" y="242" width="100" height="12" fill="url(#sii-hatch)" stroke="var(--outline)" stroke-width="1"/>
+            <line x1="200" y1="242" x2="320" y2="242" stroke="var(--on-surface)" stroke-width="2"/>
+            <rect x="200" y="190" width="120" height="50" rx="25" fill="var(--surface-container)" stroke="var(--outline)" stroke-width="1"/>
+            <text x="260" y="211" text-anchor="middle" font-family="var(--ff-sans)" font-size="14" font-weight="600" fill="var(--on-surface)">E₀ : Bâti</text>
+            <text x="260" y="227" text-anchor="middle" font-family="var(--ff-mono)" font-size="11" font-style="italic" fill="var(--on-surface-variant)">(Structure Fixe)</text>
+          </g>
+
+          <g class="sii-node" id="node-E1" onclick="selectItem('E1')">
+            <rect x="50" y="50" width="120" height="50" rx="25" fill="var(--surface-dim)" stroke="var(--stroke-default)" stroke-width="1"/>
+            <text x="110" y="71" text-anchor="middle" font-family="var(--ff-sans)" font-size="14" font-weight="600" fill="var(--on-surface)">E₁ : Vis Z</text>
+            <text x="110" y="87" text-anchor="middle" font-family="var(--ff-mono)" font-size="11" font-style="italic" fill="var(--on-surface-variant)">(Trapézoïdale)</text>
+          </g>
+
+          <g class="sii-node" id="node-E2" onclick="selectItem('E2')">
+            <rect x="350" y="50" width="120" height="50" rx="25" fill="var(--surface-dim)" stroke="var(--stroke-default)" stroke-width="1"/>
+            <text x="410" y="71" text-anchor="middle" font-family="var(--ff-sans)" font-size="14" font-weight="600" fill="var(--on-surface)">E₂ : Portique X</text>
+            <text x="410" y="87" text-anchor="middle" font-family="var(--ff-mono)" font-size="11" font-style="italic" fill="var(--on-surface-variant)">(Écrou Z)</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="inspector-card">
+        <div class="inspector-title">
+          <span id="inspect-title">Liaison E1 - E2</span>
+          <span class="inspector-badge" id="inspect-badge">Hélicoïdale</span>
+        </div>
+
+        <div class="torsor-box" id="inspect-torsor"></div>
+
+        <div class="advice-box">
+          <span class="advice-header">Conseil de rédaction CPGE</span>
+          <span id="inspect-advice"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="control-deck">
+      <div class="control-row">
+        <span style="font-weight: 600; font-size:13px;">Préréglages moteur :</span>
+        <div class="presets-row">
+          <button class="preset-btn" onclick="setPreset(1)">1 pas (1,8&deg;)</button>
+          <button class="preset-btn" onclick="setPreset(10)">10 pas</button>
+          <button class="preset-btn" onclick="setPreset(100)">1/2 tour (100 pas)</button>
+          <button class="preset-btn is-active" id="btn-200" onclick="setPreset(200)">1 tour (200 pas)</button>
+        </div>
+      </div>
+
+      <div class="control-row">
+        <label class="control-label" for="slider-steps">Nombre de pas (N<sub>pas</sub>) :</label>
+        <div class="lumi-slider-container">
+          <input type="range" id="slider-steps" class="lumi-slider" data-key="steps" min="1" max="400" value="200">
+          <div id="slider-steps-val" class="lumi-slider-value">200 pas</div>
+        </div>
+      </div>
+
+      <div class="control-row">
+        <label class="control-label" for="slider-speed">Vitesse &omega;<sub>moteur</sub> :</label>
+        <div class="lumi-slider-container">
+          <input type="range" id="slider-speed" class="lumi-slider" data-key="speed" min="0.5" max="20" step="0.5" value="6.28">
+          <div id="slider-speed-val" class="lumi-slider-value">6.28 rad/s</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const state = { steps: 200, speed: 6.283, selectedId: 'E1-E2', pz: 8.0 };
+
+    const DATA_MAP = {
+      'E0': {
+        title: 'Classe d\'équivalence E0 : Bâti',
+        badge: 'Solide Fixe',
+        torsor: '{V(E0/R0)} = { 0 } au point O2.<br>Référentiel R0 supposé galiléen.',
+        advice: 'Toujours identifier le bâti (E0) en premier pour définir le repère global (O, x0, y0, z0). Les hachures sous E0 sont la convention normalisée SII.'
+      },
+      'E1': {
+        title: 'Classe d\'équivalence E1 : Vis Z',
+        badge: 'Solide Tournant',
+        torsor: '{V(1/0)} = { &omega;<sub>m</sub> z0 | 0 } en O1 (ou O2).<br>1 ddl de rotation autour de z0.',
+        advice: 'Isoler le sous-ensemble vis. En CPGE, préciser que la vis est guidée par deux roulements/paliers liés au bâti E0, formant une liaison pivot parfaite.'
+      },
+      'E2': {
+        title: 'Classe d\'équivalence E2 : Portique X',
+        badge: 'Solide Translation',
+        torsor: '{V(2/0)} = { 0 | V<sub>z</sub> z0 } en tout point O2.<br>1 ddl de translation selon z0.',
+        advice: 'Le portique X intègre l\'écrou laiton (E2). Le guidage par galets V-slot sur les profilés alu (E0) réalise la liaison glissière de direction z0.'
+      },
+      'E0-E1': {
+        title: 'Liaison Pivot E0 - E1',
+        badge: '1 ddl (Rotation)',
+        torsor: '{V(1/0)}<sub>O2</sub> =<br>[ 0 &nbsp;&nbsp;|&nbsp;&nbsp; 0 ]<br>[ 0 &nbsp;&nbsp;|&nbsp;&nbsp; 0 ]<br>[ &omega;<sub>m</sub> &nbsp;|&nbsp;&nbsp; 0 ]<sub>(&omega;<sub>m</sub> z0 , 0)</sub>',
+        advice: 'La liaison pivot bloque les 3 translations et 2 rotations. Seule la rotation &omega;(1/0)·z0 est autorisée. Pas de translation relative au point O1/O2.'
+      },
+      'E1-E2': {
+        title: 'Liaison Hélicoïdale E1 - E2',
+        badge: '1 ddl Couplé',
+        torsor: '{V(2/1)}<sub>O2</sub> =<br>[ 0 &nbsp;&nbsp;|&nbsp;&nbsp; 0 ]<br>[ 0 &nbsp;&nbsp;|&nbsp;&nbsp; 0 ]<br>[ &omega;<sub>21</sub> &nbsp;|&nbsp;&nbsp; -(&omega;<sub>21</sub> &middot; p<sub>z</sub> / 2&pi;) ]<sub>z0</sub>',
+        advice: 'Attention au signe ! Pour une vis à pas à droite (Tr8x8, pz = 8 mm), Vz(2/1) = - (pz / 2&pi;) &middot; &omega;(2/1). Vérifiez la fermeture cinématique.'
+      },
+      'E0-E2': {
+        title: 'Liaison Glissière E0 - E2',
+        badge: '1 ddl (Translation)',
+        torsor: '{V(2/0)}<sub>O2</sub> =<br>[ 0 &nbsp;&nbsp;|&nbsp;&nbsp; 0 ]<br>[ 0 &nbsp;&nbsp;|&nbsp;&nbsp; 0 ]<br>[ 0 &nbsp;&nbsp;|&nbsp;&nbsp; V<sub>z</sub> ]<sub>(0 , V<sub>z</sub> z0)</sub>',
+        advice: 'Provenir de la structure du portique guidé sur le bâti. Le torseur n\'a aucune composante de rotation : &omega;(2/0) = 0.'
+      }
+    };
+
+    function selectItem(id) {
+      state.selectedId = id;
+      updateViz();
+    }
+
+    function setPreset(steps) {
+      state.steps = steps;
+      document.getElementById('slider-steps').value = steps;
+      document.getElementById('slider-steps-val').textContent = steps + ' pas';
+      document.querySelectorAll('.preset-btn').forEach(btn => btn.classList.remove('is-active'));
+      if (steps === 200) document.getElementById('btn-200')?.classList.add('is-active');
+      updateViz();
+    }
+
+    function updateViz() {
+      const pz = state.pz;
+      const stepsPerRev = 200;
+      const revs = state.steps / stepsPerRev;
+      const dZ = revs * pz;
+      const dZ_um = dZ * 1000;
+      const theta_deg = revs * 360.0;
+      const Vz = (pz / (2 * Math.PI)) * state.speed;
+
+      document.getElementById('kpi-dz').textContent = dZ.toFixed(2).replace('.', ',') + ' mm';
+      document.getElementById('kpi-dz-um').textContent = Math.round(dZ_um).toLocaleString('fr-FR') + ' \u03BCm';
+      document.getElementById('kpi-vz').textContent = Vz.toFixed(2).replace('.', ',') + ' mm/s';
+      document.getElementById('kpi-omega').innerHTML = '&omega;<sub>m</sub> = ' + state.speed.toFixed(2).replace('.', ',') + ' rad/s';
+      document.getElementById('kpi-rot').textContent = theta_deg.toFixed(1).replace('.', ',') + '\u00B0';
+      document.getElementById('kpi-rot-rad').textContent = (revs * 2).toFixed(2).replace('.', ',') + ' \u03C0 rad';
+
+      const itemData = DATA_MAP[state.selectedId] || DATA_MAP['E1-E2'];
+      document.getElementById('inspect-title').textContent = itemData.title;
+      document.getElementById('inspect-badge').textContent = itemData.badge;
+      document.getElementById('inspect-torsor').innerHTML = itemData.torsor;
+      document.getElementById('inspect-advice').innerHTML = itemData.advice;
+
+      ['E0', 'E1', 'E2', 'E0-E1', 'E1-E2', 'E0-E2'].forEach(id => {
+        document.getElementById('node-' + id)?.classList.remove('is-selected');
+        document.getElementById('edge-' + id)?.classList.remove('is-selected');
+        document.getElementById('pill-' + id)?.classList.remove('is-selected');
+      });
+
+      const sel = state.selectedId;
+      document.getElementById('node-' + sel)?.classList.add('is-selected');
+      document.getElementById('edge-' + sel)?.classList.add('is-selected');
+      document.getElementById('pill-' + sel)?.classList.add('is-selected');
+    }
+
+    document.getElementById('slider-steps').addEventListener('input', (e) => {
+      state.steps = parseFloat(e.target.value);
+      document.getElementById('slider-steps-val').textContent = Math.round(state.steps) + ' pas';
+      document.querySelectorAll('.preset-btn').forEach(btn => btn.classList.remove('is-active'));
+      updateViz();
+    });
+
+    document.getElementById('slider-speed').addEventListener('input', (e) => {
+      state.speed = parseFloat(e.target.value);
+      document.getElementById('slider-speed-val').textContent = state.speed.toFixed(1) + ' rad/s';
+      updateViz();
+    });
+
+    updateViz();
+  </script>
+</body>
+</html>
