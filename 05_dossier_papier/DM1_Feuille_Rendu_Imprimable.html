@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DM n°1 SII — Dossier Papier Complet (Juan Ignacio RAMOS — MPSI)</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+  <style>
+    :root {
+      --ink: #0f172a;
+      --muted: #475569;
+      --border: #cbd5e1;
+      --e0: #0f172a;
+      --e1: #2563eb;
+      --e2: #dc2626;
+      --e3: #16a34a;
+      --e4: #ea580c;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #e2e8f0;
+      color: var(--ink);
+      padding: 24px 12px;
+      line-height: 1.48;
+    }
+    .print-bar {
+      max-width: 1120px;
+      margin: 0 auto 18px auto;
+      background: #0f172a;
+      color: #ffffff;
+      padding: 12px 20px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .print-bar a, .print-bar button {
+      background: #2563eb;
+      color: #ffffff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      cursor: pointer;
+      text-decoration: none;
+      margin-left: 8px;
+    }
+    .print-bar a.sec { background: #334155; }
+    .page {
+      max-width: 1120px;
+      margin: 0 auto 28px auto;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 28px 34px;
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.1);
+    }
+    /* En-tête conforme au modèle de la Page 2 de l'énoncé */
+    .assignment-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 3px solid var(--ink);
+      padding-bottom: 14px;
+      margin-bottom: 18px;
+    }
+    .student-fields {
+      font-size: 1.02rem;
+      line-height: 1.65;
+    }
+    .student-fields strong {
+      display: inline-block;
+      min-width: 145px;
+      color: var(--ink);
+    }
+    .course-badge {
+      text-align: right;
+      background: #f8fafc;
+      border: 1.5px solid var(--ink);
+      border-radius: 8px;
+      padding: 10px 16px;
+    }
+    .course-badge h1 {
+      font-size: 1.08rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .course-badge p {
+      font-size: 0.84rem;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+    /* Grille supérieure : Selfie à gauche + Photo annotée à droite (exactement comme Page 2 de l'énoncé) */
+    .photo-showcase {
+      display: grid;
+      grid-template-columns: 0.82fr 1.48fr;
+      gap: 16px;
+      margin-bottom: 20px;
+      align-items: stretch;
+    }
+    .photo-card {
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #f8fafc;
+      display: flex;
+      flex-direction: column;
+    }
+    .photo-card-header {
+      background: var(--ink);
+      color: #ffffff;
+      padding: 7px 12px;
+      font-size: 0.84rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+    .photo-card-body {
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      background: #ffffff;
+    }
+    .photo-card-body img {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      display: block;
+    }
+    .section-banner {
+      background: var(--ink);
+      color: #ffffff;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 800;
+      margin: 18px 0 12px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .section-banner span.sub {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #cbd5e1;
+    }
+    .svg-box {
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #ffffff;
+      margin-bottom: 16px;
+    }
+    .svg-box img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    table.sii-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.86rem;
+      margin-bottom: 14px;
+    }
+    table.sii-table th, table.sii-table td {
+      border: 1px solid var(--border);
+      padding: 8px 10px;
+      text-align: left;
+      vertical-align: middle;
+    }
+    table.sii-table th {
+      background: #f1f5f9;
+      font-weight: 800;
+      color: var(--ink);
+    }
+    .closure-panel {
+      background: #f8fafc;
+      border: 1.5px solid #93c5fd;
+      border-left: 5px solid var(--e1);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 0.9rem;
+    }
+    @media print {
+      body { background: #ffffff; padding: 0; }
+      .print-bar { display: none; }
+      .page { box-shadow: none; border: none; padding: 8px 0; page-break-after: always; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="print-bar">
+    <div>
+      <strong>Dossier de Rendu Papier DM n°1 (Modèle Page 2 de l'Énoncé)</strong> — Prêt à imprimer ou recopier à la main
+    </div>
+    <div>
+      <a href="../index.html" class="sec">← Portail Principal</a>
+      <a href="../diagrams_reference.html" class="sec">Planches SII</a>
+      <button onclick="window.print()">Imprimer en A4 / PDF (Cmd+P)</button>
+    </div>
+  </div>
+
+  <!-- PAGE 1 : EN-TÊTE, PHOTOS (SELFIE + SYSTÈME PARAMÉTRÉ) & GRAPHE DES LIAISONS -->
+  <div class="page">
+    <div class="assignment-header">
+      <div class="student-fields">
+        <div><strong>Nom :</strong> RAMOS</div>
+        <div><strong>Prénom :</strong> Juan Ignacio</div>
+        <div><strong>Classe :</strong> MPSI (Lycée Stanislas)</div>
+        <div><strong>Système étudié :</strong> Imprimante 3D Creality Ender 3 (modèle de base)</div>
+      </div>
+      <div class="course-badge">
+        <h1>DM n°1 — Modélisation des Liaisons / Schématisation</h1>
+        <p>Sciences Industrielles de l'Ingénieur (SII) — Mme M. Prot &amp; M. Cullaz</p>
+        <p style="margin-top:4px; font-weight:700; color:#1d4ed8;">5 Classes d'équivalence ($E_0$ à $E_4$) • 5 Liaisons (3 familles distinctes)</p>
+      </div>
+    </div>
+
+    <div class="photo-showcase">
+      <div class="photo-card">
+        <div class="photo-card-header">1. Photo de l'élève avec le système (RAMOS-Selfie.png)</div>
+        <div class="photo-card-body">
+          <img src="../02_photos/RAMOS-Selfie.png" alt="Selfie de Juan Ignacio Ramos avec l'imprimante 3D Creality Ender 3">
+        </div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-card-header">2. Système paramétré : Repères locaux ($\mathcal{R}_0$ à $\mathcal{R}_4$), Centres ($O_0$ à $O_5$) &amp; Pièces</div>
+        <div class="photo-card-body">
+          <img src="../02_photos/RAMOS-Ender3-Details.png" alt="Photo annotée du système Creality Ender 3 avec repères locaux et classes d'équivalence">
+        </div>
+      </div>
+    </div>
+
+    <div class="section-banner">
+      <span>Graphe des liaisons (avec classes d'équivalence explicites et mise en valeur du bâti $E_0$)</span>
+      <span class="sub">Norme AFNOR NF EN ISO 3952</span>
+    </div>
+    <div class="svg-box">
+      <img src="../04_schemas_cinematiques/graphe_des_liaisons.svg" alt="Graphe des liaisons normalisé">
+    </div>
+  </div>
+
+  <!-- PAGE 2 : SCHÉMA CINÉMATIQUE 2D EN COULEUR, SCHÉMA 3D EN COULEUR & SYNTHÈSE MATHÉMATIQUE -->
+  <div class="page">
+    <div class="section-banner" style="margin-top:0;">
+      <span>Schéma cinématique 2D en couleur — Projection frontale $(O_0, \vec{x}_0, \vec{z}_0)$ avec $\vec{y}_0$ entrant ($\otimes$)</span>
+      <span class="sub">Bijection stricte : 1 couleur = 1 classe $E_k$</span>
+    </div>
+    <div class="svg-box">
+      <img src="../04_schemas_cinematiques/schema_cinematique_2d.svg" alt="Schéma cinématique 2D en couleur">
+    </div>
+
+    <div class="section-banner">
+      <span>Schéma cinématique 3D en couleur — Perspective axonométrique / cavalière</span>
+      <span class="sub">Fuyante longitudinale $\vec{y}_0 = \vec{z}_0 \wedge \vec{x}_0$</span>
+    </div>
+    <div class="svg-box">
+      <img src="../04_schemas_cinematiques/schema_cinematique_3d.svg" alt="Schéma cinématique 3D en couleur">
+    </div>
+
+    <div class="section-banner">
+      <span>Paramétrage Angulaire ($\mathcal{B}_0 \to \mathcal{B}_1$), Chaîne des Centres &amp; Torseurs Cinématiques</span>
+      <span class="sub">Synthèse analytique CPGE MPSI</span>
+    </div>
+    <div class="svg-box">
+      <img src="../04_schemas_cinematiques/figures_parametrage_angles.svg" alt="Figure plane de changement de base et chaîne vectorielle des centres">
+    </div>
+
+    <table class="sii-table">
+      <thead>
+        <tr>
+          <th>Liaison</th>
+          <th>Classes reliées &amp; Repères locaux</th>
+          <th>Nom normalisé AFNOR &amp; Caractéristique</th>
+          <th>Torseur cinématique dans $\mathcal{B}_0(\vec{x}_0, \vec{y}_0, \vec{z}_0)$</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>$L_{01}$</strong></td>
+          <td>$E_0 [\mathcal{R}_0] \leftrightarrow E_1 [\mathcal{R}_1]$</td>
+          <td><strong>Pivot</strong> d'axe $(O_1, \vec{z}_0)$ — Rotation $\theta_1(t) = (\widehat{\vec{x}_0, \vec{x}_1})$</td>
+          <td>$\{\mathcal{V}(E_1/E_0)\} = \left\{ \vec{\Omega}(E_1/E_0) = \dot{\theta}_1(t)\,\vec{z}_0 \;;\; \vec{V}(O_1 \in E_1/E_0) = \vec{0} \right\}_{O_1}$</td>
+        </tr>
+        <tr>
+          <td><strong>$L_{12}$</strong></td>
+          <td>$E_1 [\mathcal{R}_1] \leftrightarrow E_2 [\mathcal{R}_2]$</td>
+          <td><strong>Hélicoïdale</strong> d'axe $(O_2, \vec{z}_0)$, filet à droite, pas $p_z = 8\text{ mm/tr}$</td>
+          <td>$\{\mathcal{V}(E_2/E_1)\} = \left\{ \omega_{21}(t)\,\vec{z}_0 \;;\; v_{21}(t)\,\vec{z}_0 = +\dfrac{p_z}{2\pi}\,\omega_{21}(t)\,\vec{z}_0 \right\}_{O_2}$</td>
+        </tr>
+        <tr>
+          <td><strong>$L_{02}$</strong></td>
+          <td>$E_0 [\mathcal{R}_0] \leftrightarrow E_2 [\mathcal{R}_2]$</td>
+          <td><strong>Glissière</strong> de direction $\vec{z}_0$ (en $O_3$) — Translation $z_2(t)\,\vec{z}_0$</td>
+          <td>$\{\mathcal{V}(E_2/E_0)\} = \left\{ \vec{0} \;;\; \dot{z}_2(t)\,\vec{z}_0 \right\}_{\forall P}$</td>
+        </tr>
+        <tr>
+          <td><strong>$L_{23}$</strong></td>
+          <td>$E_2 [\mathcal{R}_2] \leftrightarrow E_3 [\mathcal{R}_3]$</td>
+          <td><strong>Glissière</strong> de direction $\vec{x}_0$ (en $O_4$) — Translation $x_3(t)\,\vec{x}_0$</td>
+          <td>$\{\mathcal{V}(E_3/E_2)\} = \left\{ \vec{0} \;;\; \dot{x}_3(t)\,\vec{x}_0 \right\}_{\forall P}$</td>
+        </tr>
+        <tr>
+          <td><strong>$L_{04}$</strong></td>
+          <td>$E_0 [\mathcal{R}_0] \leftrightarrow E_4 [\mathcal{R}_4]$</td>
+          <td><strong>Glissière</strong> de direction $\vec{y}_0$ (en $O_5$) — Translation $y_4(t)\,\vec{y}_0$</td>
+          <td>$\{\mathcal{V}(E_4/E_0)\} = \left\{ \vec{0} \;;\; \dot{y}_4(t)\,\vec{y}_0 \right\}_{\forall P}$</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="closure-panel">
+      <strong>Fermeture cinématique de la chaîne fermée $Z$ ($E_0 - E_1 - E_2 - E_0$) réduite en $O_2$ :</strong>
+      $\{\mathcal{V}(E_2/E_0)\} = \{\mathcal{V}(E_2/E_1)\} + \{\mathcal{V}(E_1/E_0)\} \implies \omega_{21}(t) = -\omega_{10}(t) = -\dot{\theta}_1(t)$ et
+      $\dot{z}_2(t) = v_{21}(t) = +\dfrac{p_z}{2\pi}\,\omega_{21}(t) = -\dfrac{p_z}{2\pi}\,\dot{\theta}_1(t) = +\dfrac{p_z}{2\pi}\,\omega_m(t)$.
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,115 +1,78 @@
-# 2. Fermeture Cinématique de la Boucle Z & Graphe des Liaisons
+# Graphe des Liaisons Normalisé et Fermeture Cinématique
+
+**Système étudié :** Imprimante 3D Creality Ender 3 (modèle de base)  
+**Matière :** Sciences Industrielles de l'Ingénieur (SII) — CPGE MPSI  
+**Conformité :** Norme AFNOR NF EN ISO 3952 — Analyse topologique et cinématique des systèmes
+
+![Graphe des liaisons normalisé de la Creality Ender 3](../04_schemas_cinematiques/graphe_des_liaisons.svg)
 
 ---
 
-## 1. Fermeture Cinématique de la Boucle $Z$ ($E_0 - E_1 - E_2 - E_0$)
+## 1. Analyse topologique de la structure cinématique
 
-### Équation torsorielle de fermeture cinématique
+### 1.1. Décompte des sommets, des arcs et nombre cyclomatique $\gamma$
+Le graphe des liaisons comporte :
+- **$N = 5$ sommets** représentant les **5 classes d'équivalence cinématique** : $E_0, E_1, E_2, E_3, E_4$, dont chacune détaille explicitement ses pièces constitutives et son repère local associé ($\mathcal{R}_0$ à $\mathcal{R}_4$). Le bâti fixe $E_0$ est mis en valeur par un contour renforcé et le symbole normalisé de référence fixe ($\underline{\underline{\equiv\mkern-10mu\perp}}$).
+- **$L = 5$ arcs** représentant les **5 liaisons élémentaires** : $L_{01}, L_{12}, L_{02}, L_{23}, L_{04}$, issues de **3 familles de liaisons distinctes** (Pivot, Hélicoïdale, Glissière).
+- **Nombre cyclomatique $\gamma$ du graphe :**
+  $$\gamma = L - N + 1 = 5 - 5 + 1 = 1$$
 
-Par composition des mouvements sur la chaîne fermée $E_0 - E_1 - E_2 - E_0$, la loi de composition des torseurs cinématiques s'écrit :
+### 1.2. Décomposition en sous-chaînes cinématiques
+La valeur $\gamma = 1$ traduit une **architecture cinématique hybride (série-parallèle)** composée de :
+1. **Une chaîne fermée élémentaire ($\gamma = 1$) : Boucle d'élévation verticale $Z$ ($E_0 - E_1 - E_2 - E_0$)**  
+   Elle transforme la rotation commandée de la vis mère $E_1$ (liaison Pivot $L_{01}$) en une translation verticale pure du portique $E_2$ (liaison Glissière $L_{02}$) par l'intermédiaire de la liaison Hélicoïdale $L_{12}$.
+2. **Deux chaînes ouvertes indépendantes (structures séries) :**
+   - **Branche transversale $X$ ($E_2 - E_3$) :** Liaison Glissière $L_{23}$ de direction $\vec{x}_0$ portée par le portique $E_2$, permettant à la tête d'impression $E_3$ de balayer la largeur du plateau tout en étant entraînée verticalement par $E_2$.
+   - **Branche longitudinale $Y$ ($E_0 - E_4$) :** Liaison Glissière $L_{04}$ de direction $\vec{y}_0$ directement liée au bâti $E_0$, assurant le déplacement avant/arrière du plateau chauffant $E_4$ indépendamment du portique $(X, Z)$.
 
+---
+
+## 2. Fermeture cinématique de la boucle d'élévation $Z$ ($E_0 - E_1 - E_2 - E_0$)
+
+Pour déterminer la loi d'entrée-sortie du mécanisme de montée/descente de l'axe $Z$, on écrit la **relation de composition des torseurs cinématiques** sur la chaîne fermée $E_0 \to E_1 \to E_2 \to E_0$ :
 $$\{\mathcal{V}(E_2/E_0)\} = \{\mathcal{V}(E_2/E_1)\} + \{\mathcal{V}(E_1/E_0)\}$$
 
-Pour exploiter algébriquement cette égalité torsorielle, il est **impératif de réduire les trois torseurs au même point géométrique**. Choisissons le point $O_2$, centre de la liaison hélicoïdale $L_{12}$.
+### 2.1. Choix du point de réduction commun
+Les axes des liaisons Pivot $L_{01}$ et Hélicoïdale $L_{12}$ sont confondus selon la droite $(O_1, \vec{z}_0) = (O_2, \vec{z}_0)$, car l'arbre du moteur $Z$ et la vis trapézoïdale sont coaxiaux ($\overrightarrow{O_1 O_2} = z_2(t)\,\vec{z}_0$).  
+Par ailleurs, la liaison $L_{02}$ étant une glissière de direction $\vec{z}_0$, le torseur $\{\mathcal{V}(E_2/E_0)\}$ est un **torseur couple** (son vecteur vitesse est uniforme en tout point de l'espace).  
+On réduit donc les trois torseurs au même point **$O_2$** et dans la même base fixe **$\mathcal{B}_0(\vec{x}_0, \vec{y}_0, \vec{z}_0)$** :
+
+1. **Transport de $\{\mathcal{V}(E_1/E_0)\}$ de $O_1$ en $O_2$ (formule de Varignon / équiprojectivité) :**
+   $$\vec{V}(O_2 \in E_1/E_0) = \vec{V}(O_1 \in E_1/E_0) + \vec{\Omega}(E_1/E_0) \wedge \overrightarrow{O_1 O_2} = \vec{0} + \big(\omega_{10}(t)\,\vec{z}_0\big) \wedge \big(z_2(t)\,\vec{z}_0\big) = \vec{0}$$
+   D'où :
+   $$\{\mathcal{V}(E_1/E_0)\} = \begin{Bmatrix} 0 & 0 \\ 0 & 0 \\ \omega_{10}(t) & 0 \end{Bmatrix}_{O_2, \mathcal{B}_0} \quad \text{avec } \omega_{10}(t) = \dot{\theta}_1(t)$$
+
+2. **Torseur de la liaison Hélicoïdale $L_{12}$ en $O_2$ (filetage à droite, pas $p_z = 8\text{ mm/tr}$) :**
+   $$\{\mathcal{V}(E_2/E_1)\} = \begin{Bmatrix} 0 & 0 \\ 0 & 0 \\ \omega_{21}(t) & v_{21}(t) \end{Bmatrix}_{O_2, \mathcal{B}_0} \quad \text{avec } v_{21}(t) = +\frac{p_z}{2\pi}\,\omega_{21}(t)$$
+
+3. **Torseur de la liaison Glissière $L_{02}$ en $O_2$ :**
+   $$\{\mathcal{V}(E_2/E_0)\} = \begin{Bmatrix} 0 & 0 \\ 0 & 0 \\ 0 & V_z(t) \end{Bmatrix}_{O_2, \mathcal{B}_0} \quad \text{avec } V_z(t) = \dot{z}_2(t)$$
+
+### 2.2. Système d'équations scalaires et loi d'entrée-sortie
+L'égalité des éléments de réduction en $O_2$ donne :
+$$\begin{Bmatrix} 0 & 0 \\ 0 & 0 \\ 0 & V_z(t) \end{Bmatrix}_{O_2, \mathcal{B}_0} = \begin{Bmatrix} 0 & 0 \\ 0 & 0 \\ \omega_{21}(t) + \omega_{10}(t) & v_{21}(t) + 0 \end{Bmatrix}_{O_2, \mathcal{B}_0}$$
+
+En projetant sur l'axe $\vec{z}_0$, les deux équations non triviales sont :
+$$\begin{cases}
+\text{Équation de résultante (rotation selon } \vec{z}_0\text{) :} & 0 = \omega_{21}(t) + \omega_{10}(t) \quad \Longrightarrow \quad \omega_{21}(t) = -\omega_{10}(t) \\[6pt]
+\text{Équation de moment (vitesse selon } \vec{z}_0\text{) :} & V_z(t) = v_{21}(t) = +\dfrac{p_z}{2\pi}\,\omega_{21}(t)
+\end{cases}$$
+
+En substituant $\omega_{21}(t) = -\omega_{10}(t)$, on obtient la **loi d'entrée-sortie cinématique** du système vis-écrou $Z$ :
+$$\boxed{V_z(t) = \dot{z}_2(t) = -\frac{p_z}{2\pi}\,\omega_{10}(t) = -\frac{p_z}{2\pi}\,\dot{\theta}_1(t) = +\frac{p_z}{2\pi}\,\omega_m(t)}$$
+où $\omega_m(t) = -\omega_{10}(t)$ désigne la vitesse angulaire motrice dans le sens d'élévation du portique (sens horaire de la vis vue de dessus).
+
+- **Application numérique (Creality Ender 3) :**  
+  Pour un pas hélicoïdal $p_z = 8\text{ mm/tr}$ :
+  - Un tour complet du moteur $Z$ ($\Delta\theta_m = 2\pi\text{ rad}$) élève le portique $E_2$ de $\Delta z_2 = 8{,}0\text{ mm}$.
+  - Avec un moteur NEMA 17 de $200\text{ pas/tr}$ piloté en micropas $1/16$ ($3200\text{ micropas/tr}$, soit $400\text{ micropas/mm}$), la résolution verticale théorique est de $\delta z = \dfrac{8\text{ mm}}{3200} = 2{,}5\text{ }\mu\text{m}$.
 
 ---
 
-### Transport des moments en $O_2$ par la relation de Varignon
+## 3. Loi de vitesse relative globale de dépôt du filament ($E_3 / E_4$)
 
-1. **Transport de $\{\mathcal{V}(E_2/E_0)\}$ de $O_3$ en $O_2$ :**
-   La résultante $\vec{\Omega}(E_2/E_0)$ étant nulle (mouvement de translation pure), le champ des vecteurs vitesse de $E_2/E_0$ est uniforme dans tout l'espace :
-   $$\vec{V}(O_2, E_2/E_0) = \vec{V}(O_3, E_2/E_0) + \underbrace{\vec{\Omega}(E_2/E_0)}_{=\,\vec{0}} \wedge \overrightarrow{O_3 O_2} = V_z(t)\,\vec{z}_0$$
+Pour piloter l'impression 3D, le G-code commande la vitesse du point d'extrusion de la buse ($O_4 \in E_3$) par rapport au plateau d'impression ($E_4$). Par composition des mouvements le long de la chaîne cinématique ouverte reliant $E_4$ à $E_3$ via $E_0$ et $E_2$ :
+$$\{\mathcal{V}(E_3/E_4)\} = \{\mathcal{V}(E_3/E_2)\} + \{\mathcal{V}(E_2/E_0)\} + \{\mathcal{V}(E_0/E_4)\} = \{\mathcal{V}(E_3/E_2)\} + \{\mathcal{V}(E_2/E_0)\} - \{\mathcal{V}(E_4/E_0)\}$$
 
-2. **Transport de $\{\mathcal{V}(E_1/E_0)\}$ de $O_1$ en $O_2$ :**
-   Par application de la formule de changement de point du moment d'un torseur (relation de Varignon) :
-   $$\vec{V}(O_2, E_1/E_0) = \vec{V}(O_1, E_1/E_0) + \vec{\Omega}(E_1/E_0) \wedge \overrightarrow{O_1 O_2}$$
-
-   **Démonstration de l'annulation du terme de transport :**
-   * Le point $O_1$ appartient à l'axe de la liaison pivot $L_{01}$, donc $\vec{V}(O_1, E_1/E_0) = \vec{0}$.
-   * Par construction géométrique de l'axe vertical, la liaison pivot $L_{01}$ et la liaison hélicoïdale $L_{12}$ sont **coaxiales** : elles partagent le même axe géométrique $(O_1, \vec{z}_0)$ de la vis trapézoïdale. Le point $O_2$ appartient donc à la droite $(O_1, \vec{z}_0)$, ce qui se traduit vectoriellement par :
-     $$\overrightarrow{O_1 O_2} = z_{12}(t)\,\vec{z}_0$$
-   * Le vecteur taux de rotation est $\vec{\Omega}(E_1/E_0) = \omega_m(t)\,\vec{z}_0$.
-   * Les deux vecteurs $\vec{\Omega}(E_1/E_0)$ et $\overrightarrow{O_1 O_2}$ étant **colinéaires** (portés tous deux par $\vec{z}_0$), leur produit vectoriel est identiquement nul :
-     $$\vec{\Omega}(E_1/E_0) \wedge \overrightarrow{O_1 O_2} = \left(\omega_m(t)\,\vec{z}_0\right) \wedge \left(z_{12}(t)\,\vec{z}_0\right) = \omega_m(t)\,z_{12}(t)\,\underbrace{\left(\vec{z}_0 \wedge \vec{z}_0\right)}_{=\,\vec{0}} = \vec{0}$$
-   * On en conclut immédiatement :
-     $$\boxed{\vec{V}(O_2, E_1/E_0) = \vec{0}}$$
-
----
-
-### Projection sur l'axe $\vec{z}_0$ et loi d'entrée-sortie en vitesse
-
-L'équation torsorielle réduite au point $O_2$ dans la base $\mathcal{B}_0$ s'écrit alors :
-
-$$\begin{Bmatrix} 0 & 0 \\ 0 & 0 \\ 0 & V_z(t) \end{Bmatrix}_{O_2, \mathcal{B}_0} = \begin{Bmatrix} 0 & 0 \\ 0 & 0 \\ \omega_{21}(t) & -\dfrac{p_z}{2\pi}\,\omega_{21}(t) \end{Bmatrix}_{O_2, \mathcal{B}_0} + \begin{Bmatrix} 0 & 0 \\ 0 & 0 \\ \omega_m(t) & 0 \end{Bmatrix}_{O_2, \mathcal{B}_0}$$
-
-En projetant sur l'axe $\vec{z}_0$ :
-
-1. **Équation de résultante selon $\vec{z}_0$ :**
-   $$0 = \omega_{21}(t) + \omega_m(t) \iff \omega_{21}(t) = -\omega_m(t)$$
-
-2. **Équation de moment (vitesse linéaire en $O_2$) selon $\vec{z}_0$ :**
-   $$V_z(t) = -\frac{p_z}{2\pi}\,\omega_{21}(t) + 0$$
-
-En substituant $\omega_{21}(t) = -\omega_m(t)$ dans l'équation de vitesse, on obtient la **loi d'élévation scalaire (loi d'entrée-sortie cinématique)** :
-
-$$\boxed{V_z(t) = \frac{p_z}{2\pi}\,\omega_m(t)}$$
-
----
-
-### Relation intégrée et déplacement incrémental pour 1 pas moteur
-
-En notant $V_z(t) = \dfrac{\mathrm{d}Z(t)}{\mathrm{d}t}$ et $\omega_m(t) = \dfrac{\mathrm{d}\theta_m(t)}{\mathrm{d}t}$, la relation devient :
-
-$$\frac{\mathrm{d}Z(t)}{\mathrm{d}t} = \frac{p_z}{2\pi}\,\frac{\mathrm{d}\theta_m(t)}{\mathrm{d}t}$$
-
-Par intégration temporelle entre deux instants quelconques (le rapport de transmission $\dfrac{p_z}{2\pi}$ étant constant), on obtient la relation entre la variation de cote verticale $\Delta Z$ et la rotation angulaire du moteur $\Delta\theta_m$ (exprimée en radians) :
-
-$$\boxed{\Delta Z = \frac{p_z}{2\pi}\,\Delta\theta_m}$$
-
-#### Application numérique pour 1 pas moteur ($\Delta\theta_{\text{pas}} = 1{,}8^\circ$) :
-
-1. **Conversion de l'angle de pas en radians :**
-   $$\Delta\theta_{\text{pas}} = 1{,}8^\circ \times \frac{\pi}{180^\circ} = \frac{\pi}{100}\text{ rad} \quad (\text{soit } 200\text{ pas par tour complet})$$
-
-2. **Calcul du déplacement vertical élémentaire $\Delta Z_{\text{pas}}$ avec $p_z = 8\text{ mm/tr}$ :**
-   $$\Delta Z_{\text{pas}} = \frac{8}{2\pi} \times \frac{\pi}{100} = \frac{8}{200} = 0{,}04\text{ mm}$$
-
-   $$\boxed{\Delta Z_{\text{pas}} = 0{,}04\text{ mm} = 40\ \mu\text{m}}$$
-
----
-
-## 2. Graphe des Liaisons
-
-### Description méthodique du tracé sur votre copie
-
-1. **Les nœuds (sommets du graphe) :**
-   Tracez **5 cercles (ou ellipses)** bien espacés représentant les 5 classes d'équivalence cinématique : $E_0$, $E_1$, $E_2$, $E_3$ et $E_4$.
-2. **Le symbole normalisé de bâti fixe sur $E_0$ :**
-   Au bas du cercle $E_0$, tracez un petit segment vertical aboutissant sur un trait horizontal souligné de **hachures obliques parallèles** (symbole normalisé de la référence mécanique / bâti galiléen).
-3. **Les arêtes (arcs de liaison) et l'architecture topologique :**
-   Le mécanisme possède une structure **mixte** composée d'une **chaîne fermée** (boucle d'élévation $Z$) et de **deux chaînes ouvertes** (axes $X$ et $Y$) :
-   * **La boucle fermée $(E_0 - E_1 - E_2 - E_0)$ :**
-     * Reliez $E_0$ à $E_1$ par un trait continu annoté : **$L_{01}$ : Pivot $(O_1, \vec{z}_0)$**.
-     * Reliez $E_1$ à $E_2$ par un trait continu annoté : **$L_{12}$ : Hélicoïdale $(O_2, \vec{z}_0)$, pas $p_z = 8\text{ mm/tr}$**.
-     * Reliez directement $E_0$ à $E_2$ par un second chemin pour fermer le cycle, annoté : **$L_{02}$ : Glissière $(\vec{z}_0)$ en $O_3$**.
-   * **La première branche ouverte $(E_2 - E_3)$ :**
-     * Depuis le nœud $E_2$, tirez une arête vers le nœud $E_3$ annotée : **$L_{23}$ : Glissière $(\vec{x}_0)$ en $O_4$**.
-   * **La seconde branche ouverte $(E_0 - E_4)$ :**
-     * Depuis le nœud $E_0$ (du côté opposé à la boucle $Z$ pour aérer le dessin), tirez une arête vers le nœud $E_4$ annotée : **$L_{04}$ : Glissière $(\vec{y}_0)$ en $O_5$**.
-
-### Disposition spatiale recommandée sur votre feuille
-
-```text
-                               L12 : Hélicoïdale (O2, z0)
-                                     pas pz = 8 mm/tr
-                         ( E1 ) -------------------------- ( E2 )
-                           |                               /    \
-                           |                              /      \  L23 : Glissière (x0)
-        L01 : Pivot (O1, z0)       L02 : Glissière (z0)  /        \       centre O4
-                           |             centre O3      /          \
-                           |                           /            \
-      ( E4 ) ------------ ( E0 ) ----------------------             ( E3 )
-        L04 : Glissière     |
-        (y0), centre O5   =====  <-- Symbole normalisé du bâti fixe (hachures)
-                         ///////
-```
+Les trois mouvements étant des translations pures de directions deux à deux orthogonales ($\vec{x}_0, \vec{z}_0, \vec{y}_0$), le mouvement de la tête $E_3$ par rapport au plateau $E_4$ est une **translation spatiale à 3 degrés de liberté indépendants** ($\vec{\Omega}(E_3/E_4) = \vec{0}$) dont le torseur cinématique s'écrit en tout point $P$ :
+$$\boxed{\{\mathcal{V}(E_3/E_4)\} = \begin{Bmatrix} 0 & V_x(t) \\ 0 & -V_y(t) \\ 0 & V_z(t) \end{Bmatrix}_{\forall P, \mathcal{B}_0} = \begin{Bmatrix} 0 & \dot{x}_3(t) \\ 0 & -\dot{y}_4(t) \\ 0 & +\dfrac{p_z}{2\pi}\,\omega_m(t) \end{Bmatrix}_{\forall P, \mathcal{B}_0}}$$

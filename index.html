@@ -183,13 +183,13 @@
 
 <nav class="tabs-nav">
     <div class="nav-wrapper">
-        <button class="tab-btn active" onclick="openTab('tab-dossier')">📄 Dossier de Rendu Papier</button>
+        <button class="tab-btn active" onclick="openTab('tab-dossier')">📄 Dossier Papier &amp; Schémas</button>
+        <button class="tab-btn" onclick="openTab('tab-print')">🖨️ Feuille de Rendu A4 (Modèle Énoncé)</button>
         <button class="tab-btn" onclick="openTab('tab-sim1')">🕹️ 3D/2D Switchable</button>
-        <button class="tab-btn" onclick="openTab('tab-sim2')">📊 Graphe & Fermeture Z</button>
-        <button class="tab-btn" onclick="openTab('tab-sim3')">🔍 Inspecteur 6 DDL & Torseurs</button>
+        <button class="tab-btn" onclick="openTab('tab-sim2')">📊 Graphe &amp; Fermeture Z</button>
+        <button class="tab-btn" onclick="openTab('tab-sim3')">🔍 Inspecteur 6 DDL &amp; Torseurs</button>
         <button class="tab-btn" onclick="openTab('tab-sim4')">🌐 Modèle 3D Spatial O₀..O₅</button>
-        <button class="tab-btn" onclick="openTab('tab-emails')">✉️ Courriels & Photos</button>
-        <button class="tab-btn" onclick="openTab('tab-prompts')">📋 Boîte à Prompts</button>
+        <button class="tab-btn" onclick="openTab('tab-emails')">✉️ Courriels &amp; Photos</button>
     </div>
 </nav>
 
@@ -198,109 +198,119 @@
     <!-- TAB 1 : DOSSIER DE RENDU PAPIER COMPLET -->
     <div id="tab-dossier" class="tab-panel active">
         <div class="card">
-            <h2>Corrigé Type Officiel pour le Devoir Maison n°1</h2>
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+                <h2 style="margin:0;">Dossier Complet de Rendu Papier — DM n°1 SII (Creality Ender 3)</h2>
+                <div>
+                    <a href="05_dossier_papier/DM1_Feuille_Rendu_Imprimable.html" style="background:#2563eb; color:#fff; padding:8px 16px; border-radius:8px; text-decoration:none; font-weight:700; font-size:13px; margin-right:8px;">🖨️ Ouvrir la Feuille A4 Imprimable</a>
+                    <a href="diagrams_reference.html" style="background:#0f172a; color:#fff; padding:8px 16px; border-radius:8px; text-decoration:none; font-weight:700; font-size:13px;">📐 Ouvrir les Planches SII</a>
+                </div>
+            </div>
             <div class="alert-box">
-                <strong>Critères d'évaluation CPGE :</strong> Ce document intègre la totalité des exigences formelles de Mme Prot et M. Cullaz : préambule d'exclusion des pièces déformables/roulantes, inventaire réel exhaustif des classes d'équivalence, tableau des DDL, écriture matricielle des torseurs dans la base fixe $\mathcal{B}_0$, démonstration de Varignon au point $O_2$ avec colinéarité, et graphe des liaisons topologique.
+                <strong>Conformité totale CPGE MPSI &amp; Norme AFNOR NF EN ISO 3952 :</strong> Ce dossier regroupe toutes les exigences de la Partie III du DM n°1 : paramétrage du système avec repères locaux $\mathcal{R}_0$ à $\mathcal{R}_4$, graphe des liaisons avec classes d'équivalence explicites et bâti mis en valeur ($\underline{\underline{\equiv\mkern-10mu\perp}}$), schéma cinématique 2D en couleur ($\vec{y}_0$ entrant $\otimes$), schéma cinématique 3D en couleur, et fermeture cinématique de la boucle $Z$.
             </div>
 
-            <h3>1. Classes d'Équivalence Cinématique (CEC)</h3>
-            <p><strong>Préambule :</strong> Sont exclus des classes $E_0$ à $E_4$ les organes déformables (courroies GT2, tube Bowden PTFE, ressorts hélicoïdaux de nivellement, faisceaux électriques, filament PLA), les éléments roulants (13 galets en POM et bagues extérieures de leurs 26 roulements 625ZZ), ainsi que le rotor d'extrusion et les 4 ventilateurs.</p>
+            <h3>1. Système Paramétré : Photo Annotée, Repères Locaux ($\mathcal{R}_0$ à $\mathcal{R}_4$) et Classes d'Équivalence</h3>
+            <div style="border:1px solid var(--border); border-radius:10px; overflow:hidden; margin:16px 0;">
+                <img src="02_photos/RAMOS-Ender3-Details.png" alt="Photo annotée du système Creality Ender 3 avec repères locaux et classes d'équivalence" style="width:100%; height:auto; display:block;">
+            </div>
+
             <table class="sii-table">
-                <tr><th>Classe</th><th>Couleur</th><th>Désignation</th><th>Composants physiques réels (Ender 3)</th></tr>
+                <tr><th>Classe</th><th>Couleur</th><th>Repère local lié</th><th>Désignation &amp; Composants physiques solidaires (Creality Ender 3)</th></tr>
                 <tr>
-                    <td><strong>E₀</strong></td>
-                    <td><strong>Noir ($\equiv\mkern-10mu\perp$)</strong></td>
-                    <td>Bâti fixe</td>
-                    <td>Traverses latérales en profilé alu 4040 V-Slot avec patins élastomère, profilé central Y 2040 V-Slot, traverse avant 2020, 2 montants verticaux Z 2040, traverse supérieure 2020 avec bouchons ABS, stators des moteurs pas-à-pas NEMA 17 Z et Y, supports tendeurs de courroie Y et axes fixes de poulie, capteurs fin de course Z/Y-Endstop, boîtier carte mère, alimentation 24V 360W, écran LCD et visserie structurelle (vis M4/M5 et écrous T-nuts).</td>
+                    <td><strong>$E_0$</strong></td>
+                    <td><strong>Noir ($\underline{\underline{\equiv\mkern-10mu\perp}}$)</strong></td>
+                    <td>$\mathcal{R}_0(O_0, \vec{x}_0, \vec{y}_0, \vec{z}_0)$</td>
+                    <td><strong>Bâti fixe :</strong> Cadre inférieur en profilés alu V-Slot $40\times 40$, rail central $Y$ $40\times 40$, 2 montants verticaux $Z$ $20\times 40$, traverse supérieure $20\times 20$, porte-bobine, 4 patins caoutchouc, stators des moteurs NEMA 17 $Z$ et $Y$, tendeur avant $Y$, capteurs $Z/Y$-Endstop, alimentation 24V, boîtier carte mère et écran LCD.</td>
                 </tr>
                 <tr>
-                    <td><strong>E₁</strong></td>
+                    <td><strong>$E_1$</strong></td>
                     <td><strong>Bleu</strong></td>
-                    <td>Vis Z & Rotor</td>
-                    <td>Rotor et arbre de sortie ($\varnothing 5\text{ mm}$) du moteur Z, manchon d'accouplement rigide fendu en alu avec ses 2 vis radiales M3, vis trapézoïdale Tr8x8 en acier inoxydable ($\varnothing 8\text{ mm}$, 4 filets, avance $p_z = 8\text{ mm/tr}$).</td>
+                    <td>$\mathcal{R}_1(O_1, \vec{x}_1, \vec{y}_1, \vec{z}_0)$</td>
+                    <td><strong>Arbre moteur &amp; Vis mère $Z$ :</strong> Rotor et arbre de sortie ($\varnothing 5\text{ mm}$) du moteur NEMA 17 $Z$, coupleur rigide fendu en alliage d'aluminium avec ses 2 vis CHC M3, vis trapézoïdale inox Tr8x8 ($\varnothing 8\text{ mm}$, filetage à droite, pas $p_z = 8\text{ mm/tr}$).</td>
                 </tr>
                 <tr>
-                    <td><strong>E₂</strong></td>
+                    <td><strong>$E_2$</strong></td>
                     <td><strong>Rouge</strong></td>
-                    <td>Portique X</td>
-                    <td>Profilé horizontal transversal 2020 V-Slot, platines gauche et droite pliées, écrou trapézoïdal en laiton Tr8x8 fixé par 2 vis M3, axes et entretoises lisses/excentriques des 6 galets V-wheels Z avec bagues intérieures de roulements, stator du moteur pas-à-pas NEMA 17 X avec son capot et capteur X-Endstop, support tendeur courroie X, stator moteur extrudeur MK8 et raccord pneumatique PC4-M6.</td>
+                    <td>$\mathcal{R}_2(O_3, \vec{x}_0, \vec{y}_0, \vec{z}_0)$</td>
+                    <td><strong>Portique mobile horizontal $X$ :</strong> Profilé horizontal $X$ $20\times 20$ V-Slot, platines supports gauche et droite en acier, écrou trapézoïdal en laiton Tr8x8 (2 vis M3), axes M5, entretoises, excentriques et bagues intérieures des 6 galets V-wheels $Z$, stators des moteurs NEMA 17 $X$ et extrudeur MK8, capteur $X$-Endstop et tendeur droit $X$.</td>
                 </tr>
                 <tr>
-                    <td><strong>E₃</strong></td>
+                    <td><strong>$E_3$</strong></td>
                     <td><strong>Vert</strong></td>
-                    <td>Chariot tête</td>
-                    <td>Platine support chariot X avec fentes d'ancrage de courroie, axes et entretoises des 3 galets V-wheels X avec bagues intérieures de roulements, raccord pneumatique PC4-M10, radiateur dissipateur rouge, heatbreak inox, bloc de chauffe alu avec cartouche 40W et thermistance CTN 100k, buse laiton $\varnothing 0{,}4\text{ mm}$ et carénage de ventilation.</td>
+                    <td>$\mathcal{R}_3(O_4, \vec{x}_0, \vec{y}_0, \vec{z}_0)$</td>
+                    <td><strong>Chariot de tête d'impression :</strong> Platine chariot $X$ en acier, axes M5, entretoises, excentrique et bagues intérieures des 3 galets V-wheels $X$, tête chaude MK8 (raccord PC4-M10, radiateur rouge, heatbreak, bloc de chauffe, buse laiton $\varnothing 0{,}4\text{ mm}$), carénage et stators des 2 ventilateurs 4010.</td>
                 </tr>
                 <tr>
-                    <td><strong>E₄</strong></td>
+                    <td><strong>$E_4$</strong></td>
                     <td><strong>Orange</strong></td>
-                    <td>Plateau Y</td>
-                    <td>Platine chariot Y, axes et entretoises des 4 galets V-wheels Y, 4 vis M4 et molettes crantées de nivellement (*solidaires de la platine en fonctionnement*), plaque d'aluminium chauffante 24V 220W avec thermistance CTN, revêtement texturé BuildTak et 4 pinces métalliques.</td>
+                    <td>$\mathcal{R}_4(O_5, \vec{x}_0, \vec{y}_0, \vec{z}_0)$</td>
+                    <td><strong>Plateau chauffant mobile $Y$ :</strong> Platine chariot $Y$ en aluminium, axes M5, entretoises, 2 excentriques et bagues intérieures des 4 galets V-wheels $Y$, 4 vis M4 et molettes crantées de nivellement (fixes en impression), plaque alu chauffante $235\times 235\text{ mm}$ (24V/220W), BuildTak et 4 pinces.</td>
                 </tr>
             </table>
 
-            <h3>2. Tableau Synthétique des DDL & Torseurs Cinématiques dans $\mathcal{B}_0$</h3>
+            <h3>2. Figure Plane de Changement de Base ($\mathcal{B}_0 \to \mathcal{B}_1$) &amp; Chaîne Vectorielle des Centres</h3>
+            <div style="border:1px solid var(--border); border-radius:10px; overflow:hidden; margin:16px 0;">
+                <img src="04_schemas_cinematiques/figures_parametrage_angles.svg" alt="Figure plane de changement de base et chaîne vectorielle des centres" style="width:100%; height:auto; display:block;">
+            </div>
+
+            <h3>3. Graphe des Liaisons Normalisé (Partie III — Exigence 2)</h3>
+            <div style="border:1px solid var(--border); border-radius:10px; overflow:hidden; margin:16px 0;">
+                <img src="04_schemas_cinematiques/graphe_des_liaisons.svg" alt="Graphe des liaisons normalisé" style="width:100%; height:auto; display:block;">
+            </div>
+
+            <h3>4. Schéma Cinématique Minimal 2D en Couleur (Partie III — Exigence 3)</h3>
+            <div style="border:1px solid var(--border); border-radius:10px; overflow:hidden; margin:16px 0;">
+                <img src="04_schemas_cinematiques/schema_cinematique_2d.svg" alt="Schéma cinématique 2D en couleur" style="width:100%; height:auto; display:block;">
+            </div>
+
+            <h3>5. Schéma Cinématique Spatial 3D en Couleur (Partie III — Exigence 4)</h3>
+            <div style="border:1px solid var(--border); border-radius:10px; overflow:hidden; margin:16px 0;">
+                <img src="04_schemas_cinematiques/schema_cinematique_3d.svg" alt="Schéma cinématique 3D en couleur" style="width:100%; height:auto; display:block;">
+            </div>
+
+            <h3>6. Tableau Synthétique des DDL, Torseurs Cinématiques dans $\mathcal{B}_0$ &amp; Fermeture Cinématique</h3>
             <table class="sii-table">
-                <tr><th>Liaison</th><th>Classes</th><th>Nature et géométrie</th><th>$T_x$</th><th>$T_y$</th><th>$T_z$</th><th>$R_x$</th><th>$R_y$</th><th>$R_z$</th><th>Mobilités</th></tr>
-                <tr><td><strong>L₀₁</strong></td><td>$E_0 / E_1$</td><td>Pivot d'axe $(O_1, \vec{z}_0)$</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td><strong>1</strong></td><td>1</td></tr>
-                <tr><td><strong>L₁₂</strong></td><td>$E_1 / E_2$</td><td>Hélicoïdale d'axe $(O_2, \vec{z}_0)$, $p_z = 8\text{ mm}$</td><td>0</td><td>0</td><td><strong>1*</strong></td><td>0</td><td>0</td><td><strong>1*</strong></td><td>1 (couplé)</td></tr>
-                <tr><td><strong>L₀₂</strong></td><td>$E_0 / E_2$</td><td>Glissière de direction $\vec{z}_0$ en $O_3$</td><td>0</td><td>0</td><td><strong>1</strong></td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
-                <tr><td><strong>L₂₃</strong></td><td>$E_2 / E_3$</td><td>Glissière de direction $\vec{x}_0$ en $O_4$</td><td><strong>1</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
-                <tr><td><strong>L₀₄</strong></td><td>$E_0 / E_4$</td><td>Glissière de direction $\vec{y}_0$ en $O_5$</td><td>0</td><td><strong>1</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+                <tr><th>Liaison</th><th>Classes</th><th>Nature et caractéristique géométrique</th><th>$T_x$</th><th>$T_y$</th><th>$T_z$</th><th>$R_x$</th><th>$R_y$</th><th>$R_z$</th><th>Mobilités ($N_c$)</th></tr>
+                <tr><td><strong>$L_{01}$</strong></td><td>$E_0 / E_1$</td><td>Pivot d'axe $(O_1, \vec{z}_0)$</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td><strong>1</strong></td><td>1 ($\theta_1(t)$)</td></tr>
+                <tr><td><strong>$L_{12}$</strong></td><td>$E_1 / E_2$</td><td>Hélicoïdale d'axe $(O_2, \vec{z}_0)$, filet à droite, $p_z = 8\text{ mm/tr}$</td><td>0</td><td>0</td><td><strong>1*</strong></td><td>0</td><td>0</td><td><strong>1*</strong></td><td>1 (conjugué)</td></tr>
+                <tr><td><strong>$L_{02}$</strong></td><td>$E_0 / E_2$</td><td>Glissière de direction $\vec{z}_0$ en $O_3$</td><td>0</td><td>0</td><td><strong>1</strong></td><td>0</td><td>0</td><td>0</td><td>1 ($z_2(t)$)</td></tr>
+                <tr><td><strong>$L_{23}$</strong></td><td>$E_2 / E_3$</td><td>Glissière de direction $\vec{x}_0$ en $O_4$</td><td><strong>1</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1 ($x_3(t)$)</td></tr>
+                <tr><td><strong>$L_{04}$</strong></td><td>$E_0 / E_4$</td><td>Glissière de direction $\vec{y}_0$ en $O_5$</td><td>0</td><td><strong>1</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>1 ($y_4(t)$)</td></tr>
             </table>
 
-            <h4>Écriture Matricielle Formelle des Torseurs :</h4>
             <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:15px; margin:15px 0;">
                 <div class="card" style="padding:15px; margin:0;">
-                    <strong>L₀₁ : Pivot (O₁, z₀)</strong>
-                    $$\{\mathcal{V}(E_1/E_0)\} = \begin{Bmatrix} 0 & 0 \\ 0 & 0 \\ \omega_m(t) & 0 \end{Bmatrix}_{O_1, \mathcal{B}_0}$$
+                    <strong>$L_{01}$ : Pivot $(O_1, \vec{z}_0)$</strong>
+                    $$\{\mathcal{V}(E_1/E_0)\} = \begin{Bmatrix} 0 & 0 \\ 0 & 0 \\ \omega_{10}(t) & 0 \end{Bmatrix}_{O_1, \mathcal{B}_0}$$
                 </div>
                 <div class="card" style="padding:15px; margin:0;">
-                    <strong>L₁₂ : Hélicoïdale (O₂, z₀)</strong>
-                    $$\{\mathcal{V}(E_2/E_1)\} = \begin{Bmatrix} 0 & 0 \\ 0 & 0 \\ \omega_{21}(t) & -\dfrac{p_z}{2\pi}\,\omega_{21}(t) \end{Bmatrix}_{O_2, \mathcal{B}_0}$$
+                    <strong>$L_{12}$ : Hélicoïdale $(O_2, \vec{z}_0)$ (droite)</strong>
+                    $$\{\mathcal{V}(E_2/E_1)\} = \begin{Bmatrix} 0 & 0 \\ 0 & 0 \\ \omega_{21}(t) & +\dfrac{p_z}{2\pi}\,\omega_{21}(t) \end{Bmatrix}_{O_2, \mathcal{B}_0}$$
                 </div>
                 <div class="card" style="padding:15px; margin:0;">
-                    <strong>L₀₂ : Glissière (z₀) en O₃</strong>
-                    $$\{\mathcal{V}(E_2/E_0)\} = \begin{Bmatrix} 0 & 0 \\ 0 & 0 \\ 0 & V_z(t) \end{Bmatrix}_{O_3, \mathcal{B}_0}$$
+                    <strong>$L_{02}$ : Glissière $(\vec{z}_0)$ en $O_3$</strong>
+                    $$\{\mathcal{V}(E_2/E_0)\} = \begin{Bmatrix} 0 & 0 \\ 0 & 0 \\ 0 & V_z(t) \end{Bmatrix}_{\forall P, \mathcal{B}_0}$$
                 </div>
                 <div class="card" style="padding:15px; margin:0;">
-                    <strong>L₂₃ : Glissière (x₀) en O₄</strong>
-                    $$\{\mathcal{V}(E_3/E_2)\} = \begin{Bmatrix} 0 & V_x(t) \\ 0 & 0 \\ 0 & 0 \end{Bmatrix}_{O_4, \mathcal{B}_0}$$
+                    <strong>$L_{23}$ : Glissière $(\vec{x}_0)$ en $O_4$</strong>
+                    $$\{\mathcal{V}(E_3/E_2)\} = \begin{Bmatrix} 0 & V_x(t) \\ 0 & 0 \\ 0 & 0 \end{Bmatrix}_{\forall P, \mathcal{B}_0}$$
                 </div>
                 <div class="card" style="padding:15px; margin:0;">
-                    <strong>L₀₄ : Glissière (y₀) en O₅</strong>
-                    $$\{\mathcal{V}(E_4/E_0)\} = \begin{Bmatrix} 0 & 0 \\ 0 & V_y(t) \\ 0 & 0 \end{Bmatrix}_{O_5, \mathcal{B}_0}$$
+                    <strong>$L_{04}$ : Glissière $(\vec{y}_0)$ en $O_5$</strong>
+                    $$\{\mathcal{V}(E_4/E_0)\} = \begin{Bmatrix} 0 & 0 \\ 0 & V_y(t) \\ 0 & 0 \end{Bmatrix}_{\forall P, \mathcal{B}_0}$$
                 </div>
             </div>
 
-            <h3>3. Fermeture Cinématique Z & Démonstration de Varignon</h3>
-            <p>Sur la boucle fermée $\{E_0 \to E_1 \to E_2 \to E_0\}$ réduite au point $O_2$ :</p>
-            $$\{\mathcal{V}(E_2/E_0)\} = \{\mathcal{V}(E_2/E_1)\} + \{\mathcal{V}(E_1/E_0)\}$$
-            <p><strong>Transport du moment en $O_2$ (Varignon) :</strong></p>
-            $$\vec{V}(O_2, E_1/E_0) = \vec{V}(O_1, E_1/E_0) + \vec{\Omega}(E_1/E_0) \wedge \overrightarrow{O_1 O_2}$$
-            <p>Comme $O_1$ est sur l'axe de la liaison pivot, $\vec{V}(O_1, E_1/E_0) = \vec{0}$. De plus, la vis et l'écrou étant coaxiaux, $\overrightarrow{O_1 O_2} = z_{12}(t)\vec{z}_0$ est colinéaire à $\vec{\Omega}(E_1/E_0) = \omega_m(t)\vec{z}_0$. Le produit vectoriel s'annule :</p>
-            $$\vec{\Omega}(E_1/E_0) \wedge \overrightarrow{O_1 O_2} = (\omega_m \vec{z}_0) \wedge (z_{12} \vec{z}_0) = \vec{0} \quad \Longrightarrow \quad \vec{V}(O_2, E_1/E_0) = \vec{0}$$
-            <p>En projetant sur $\vec{z}_0$ : $\omega_{21} = -\omega_m$ et $V_z(t) = -\frac{p_z}{2\pi}\omega_{21}(t) = \frac{p_z}{2\pi}\omega_m(t)$.</p>
-            $$\boxed{V_z(t) = \frac{p_z}{2\pi} \cdot \omega_m(t)} \quad \Longleftrightarrow \quad \boxed{\Delta Z = \frac{p_z}{2\pi} \cdot \Delta \theta_m}$$
-            <p><strong>Déplacement incrémental pour 1 pas moteur ($1{,}8^\circ = \frac{\pi}{100}\text{ rad}$) :</strong></p>
-            $$\Delta Z_{\text{pas}} = \frac{8\text{ mm}}{2\pi} \times \frac{\pi}{100} = \frac{8}{200} = 0{,}04\text{ mm} = \mathbf{40\ \mu m}$$
-
-            <h3>4. Architecture du Graphe des Liaisons</h3>
-            <div class="copy-box" style="background:#f8fafc; color:#0f172a; border:1px solid var(--border);">
-                               L12 : Hélicoïdale (O2, z0)
-                                     pas pz = 8 mm/tr
-                         ( E1 ) -------------------------- ( E2 )
-                           |                               /    \
-                           |                              /      \  L23 : Glissière (x0)
-        L01 : Pivot (O1, z0)       L02 : Glissière (z0)  /        \       centre O4
-                           |             centre O3      /          \
-                           |                           /            \
-      ( E4 ) ------------ ( E0 ) ----------------------             ( E3 )
-        L04 : Glissière     |
-        (y0), centre O5   =====  <-- Symbole normalisé du bâti fixe (hachures)
-                         ///////
-            </div>
+            <p><strong>Fermeture cinématique sur la chaîne fermée $\{E_0 \to E_1 \to E_2 \to E_0\}$ réduite au point $O_2 \in (O_1, \vec{z}_0)$ :</strong></p>
+            $$\{\mathcal{V}(E_2/E_0)\} = \{\mathcal{V}(E_2/E_1)\} + \{\mathcal{V}(E_1/E_0)\} \quad \text{avec } \vec{V}(O_2 \in E_1/E_0) = \vec{V}(O_1 \in E_1/E_0) + \big(\omega_{10}\,\vec{z}_0\big) \wedge \big(z_2\,\vec{z}_0\big) = \vec{0}$$
+            <p>En projetant sur $\vec{z}_0$ : $0 = \omega_{21}(t) + \omega_{10}(t) \implies \omega_{21}(t) = -\omega_{10}(t) = +\omega_m(t)$, d'où la loi d'entrée-sortie :</p>
+            $$\boxed{V_z(t) = \dot{z}_2(t) = v_{21}(t) = +\frac{p_z}{2\pi}\,\omega_{21}(t) = -\frac{p_z}{2\pi}\,\omega_{10}(t) = +\frac{p_z}{2\pi}\,\omega_m(t)}$$
         </div>
+    </div>
+
+    <!-- TAB PRINT : FEUILLE DE RENDU A4 IMPRIMABLE -->
+    <div id="tab-print" class="tab-panel">
+        <iframe class="simulator-frame" style="height:920px;" src="05_dossier_papier/DM1_Feuille_Rendu_Imprimable.html"></iframe>
     </div>
 
     <!-- TAB 2 : SIMULATEUR 1 -->
@@ -410,6 +420,7 @@ document.addEventListener("DOMContentLoaded", () => {
             delimiters: [
                 {left: '$$', right: '$$', display: true},
                 {left: '\\[', right: '\\]', display: true},
+                {left: '$', right: '$', display: false},
                 {left: '\\(', right: '\\)', display: false}
             ]
         });

@@ -415,86 +415,89 @@ button.lumi-chip.is-active {
     const LINKS_DATA = {
       L01: {
         id: 'L01',
-        title: 'Liaison L01 — E0 (Bâti) / E1 (Vis Z)',
+        title: 'Liaison L₀₁ — E₀ (Bâti) / E₁ (Vis mère Z) [R₁]',
         type: 'PIVOT (Z)',
-        desc: "Pivot d'axe (O1, z0)",
+        desc: "Pivot d'axe (O₁, z₀)",
         nodes: ['E0', 'E1'],
         ddl: { Rx: 0, Ry: 0, Rz: 1, Tx: 0, Ty: 0, Tz: 0 },
-        point: 'O1',
-        base: '(x0, y0, z0)',
-        sol: 'Roulements à billes 608ZZ + accouplement flexible aluminium sur arbre Moteur pas-à-pas NEMA 17.',
-        getTorseur: function() { return { rx: '0', ry: '0', rz: state.omega10.toFixed(1), tx: '0', ty: '0', tz: '0' }; },
-        getLaw: function() { return `ω_10 = ${state.omega10.toFixed(2)} rad/s (Entrée Moteur Z)`; }
+        point: 'O₁ (et O₂)',
+        base: 'B₀(x₀, y₀, z₀)',
+        sol: 'Guidage interne par les deux roulements à billes du moteur NEMA 17 Z + coupleur rigide fendu en aluminium (2 vis CHC M3).',
+        getTorseur: function() {
+          const w10 = -state.omega10;
+          return { rx: '0', ry: '0', rz: w10.toFixed(1), tx: '0', ty: '0', tz: '0' };
+        },
+        getLaw: function() { return `ω₁₀ = -ω_m = ${(-state.omega10).toFixed(2)} rad/s (Rotation horaire de montée autour de z₀)`; }
       },
       L12: {
         id: 'L12',
-        title: 'Liaison L12 — E1 (Vis Z) / E2 (Portique X)',
+        title: 'Liaison L₁₂ — E₁ (Vis mère Z) / E₂ (Portique X)',
         type: 'HÉLICOÏDALE (Z)',
-        desc: "Hélicoïdale d'axe (O2, z0), pas pz = 8 mm/tr (droite)",
+        desc: "Hélicoïdale d'axe (O₂, z₀), pas p_z = 8 mm/tr (filetage à droite)",
         nodes: ['E1', 'E2'],
         ddl: { Rx: 0, Ry: 0, Rz: '1*', Tx: 0, Ty: 0, Tz: '1*' },
-        point: 'O2',
-        base: '(x0, y0, z0)',
-        sol: 'Écrou en laiton fixé sur la platine du chariot Z + vis sans fin Trapézoïdale T8x8 (4 filets).',
+        point: 'O₂',
+        base: 'B₀(x₀, y₀, z₀)',
+        sol: 'Écrou trapézoïdal en laiton fixé sur la platine gauche du portique E₂ + vis trapézoïdale inox Tr8x8 (p_z = 8 mm/tr).',
         getTorseur: function() {
-          const omega21 = -state.omega10;
+          const omega21 = +state.omega10; // omega21 = -omega10 = +omega_m
           const v21 = getK() * omega21;
-          return { rx: '0', ry: '0', rz: omega21.toFixed(1), tx: '0', ty: '0', tz: v21.toFixed(2) };
+          return { rx: '0', ry: '0', rz: '+' + omega21.toFixed(1), tx: '0', ty: '0', tz: '+' + v21.toFixed(2) };
         },
         getLaw: function() {
-          const omega21 = -state.omega10;
+          const omega21 = +state.omega10;
           const v21 = getK() * omega21;
-          return `Fermeture cinématique Z: ω_21 = -ω_10 = ${omega21.toFixed(1)} rad/s ⇒ v_21 = ${v21.toFixed(2)} mm/s`;
+          return `Fermeture Z : ω₂₁ = -ω₁₀ = +${omega21.toFixed(1)} rad/s ⇒ v₂₁ = +(p_z/2π)·ω₂₁ = +${v21.toFixed(2)} mm/s`;
         }
       },
       L02: {
         id: 'L02',
-        title: 'Liaison L02 — E0 (Bâti) / E2 (Portique X)',
+        title: 'Liaison L₀₂ — E₀ (Bâti) / E₂ (Portique X) [R₂]',
         type: 'GLISSIÈRE (Z)',
-        desc: "Glissière équivalente de direction z0",
+        desc: "Glissière équivalente de direction z₀ (centre O₃)",
         nodes: ['E0', 'E2'],
         ddl: { Rx: 0, Ry: 0, Rz: 0, Tx: 0, Ty: 0, Tz: 1 },
-        point: 'Tout point',
-        base: '(x0, y0, z0)',
-        sol: 'Guidage par galets V-slot en POM roulant sur le profilé aluminium vertical V-Slot 2040.',
+        point: 'Tout point (O₃, O₂)',
+        base: 'B₀(x₀, y₀, z₀)',
+        sol: 'Guidage bilatéral par 6 galets V-wheels en POM (dont 2 sur excentriques) roulant sur les 2 montants verticaux V-Slot 2040.',
         getTorseur: function() {
           const v20 = getK() * state.omega10;
-          return { rx: '0', ry: '0', rz: '0', tx: '0', ty: '0', tz: v20.toFixed(2) };
+          return { rx: '0', ry: '0', rz: '0', tx: '0', ty: '0', tz: '+' + v20.toFixed(2) };
         },
         getLaw: function() {
           const v20 = getK() * state.omega10;
-          return `Relation globale Z: v_20 = (p_z / 2π) · ω_10 = ${v20.toFixed(2)} mm/s`;
+          return `Fermeture Z : V_z = v₂₁ + 0 = -(p_z/2π)·ω₁₀ = +(p_z/2π)·ω_m = +${v20.toFixed(2)} mm/s`;
         }
       },
       L23: {
         id: 'L23',
-        title: 'Liaison L23 — E2 (Portique X) / E3 (Tête X)',
+        title: 'Liaison L₂₃ — E₂ (Portique X) / E₃ (Tête X) [R₃]',
         type: 'GLISSIÈRE (X)',
-        desc: "Glissière de direction x0",
+        desc: "Glissière de direction x₀ (centre O₄)",
         nodes: ['E2', 'E3'],
         ddl: { Rx: 0, Ry: 0, Rz: 0, Tx: 1, Ty: 0, Tz: 0 },
-        point: 'Tout point',
-        base: '(x0, y0, z0)',
-        sol: 'Courroie crantée GT2 (pas 2mm, 16 dents) entraînée par Moteur NEMA 17 + Galets V-Slot sur profilé 2020.',
+        point: 'Tout point (O₄)',
+        base: 'B₀(x₀, y₀, z₀)',
+        sol: '3 galets V-wheels en POM roulant sur le profilé horizontal X V-Slot 2020 + entraînement par courroie crantée GT2.',
         getTorseur: function() {
           return { rx: '0', ry: '0', rz: '0', tx: state.v32.toFixed(1), ty: '0', tz: '0' };
         },
-        getLaw: function() { return `Axe X indépendant: v_32 = ${state.v32.toFixed(1)} mm/s (Consigne Moteur X)`; }
+        getLaw: function() { return `Axe X indépendant : V_x = dx₃/dt = ${state.v32.toFixed(1)} mm/s (Consigne Moteur X)`; }
       },
       L04: {
         id: 'L04',
-        title: 'Liaison L04 — E0 (Bâti) / E4 (Plateau Y)',
+        title: 'Liaison L₀₄ — E₀ (Bâti) / E₄ (Plateau Y) [R₄]',
         type: 'GLISSIÈRE (Y)',
-        desc: "Glissière de direction y0",
+        desc: "Glissière de direction y₀ (centre O₅)",
         nodes: ['E0', 'E4'],
         ddl: { Rx: 0, Ry: 0, Rz: 0, Tx: 0, Ty: 1, Tz: 0 },
-        point: 'Tout point',
-        base: '(x0, y0, z0)',
-        sol: 'Plateau mobile guidé par 4 galets en V sur le profilé aluminium central V-Slot 4040 + Courroie GT2.',
+        point: 'Tout point (O₅)',
+        base: 'B₀(x₀, y₀, z₀)',
+        sol: 'Plateau guidé par 4 galets V-wheels en POM sur le rail central V-Slot 4040 + entraînement par courroie crantée GT2.',
         getTorseur: function() {
           return { rx: '0', ry: '0', rz: '0', tx: '0', ty: state.v40.toFixed(1), tz: '0' };
         },
-        getLaw: function() { return `Axe Y indépendant: v_40 = ${state.v40.toFixed(1)} mm/s (Consigne Moteur Y)`; }
+        getLaw: function() { return `Axe Y indépendant : V_y = dy₄/dt = ${state.v40.toFixed(1)} mm/s (Consigne Moteur Y)`; }
       }
     };
 

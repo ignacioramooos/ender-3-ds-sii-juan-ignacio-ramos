@@ -445,24 +445,22 @@ button.lumi-btn--accent {
 
     <div class="sii-card">
       <div class="sii-header">
-        <span id="sii-title" class="sii-title">Fiche Liaison AFNOR — L01</span>
-        <span id="sii-class" style="font-size:13px; font-family:var(--ff-mono); color:var(--primary);">Classes : {0} Bâti / {1} Vis Z</span>
+        <span id="sii-title" class="sii-title">Fiche Liaison AFNOR — L₀₁</span>
+        <span id="sii-class" style="font-size:13px; font-family:var(--ff-mono); color:var(--primary);">Classes : E₀ (Bâti) / E₁ (Vis mère Z) [Repère R₁]</span>
       </div>
       <div class="sii-grid">
         <div class="sii-info-box">
-          <div class="sii-info-label">Nom Normalisé & Centre</div>
-          <div id="sii-name" class="sii-info-val">Liaison Pivot d'axe (A, z₀)</div>
+          <div class="sii-info-label">Nom Normalisé &amp; Centre</div>
+          <div id="sii-name" class="sii-info-val">Liaison Pivot d'axe (O₁, z₀)</div>
         </div>
         <div class="sii-info-box">
           <div class="sii-info-label">Degrés de Liberté (Mobilité)</div>
-          <div id="sii-dof" class="sii-info-val">1 Rotation (θ₁) / 0 Translation</div>
+          <div id="sii-dof" class="sii-info-val">1 Rotation θ₁(t) / 0 Translation</div>
         </div>
       </div>
       <div class="sii-info-box">
-        <div class="sii-info-label">Torseur Cinématique Normalisé</div>
-        <div id="sii-torsor" class="torsor-matrix">
-          {V(1/0)} = { [0, 0], [0, 0], [ω₁₀, 0] }_{(A, x₀, y₀, z₀)}
-        </div>
+        <div class="sii-info-label">Torseur Cinématique Normalisé dans B₀(x₀, y₀, z₀)</div>
+        <div id="sii-torsor" class="torsor-matrix">{V(E₁/E₀)} = { [0, 0], [0, 0], [ω₁₀(t), 0] }_{O₁, B₀}</div>
       </div>
     </div>
   </div>
@@ -472,39 +470,39 @@ button.lumi-btn--accent {
 
     const JOINT_SPECS = {
       L01: {
-        title: "Liaison Pivot L₀₁",
-        classes: "Classes : {0} Bâti / {1} Vis Z",
-        name: "Liaison Pivot d'axe (A, z⃗₀)",
-        dof: "1 Rotation (θ₁) / 0 Translation",
-        torsor: `{V(1/0)} = [  0     0  ]\n           [  0     0  ]\n           [ ω₁₀   0  ]_(A, x⃗₀, y⃗₀, z⃗₀)`
+        title: "Liaison Pivot L₀₁ (Origine de R₁)",
+        classes: "Classes : E₀ (Bâti fixe) / E₁ (Arbre moteur & Vis mère Z)",
+        name: "Liaison Pivot d'axe (O₁, z₀)",
+        dof: "1 Rotation θ₁(t) = (x₀, x₁) / 0 Translation",
+        torsor: `{V(E₁/E₀)} = [   0        0   ]\n             [   0        0   ]\n             [ ω₁₀(t)     0   ]_(O₁, B₀)   avec ω₁₀(t) = dθ₁/dt`
       },
       L12: {
-        title: "Liaison Hélicoïdale L₁₂",
-        classes: "Classes : {1} Vis Z / {2} Portique X",
-        name: "Liaison Hélicoïdale d'axe (B, z⃗₀), pas p = 8 mm/tr",
-        dof: "1 DoF Couplé : v₂₁z = (p / 2π) · ω₂₁z",
-        torsor: `{V(2/1)} = [  0             0          ]\n           [  0             0          ]\n           [ ω₂₁  (p/2π)·ω₂₁ ]_(B, x⃗₀, y⃗₀, z⃗₀)`
+        title: "Liaison Hélicoïdale L₁₂ (Filet à droite Tr8x8)",
+        classes: "Classes : E₁ (Vis mère Z) / E₂ (Portique X & Écrou laiton)",
+        name: "Liaison Hélicoïdale d'axe (O₂, z₀), pas p_z = 8 mm/tr",
+        dof: "1 DoF couplé : v₂₁(t) = +(p_z / 2π) · ω₂₁(t)",
+        torsor: `{V(E₂/E₁)} = [   0               0            ]\n             [   0               0            ]\n             [ ω₂₁(t)   +(p_z/2π)·ω₂₁(t) ]_(O₂, B₀)   avec ω₂₁ = -ω₁₀`
       },
       L02: {
-        title: "Liaison Glissière L₀₂",
-        classes: "Classes : {0} Bâti / {2} Portique X",
-        name: "Liaison Glissière de direction z⃗₀",
-        dof: "1 Translation (z₂) / 0 Rotation",
-        torsor: `{V(2/0)} = [  0     0   ]\n           [  0     0   ]\n           [  0   v₂₀z  ]_(x⃗₀, y⃗₀, z⃗₀)`
+        title: "Liaison Glissière L₀₂ (Origine de R₂)",
+        classes: "Classes : E₀ (Bâti fixe) / E₂ (Portique mobile X)",
+        name: "Liaison Glissière de direction z₀ (centre O₃)",
+        dof: "1 Translation verticale z₂(t) / 0 Rotation",
+        torsor: `{V(E₂/E₀)} = [  0       0     ]\n             [  0       0     ]\n             [  0    V_z(t)   ]_(∀P, B₀)   avec V_z(t) = dz₂/dt = -(p_z/2π)·ω₁₀`
       },
       L23: {
-        title: "Liaison Glissière L₂₃",
-        classes: "Classes : {2} Portique X / {3} Chariot Tête",
-        name: "Liaison Glissière de direction x⃗₀",
-        dof: "1 Translation (x₃) / 0 Rotation",
-        torsor: `{V(3/2)} = [  0   v₃₂x  ]\n           [  0     0   ]\n           [  0     0   ]_(x⃗₀, y⃗₀, z⃗₀)`
+        title: "Liaison Glissière L₂₃ (Origine de R₃)",
+        classes: "Classes : E₂ (Portique mobile X) / E₃ (Chariot Tête & Buse)",
+        name: "Liaison Glissière de direction x₀ (centre O₄)",
+        dof: "1 Translation horizontale x₃(t) / 0 Rotation",
+        torsor: `{V(E₃/E₂)} = [  0    V_x(t)   ]\n             [  0       0     ]\n             [  0       0     ]_(∀P, B₀)   avec V_x(t) = dx₃/dt`
       },
       L04: {
-        title: "Liaison Glissière L₀₄",
-        classes: "Classes : {0} Bâti / {4} Plateau",
-        name: "Liaison Glissière de direction y⃗₀",
-        dof: "1 Translation (y₄) / 0 Rotation",
-        torsor: `{V(4/0)} = [  0     0   ]\n           [  0   v₄₀y  ]\n           [  0     0   ]_(x⃗₀, y⃗₀, z⃗₀)`
+        title: "Liaison Glissière L₀₄ (Origine de R₄)",
+        classes: "Classes : E₀ (Bâti fixe) / E₄ (Plateau chauffant Y)",
+        name: "Liaison Glissière de direction y₀ (centre O₅)",
+        dof: "1 Translation longitudinale y₄(t) / 0 Rotation",
+        torsor: `{V(E₄/E₀)} = [  0       0     ]\n             [  0    V_y(t)   ]\n             [  0       0     ]_(∀P, B₀)   avec V_y(t) = dy₄/dt`
       }
     };
 
@@ -568,47 +566,69 @@ button.lumi-btn--accent {
       groupBase = new THREE.Group();
       scene.add(groupBase);
 
-      const railY = new THREE.Mesh(new THREE.BoxGeometry(16, 12, 160), matBase);
-      railY.position.set(0, 6, 0);
+      const railY = new THREE.Mesh(new THREE.BoxGeometry(16, 10, 160), matBase);
+      railY.position.set(0, 5, 0);
       groupBase.add(railY);
 
-      const colRight = new THREE.Mesh(new THREE.BoxGeometry(16, 120, 16), matBase);
-      colRight.position.set(55, 60, 0);
+      const baseCross = new THREE.Mesh(new THREE.BoxGeometry(132, 10, 16), matBase);
+      baseCross.position.set(0, 5, 0);
+      groupBase.add(baseCross);
+
+      const colLeft = new THREE.Mesh(new THREE.BoxGeometry(12, 118, 14), matBase);
+      colLeft.position.set(-58, 59, 0);
+      groupBase.add(colLeft);
+
+      const colRight = new THREE.Mesh(new THREE.BoxGeometry(12, 118, 14), matBase);
+      colRight.position.set(58, 59, 0);
       groupBase.add(colRight);
 
-      const pivotHousing = new THREE.Mesh(new THREE.CylinderGeometry(8, 8, 14, 16), matBase);
-      pivotHousing.position.set(40, 7, 0);
+      const topBar = new THREE.Mesh(new THREE.BoxGeometry(128, 8, 14), matBase);
+      topBar.position.set(0, 120, 0);
+      groupBase.add(topBar);
+
+      const pivotHousing = new THREE.Mesh(new THREE.CylinderGeometry(7.5, 7.5, 16, 20), matBase);
+      pivotHousing.position.set(-44, 12, 0);
       pivotHousing.userData = { jointKey: 'L01' };
       groupBase.add(pivotHousing);
       jointHitMeshes.push(pivotHousing);
 
       groupVis = new THREE.Group();
-      groupVis.position.set(40, 0, 0);
+      groupVis.position.set(-44, 0, 0);
       scene.add(groupVis);
 
-      const visMesh = new THREE.Mesh(new THREE.CylinderGeometry(2.5, 2.5, 110, 16), matVis);
-      visMesh.position.set(0, 55, 0);
+      const visMesh = new THREE.Mesh(new THREE.CylinderGeometry(2.6, 2.6, 114, 16), matVis);
+      visMesh.position.set(0, 58, 0);
       visMesh.userData = { jointKey: 'L01' };
       groupVis.add(visMesh);
       jointHitMeshes.push(visMesh);
 
+      const stopTop = new THREE.Mesh(new THREE.CylinderGeometry(5.5, 5.5, 2.2, 16), matVis);
+      stopTop.position.set(0, 21.5, 0);
+      groupVis.add(stopTop);
+
       groupPortique = new THREE.Group();
       scene.add(groupPortique);
 
-      const nutMesh = new THREE.Mesh(new THREE.CylinderGeometry(6, 6, 16, 16), matPortique);
-      nutMesh.position.set(40, 0, 0);
+      const nutMesh = new THREE.Mesh(new THREE.CylinderGeometry(6.2, 6.2, 16, 20), matPortique);
+      nutMesh.position.set(-44, 0, 0);
       nutMesh.userData = { jointKey: 'L12' };
       groupPortique.add(nutMesh);
       jointHitMeshes.push(nutMesh);
 
-      const barXMesh = new THREE.Mesh(new THREE.BoxGeometry(110, 12, 14), matPortique);
+      const barXMesh = new THREE.Mesh(new THREE.BoxGeometry(116, 10, 12), matPortique);
       groupPortique.add(barXMesh);
 
-      const guidePrismMesh = new THREE.Mesh(new THREE.BoxGeometry(20, 24, 20), matPortique);
-      guidePrismMesh.position.set(55, 0, 0);
+      const guidePrismMesh = new THREE.Mesh(new THREE.BoxGeometry(18, 22, 18), matPortique);
+      guidePrismMesh.position.set(-58, 0, 0);
       guidePrismMesh.userData = { jointKey: 'L02' };
       groupPortique.add(guidePrismMesh);
       jointHitMeshes.push(guidePrismMesh);
+
+      const guideRightMesh = new THREE.Mesh(new THREE.BoxGeometry(16, 20, 16), matPortique);
+      guideRightMesh.position.set(58, 0, 0);
+      guideRightMesh.userData = { jointKey: 'L02' };
+      groupPortique.add(guideRightMesh);
+      jointHitMeshes.push(guideRightMesh);
 
       groupChariot = new THREE.Group();
       scene.add(groupChariot);

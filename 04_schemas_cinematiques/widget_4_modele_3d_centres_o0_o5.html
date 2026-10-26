@@ -458,10 +458,10 @@ html, body {
       vectorLine.computeLineDistances();
       groupMarkers.visible = state.showMarkers;
 
-      const dx = Math.round(pO4.x - pO5.x);
-      const dy = Math.round(pO4.y - pO5.y);
-      const dz = Math.round(pO4.z - pO5.z);
-      document.getElementById('vec-readout').textContent = `[${dx}, ${dy}, ${dz}]`;
+      const dx_sii = Math.round(pO4.x - pO5.x);
+      const dy_sii = Math.round(-pO4.z - state.y);
+      const dz_sii = Math.round(pO4.y - pO5.y);
+      document.getElementById('vec-readout').textContent = `[${dx_sii}, ${dy_sii}, ${dz_sii}]_B₀`;
       document.getElementById('theta-readout').textContent = `${thetaRad.toFixed(2)} rad (${thetaDeg.toFixed(1)}°)`;
     }
 

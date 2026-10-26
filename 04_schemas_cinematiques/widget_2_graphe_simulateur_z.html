@@ -409,40 +409,40 @@ html, body {
 
     const DATA_MAP = {
       'E0': {
-        title: 'Classe d\'équivalence E0 : Bâti',
+        title: 'Classe d\'équivalence E₀ : Bâti fixe [R₀]',
         badge: 'Solide Fixe',
-        torsor: '{V(E0/R0)} = { 0 } au point O2.<br>Référentiel R0 supposé galiléen.',
-        advice: 'Toujours identifier le bâti (E0) en premier pour définir le repère global (O, x0, y0, z0). Les hachures sous E0 sont la convention normalisée SII.'
+        torsor: '{V(E₀/R₀)} = { 0 } en tout point.<br>Repère direct R₀(O₀, x₀, y₀, z₀) lié au châssis.',
+        advice: 'Toujours identifier le bâti (E₀) en premier pour définir le repère global R₀(O₀, x₀, y₀, z₀) et le mettre en valeur par le symbole normalisé de bâti (hachures).'
       },
       'E1': {
-        title: 'Classe d\'équivalence E1 : Vis Z',
+        title: 'Classe d\'équivalence E₁ : Arbre & Vis Z [R₁]',
         badge: 'Solide Tournant',
-        torsor: '{V(1/0)} = { &omega;<sub>m</sub> z0 | 0 } en O1 (ou O2).<br>1 ddl de rotation autour de z0.',
-        advice: 'Isoler le sous-ensemble vis. En CPGE, préciser que la vis est guidée par deux roulements/paliers liés au bâti E0, formant une liaison pivot parfaite.'
+        torsor: '{V(E₁/E₀)} = { &omega;<sub>10</sub> z₀ | 0 } en O₁ (et O₂).<br>1 ddl de rotation &theta;₁(t) autour de (O₁, z₀).',
+        advice: 'E₁ regroupe le rotor/arbre du moteur NEMA 17 Z, le coupleur rigide fendu en alu (2 vis CHC M3) et la vis trapézoïdale Tr8x8. Le guidage est assuré par les roulements internes du moteur Z.'
       },
       'E2': {
-        title: 'Classe d\'équivalence E2 : Portique X',
-        badge: 'Solide Translation',
-        torsor: '{V(2/0)} = { 0 | V<sub>z</sub> z0 } en tout point O2.<br>1 ddl de translation selon z0.',
-        advice: 'Le portique X intègre l\'écrou laiton (E2). Le guidage par galets V-slot sur les profilés alu (E0) réalise la liaison glissière de direction z0.'
+        title: 'Classe d\'équivalence E₂ : Portique X [R₂]',
+        badge: 'Solide en Translation Z',
+        torsor: '{V(E₂/E₀)} = { 0 | V<sub>z</sub> z₀ } en tout point (O₃, O₂).<br>1 ddl de translation verticale z₂(t)·z₀.',
+        advice: 'Le portique X (E₂) intègre l\'écrou laiton Tr8x8 et les axes des 6 galets V-wheels guidés sur les 2 montants verticaux 2040 du bâti E₀.'
       },
       'E0-E1': {
-        title: 'Liaison Pivot E0 - E1',
+        title: 'Liaison Pivot L₀₁ (E₀ - E₁)',
         badge: '1 ddl (Rotation)',
-        torsor: '{V(1/0)}<sub>O2</sub> =<br>[ 0 &nbsp;&nbsp;|&nbsp;&nbsp; 0 ]<br>[ 0 &nbsp;&nbsp;|&nbsp;&nbsp; 0 ]<br>[ &omega;<sub>m</sub> &nbsp;|&nbsp;&nbsp; 0 ]<sub>(&omega;<sub>m</sub> z0 , 0)</sub>',
-        advice: 'La liaison pivot bloque les 3 translations et 2 rotations. Seule la rotation &omega;(1/0)·z0 est autorisée. Pas de translation relative au point O1/O2.'
+        torsor: '{V(E₁/E₀)}<sub>O₁ = O₂</sub> =<br>[ 0 &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp; 0 ]<br>[ 0 &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp; 0 ]<br>[ &omega;<sub>10</sub> &nbsp;|&nbsp;&nbsp; 0 ]<sub>(O₁, B₀)</sub> &nbsp;(&omega;<sub>10</sub> = -&omega;<sub>m</sub>)',
+        advice: 'La liaison pivot d\'axe (O₁, z₀) autorise uniquement la rotation &theta;₁(t). Par transport sur l\'axe (O₁O₂ colinéaire à z₀), le vecteur vitesse reste nul en O₂.'
       },
       'E1-E2': {
-        title: 'Liaison Hélicoïdale E1 - E2',
-        badge: '1 ddl Couplé',
-        torsor: '{V(2/1)}<sub>O2</sub> =<br>[ 0 &nbsp;&nbsp;|&nbsp;&nbsp; 0 ]<br>[ 0 &nbsp;&nbsp;|&nbsp;&nbsp; 0 ]<br>[ &omega;<sub>21</sub> &nbsp;|&nbsp;&nbsp; -(&omega;<sub>21</sub> &middot; p<sub>z</sub> / 2&pi;) ]<sub>z0</sub>',
-        advice: 'Attention au signe ! Pour une vis à pas à droite (Tr8x8, pz = 8 mm), Vz(2/1) = - (pz / 2&pi;) &middot; &omega;(2/1). Vérifiez la fermeture cinématique.'
+        title: 'Liaison Hélicoïdale L₁₂ (E₁ - E₂)',
+        badge: '1 ddl Conjugué',
+        torsor: '{V(E₂/E₁)}<sub>O₂</sub> =<br>[ 0 &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp; 0 ]<br>[ 0 &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp; 0 ]<br>[ &omega;<sub>21</sub> &nbsp;|&nbsp;&nbsp; +(&omega;<sub>21</sub> &middot; p<sub>z</sub> / 2&pi;) ]<sub>(O₂, B₀)</sub>',
+        advice: 'Filetage à droite (Tr8x8, p<sub>z</sub> = 8 mm/tr) : v<sub>21</sub> = +(p<sub>z</sub>/2&pi;)&middot;&omega;<sub>21</sub>. Par fermeture cinématique (&omega;<sub>21</sub> + &omega;<sub>10</sub> = 0 &rArr; &omega;<sub>21</sub> = -&omega;<sub>10</sub> = +&omega;<sub>m</sub>), d\'où V<sub>z</sub> = +(p<sub>z</sub>/2&pi;)&middot;&omega;<sub>m</sub> !'
       },
       'E0-E2': {
-        title: 'Liaison Glissière E0 - E2',
+        title: 'Liaison Glissière L₀₂ (E₀ - E₂)',
         badge: '1 ddl (Translation)',
-        torsor: '{V(2/0)}<sub>O2</sub> =<br>[ 0 &nbsp;&nbsp;|&nbsp;&nbsp; 0 ]<br>[ 0 &nbsp;&nbsp;|&nbsp;&nbsp; 0 ]<br>[ 0 &nbsp;&nbsp;|&nbsp;&nbsp; V<sub>z</sub> ]<sub>(0 , V<sub>z</sub> z0)</sub>',
-        advice: 'Provenir de la structure du portique guidé sur le bâti. Le torseur n\'a aucune composante de rotation : &omega;(2/0) = 0.'
+        torsor: '{V(E₂/E₀)}<sub>&forall;P</sub> =<br>[ 0 &nbsp;&nbsp;|&nbsp;&nbsp; 0 ]<br>[ 0 &nbsp;&nbsp;|&nbsp;&nbsp; 0 ]<br>[ 0 &nbsp;&nbsp;|&nbsp;&nbsp; V<sub>z</sub> ]<sub>(&forall;P, B₀)</sub>',
+        advice: 'Liaison glissière de direction z₀ (centre O₃) : elle bloque la rotation de l\'écrou (&Omega;(E₂/E₀) = 0), ce qui convertit la rotation de la vis E₁ en translation verticale pure V<sub>z</sub>.'
       }
     };
 

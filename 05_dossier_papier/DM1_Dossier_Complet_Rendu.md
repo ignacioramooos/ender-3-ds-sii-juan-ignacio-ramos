@@ -1,144 +1,142 @@
-# DM n°1 : Modélisation des liaisons et Schématisation cinématique
+# DM n°1 — Modélisation des Liaisons et Schématisation Cinématique (Dossier Papier Complet)
 
-**Lycée Stanislas — CPGE MPSI**  
-**Sciences Industrielles de l'Ingénieur (SII)**  
-**Enseignants :** Mme Marianne Prot / M. Cullaz  
-
----
-
-* **Nom :** RAMOS  
-* **Prénom :** Ignacio  
-* **Classe :** MPSI  
-* **Système étudié :** Imprimante 3D Creality Ender 3 (modèle de base)  
+- **Nom :** RAMOS
+- **Prénom :** Juan Ignacio
+- **Classe :** MPSI — Lycée Stanislas
+- **Enseignants :** Mme Marianne Prot & M. Cullaz
+- **Système étudié :** Imprimante 3D à dépôt de fil fondu (FDM) **Creality Ender 3 (modèle de base)**
+- **Livrable imprimable A4 :** [`DM1_Feuille_Rendu_Imprimable.html`](DM1_Feuille_Rendu_Imprimable.html) | [`Planches SII`](../diagrams_reference.html)
 
 ---
 
-## 1. Préambule : Pièces Exclues des Classes d'Équivalence Cinématique
+## 1. Présentation Photographique et Paramétrage du Système (Partie III — Exigence 1)
 
-Une classe d'équivalence cinématique regroupe les solides indéformables sans mouvement relatif entre eux en phase de fonctionnement (**phase d'impression 3D**). Sont donc **strictement exclus** :
+### 1.1. Photo de l'élève avec le système validé (`RAMOS-Selfie.png`)
+![Selfie de Juan Ignacio Ramos avec l'imprimante 3D Creality Ender 3](../02_photos/RAMOS-Selfie.png)
 
-1. **Les organes déformables et matière d'œuvre :**
-   * Courroies crantées ouvertes GT2 des axes X et Y (pas de $2\text{ mm}$, en néoprène armé de fibres de verre).
-   * Tube capillaire en PTFE (*tube Bowden*) d'acheminement du filament.
-   * Les 4 ressorts hélicoïdaux de nivellement du plateau et le ressort du levier d'extrudeur.
-   * Faisceaux de câbles électriques, nappes de l'écran LCD et gaines textiles.
-   * Filament thermoplastique (PLA/ABS/PETG) de $\varnothing 1{,}75\text{ mm}$.
-2. **Les éléments roulants de guidage :**
-   * Les 13 galets en POM (*V-wheels*) et les 26 roulements à billes 625ZZ associés (billes et bagues extérieures).
-   * Les billes des roulements internes des moteurs NEMA 17 et des poulies de renvoi.
-3. **La chaîne secondaire d'extrusion et de ventilation :**
-   * Rotor du moteur d'extrudeur, roue dentée d'entraînement en laiton, galet presseur U604ZZ et rotors des 4 ventilateurs.
+### 1.2. Photo détaillée du système paramétré avec repères locaux et classes d'équivalence (`RAMOS-Ender3-Details.png`)
+![Photo annotée du système Creality Ender 3 avec repères locaux et classes d'équivalence](../02_photos/RAMOS-Ender3-Details.png)
 
 ---
 
-## 2. Définition des 5 Classes d'Équivalence Cinématique (CEC)
+## 2. Repères Locaux ($\mathcal{R}_0$ à $\mathcal{R}_4$), Paramétrage Géométrique et Chaîne des Centres
 
-| Classe | Désignation | Couleur normalisée | Pièces physiques réelles (Creality Ender 3) |
-| :---: | :--- | :---: | :--- |
-| **$E_0$** | **Bâti fixe** | **Noir** ($\equiv\mkern-10mu\perp$) | 2 traverses latérales en profilé alu 4040 V-Slot avec 4 patins en élastomère, 1 profilé central Y 2040 V-Slot, 1 traverse avant 2020 V-Slot, 2 montants verticaux Z 2040 V-Slot, 1 traverse supérieure 2020 V-Slot et bouchons ABS, stators des moteurs pas-à-pas NEMA 17 Z et Y avec platines support acier/polymère, supports tendeurs de courroie Y et axes fixes de poulie, capteurs de fin de course *Z-Endstop* et *Y-Endstop*, boîtier de carte mère, bloc alimentation 24 V / 360 W, console écran LCD 12864, porte-bobine métallique et visserie structurelle (vis CHC M4/M5 et écrous *T-nuts*). |
-| **$E_1$** | **Arbre moteur Z & Vis mère** | **Bleu** | Rotor et arbre de sortie ($\varnothing 5\text{ mm}$) du moteur pas-à-pas Z, coupleur d'accouplement rigide fendu en alliage d'aluminium avec ses 2 vis radiales CHC M3, vis trapézoïdale Tr8x8 en acier inoxydable ($\varnothing 8\text{ mm}$, 4 filets, pas d'avance $p_z = 8\text{ mm/tr}$). |
-| **$E_2$** | **Portique mobile X** | **Rouge** | Profilé aluminium horizontal transversal 2020 V-Slot, platines métalliques pliées gauche et droite, écrou trapézoïdal en laiton Tr8x8 fixé par 2 vis CHC M3, axes et entretoises lisses/excentriques des 6 galets V-wheels de guidage Z avec bagues intérieures des roulements, stator du moteur pas-à-pas NEMA 17 X avec son capot et capteur *X-Endstop*, support tendeur courroie X, et corps fixe de l'extrudeur MK8 (stator NEMA 17 et raccord pneumatique PC4-M6). |
-| **$E_3$** | **Chariot de tête d'impression** | **Vert** | Platine support du chariot X en tôle d'acier avec fentes d'ancrage de courroie, axes et entretoises lisses/excentriques des 3 galets V-wheels avec bagues intérieures de roulements, raccord pneumatique PC4-M10, radiateur dissipateur rouge à ailettes, barrière thermique (*heatbreak* inox), bloc de chauffe alu avec cartouche 24 V / 40 W et thermistance CTN 100 k$\Omega$, buse d'extrusion en laiton ($\varnothing 0{,}4\text{ mm}$), carénage tôle et stators des 2 ventilateurs 4010. |
-| **$E_4$** | **Plateau chauffant mobile Y** | **Orange** | Platine chariot Y en tôle pliée avec ancrage courroie, axes et entretoises des 4 galets V-wheels avec bagues intérieures de roulements, 4 vis M4 et molettes crantées de nivellement (*solidaires de la platine durant l'impression car non réglées en fonctionnement*), plaque d'aluminium chauffante 24 V / 220 W avec thermistance CTN, revêtement texturé *BuildTak* et 4 pinces métalliques de maintien. |
+![Figure plane de changement de base et chaîne vectorielle des centres](../04_schemas_cinematiques/figures_parametrage_angles.svg)
 
----
+### 2.1. Définition du repère global $\mathcal{R}_0$ et des 4 repères locaux mobiles ($\mathcal{R}_1, \mathcal{R}_2, \mathcal{R}_3, \mathcal{R}_4$)
 
-## 3. Paramétrage & Repères Locaux
+À chaque classe d'équivalence cinématique $E_k$ ($k \in \{0, 1, 2, 3, 4\}$) est attaché un **repère local orthonormé direct** $\mathcal{R}_k(O_{k}, \vec{x}_k, \vec{y}_k, \vec{z}_k)$ :
 
-Repère principal orthonormé direct lié au bâti fixe $E_0$ : $\mathcal{R}_0(O_0, \vec{x}_0, \vec{y}_0, \vec{z}_0)$ avec :
-* $\vec{x}_0$ : Horizontal, transversal, de gauche à droite.
-* $\vec{y}_0$ : Horizontal, longitudinal, de l'avant vers l'arrière ($\vec{y}_0 = \vec{z}_0 \wedge \vec{x}_0$).
-* $\vec{z}_0$ : Vertical ascendant.
+| Classe | Couleur | Repère local lié | Origine géométrique | Base orthonormée directe associée | Paramètre de mouvement |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **$E_0$** | **Noir** | $\mathcal{R}_0(O_0, \mathcal{B}_0)$ | $O_0$ : base médiane du rail $Y$ | $\mathcal{B}_0 = (\vec{x}_0, \vec{y}_0, \vec{z}_0)$ fixe | Référence fixe ($\underline{\underline{\equiv\mkern-10mu\perp}}$) |
+| **$E_1$** | **Bleu** | $\mathcal{R}_1(O_1, \mathcal{B}_1)$ | $O_1$ : centre du coupleur $Z$ ($L_{01}$) | $\mathcal{B}_1 = (\vec{x}_1, \vec{y}_1, \vec{z}_0)$ tournante | Rotation $\theta_1(t) = (\widehat{\vec{x}_0, \vec{x}_1})$ autour de $\vec{z}_0$ |
+| **$E_2$** | **Rouge** | $\mathcal{R}_2(O_3, \mathcal{B}_2)$ | $O_3$ : centre du guidage $Z$ ($L_{02}$) | $\mathcal{B}_2 = \mathcal{B}_0 = (\vec{x}_0, \vec{y}_0, \vec{z}_0)$ | Translation verticale $z_2(t)\,\vec{z}_0$ / $\mathcal{R}_0$ |
+| **$E_3$** | **Vert** | $\mathcal{R}_3(O_4, \mathcal{B}_3)$ | $O_4$ : centre du chariot $X$ / buse ($L_{23}$) | $\mathcal{B}_3 = \mathcal{B}_0 = (\vec{x}_0, \vec{y}_0, \vec{z}_0)$ | Translation horizontale $x_3(t)\,\vec{x}_0$ / $\mathcal{R}_2$ |
+| **$E_4$** | **Orange** | $\mathcal{R}_4(O_5, \mathcal{B}_4)$ | $O_5$ : centre du chariot plateau $Y$ ($L_{04}$) | $\mathcal{B}_4 = \mathcal{B}_0 = (\vec{x}_0, \vec{y}_0, \vec{z}_0)$ | Translation longitudinale $y_4(t)\,\vec{y}_0$ / $\mathcal{R}_0$ |
 
-**Centres des liaisons et vecteurs positions :**
-* $O_1$ : Centre du guidage interne moteur Z : $\overrightarrow{O_0 O_1} = -L_x\,\vec{x}_0 + h_1\,\vec{z}_0$.
-* $O_2$ : Centre de l'écrou hélicoïdal laiton : $\overrightarrow{O_0 O_2} = -L_x\,\vec{x}_0 + (h_1 + z(t))\,\vec{z}_0$.
-* $O_3$ : Barycentre du guidage vertical du portique X : $\overrightarrow{O_0 O_3} = (h_1 + z(t))\,\vec{z}_0$.
-* $O_4$ : Barycentre du chariot tête d'impression : $\overrightarrow{O_3 O_4} = x(t)\,\vec{x}_0 + d_y\,\vec{y}_0$.
-* $O_5$ : Barycentre du chariot plateau chauffant : $\overrightarrow{O_0 O_5} = y(t)\,\vec{y}_0 + h_5\,\vec{z}_0$.
+- **Orientation directe de $\mathcal{B}_0(\vec{x}_0, \vec{y}_0, \vec{z}_0)$ :**
+  - $\vec{x}_0$ : horizontal transversal (de la gauche vers la droite en vue de face).
+  - $\vec{z}_0$ : vertical ascendant (colinéaire aux montants verticaux $Z$ et à la vis mère).
+  - $\vec{y}_0 = \vec{z}_0 \wedge \vec{x}_0$ : horizontal longitudinal (dirigé de l'avant vers l'arrière de la machine, donc **entrant $\otimes\,\vec{y}_0$** en vue de face $(O_0, \vec{x}_0, \vec{z}_0)$).
 
-**Position relative Buse / Plateau :**
-$$\boxed{\overrightarrow{O_5 O_4} = x(t)\,\vec{x}_0 + \big(d_y - y(t)\big)\,\vec{y}_0 + \left(h_1 - h_5 + \frac{p_z}{2\pi}\,\theta_1(t)\right)\,\vec{z}_0}$$
+- **Figure plane de changement de base ($\mathcal{B}_0 \to \mathcal{B}_1$) :**
+  $$\begin{cases}
+  \vec{x}_1 = \cos\theta_1(t)\,\vec{x}_0 + \sin\theta_1(t)\,\vec{y}_0 \\
+  \vec{y}_1 = -\sin\theta_1(t)\,\vec{x}_0 + \cos\theta_1(t)\,\vec{y}_0 \\
+  \vec{z}_1 = \vec{z}_0
+  \end{cases}
+  \quad \Longrightarrow \quad
+  \vec{\Omega}(E_1/E_0) = \dot{\theta}_1(t)\,\vec{z}_0 = \omega_{10}(t)\,\vec{z}_0$$
 
----
-
-## 4. Caractérisation des 5 Liaisons Normalisées & Torseurs Cinématiques
-
-### Tableau des Degrés de Liberté (dans $\mathcal{B}_0$)
-
-| Liaison | Classes reliées | Nature et géométrie | $T_x$ | $T_y$ | $T_z$ | $R_x$ | $R_y$ | $R_z$ | Mobilités ($N_{\text{ddl}}$) |
-| :---: | :---: | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **$L_{01}$** | $E_0$ et $E_1$ | **Pivot** d'axe $(O_1, \vec{z}_0)$ | $0$ | $0$ | $0$ | $0$ | $0$ | **$1$** | **$1$** |
-| **$L_{12}$** | $E_1$ et $E_2$ | **Hélicoïdale** d'axe $(O_2, \vec{z}_0)$, pas $p_z$ | $0$ | $0$ | **$1^*$** | $0$ | $0$ | **$1^*$** | **$1$** *(couplé)* |
-| **$L_{02}$** | $E_0$ et $E_2$ | **Glissière** de direction $\vec{z}_0$ en $O_3$ | $0$ | $0$ | **$1$** | $0$ | $0$ | $0$ | **$1$** |
-| **$L_{23}$** | $E_2$ et $E_3$ | **Glissière** de direction $\vec{x}_0$ en $O_4$ | **$1$** | $0$ | $0$ | $0$ | $0$ | $0$ | **$1$** |
-| **$L_{04}$** | $E_0$ et $E_4$ | **Glissière** de direction $\vec{y}_0$ en $O_5$ | $0$ | **$1$** | $0$ | $0$ | $0$ | $0$ | **$1$** |
-
-### Torseurs Cinématiques Matriciels dans $\mathcal{B}_0$ :
-
-* **$L_{01}$ (Pivot $E_0 / E_1$) en $O_1$ :**
-  $$\{\mathcal{V}(E_1/E_0)\} = \begin{Bmatrix} 0 & 0 \\ 0 & 0 \\ \omega_m(t) & 0 \end{Bmatrix}_{O_1, \mathcal{B}_0}$$
-
-* **$L_{12}$ (Hélicoïdale $E_1 / E_2$) en $O_2$ (pas à droite $p_z = 8\text{ mm/tr}$) :**
-  $$\{\mathcal{V}(E_2/E_1)\} = \begin{Bmatrix} 0 & 0 \\ 0 & 0 \\ \omega_{21}(t) & -\dfrac{p_z}{2\pi}\,\omega_{21}(t) \end{Bmatrix}_{O_2, \mathcal{B}_0}$$
-
-* **$L_{02}$ (Glissière $E_0 / E_2$) en $O_3$ :**
-  $$\{\mathcal{V}(E_2/E_0)\} = \begin{Bmatrix} 0 & 0 \\ 0 & 0 \\ 0 & V_z(t) \end{Bmatrix}_{O_3, \mathcal{B}_0}$$
-
-* **$L_{23}$ (Glissière $E_2 / E_3$) en $O_4$ :**
-  $$\{\mathcal{V}(E_3/E_2)\} = \begin{Bmatrix} 0 & V_x(t) \\ 0 & 0 \\ 0 & 0 \end{Bmatrix}_{O_4, \mathcal{B}_0}$$
-
-* **$L_{04}$ (Glissière $E_0 / E_4$) en $O_5$ :**
-  $$\{\mathcal{V}(E_4/E_0)\} = \begin{Bmatrix} 0 & 0 \\ 0 & V_y(t) \\ 0 & 0 \end{Bmatrix}_{O_5, \mathcal{B}_0}$$
+### 2.2. Vecteurs position des centres géométriques ($O_1$ à $O_5$) et fermeture géométrique
+- $\overrightarrow{O_0 O_1} = -L_x\,\vec{x}_0 + h_1\,\vec{z}_0$ (centre du pivot $L_{01}$ sur l'axe de la vis mère, avec $L_x = 125\text{ mm}$, $h_1 = 45\text{ mm}$).
+- $\overrightarrow{O_1 O_2} = z_2(t)\,\vec{z}_0 \implies \overrightarrow{O_0 O_2} = -L_x\,\vec{x}_0 + \big(h_1 + z_2(t)\big)\,\vec{z}_0$ (centre de l'écrou laiton $L_{12}$).
+- $\overrightarrow{O_2 O_3} = +L_x\,\vec{x}_0 \implies \overrightarrow{O_0 O_3} = \big(h_1 + z_2(t)\big)\,\vec{z}_0$ (centre de la glissière équivalente $L_{02}$).
+- $\overrightarrow{O_3 O_4} = x_3(t)\,\vec{x}_0 + d_y\,\vec{y}_0 \implies \overrightarrow{O_0 O_4} = x_3(t)\,\vec{x}_0 + d_y\,\vec{y}_0 + \big(h_1 + z_2(t)\big)\,\vec{z}_0$ (centre du chariot de tête / buse $O_4$).
+- $\overrightarrow{O_0 O_5} = y_4(t)\,\vec{y}_0 + h_5\,\vec{z}_0$ (centre du chariot du plateau chauffant $O_5$).
+- **Vecteur position relative de la buse ($O_4 \in E_3$) par rapport au plateau ($O_5 \in E_4$) :**
+  $$\boxed{\overrightarrow{O_5 O_4} = x_3(t)\,\vec{x}_0 + \big(d_y - y_4(t)\big)\,\vec{y}_0 + \big(h_1 - h_5 + z_2(t)\big)\,\vec{z}_0}$$
 
 ---
 
-## 5. Fermeture Cinématique Z & Loi Entrée-Sortie
+## 3. Classes d'Équivalence Explicites et Graphe des Liaisons (Partie III — Exigence 2)
 
-Considérons le cycle cinématique fermé $\{E_0 \to E_1 \to E_2 \to E_0\}$ réduit au point $O_2$ :
-$$\{\mathcal{V}(E_2/E_0)\} = \{\mathcal{V}(E_2/E_1)\} + \{\mathcal{V}(E_1/E_0)\}$$
+### 3.1. Détail explicite des pièces de chaque classe d'équivalence ($E_0$ à $E_4$)
 
-1. **Transport de moment en $O_2$ par la relation de Varignon :**
-   $$\vec{V}(O_2, E_1/E_0) = \vec{V}(O_1, E_1/E_0) + \vec{\Omega}(E_1/E_0) \wedge \overrightarrow{O_1 O_2}$$
-   Puisque $\vec{V}(O_1, E_1/E_0) = \vec{0}$ et que $\overrightarrow{O_1 O_2} = z_{12}(t)\vec{z}_0$ est colinéaire à $\vec{\Omega}(E_1/E_0) = \omega_m(t)\vec{z}_0$ :
-   $$\vec{\Omega}(E_1/E_0) \wedge \overrightarrow{O_1 O_2} = \vec{0} \quad \Longrightarrow \quad \boxed{\vec{V}(O_2, E_1/E_0) = \vec{0}}$$
+1. **$E_0$ — Bâti fixe (Noir, repère $\mathcal{R}_0$, mis en valeur par $\underline{\underline{\equiv\mkern-10mu\perp}}$) :**
+   $$E_0 = \left\{\begin{array}{l}
+   \text{Châssis en profilés aluminium V-Slot (cadre inférieur } 40\times 40,\text{ rail central } Y\text{ } 40\times 40, \\
+   \quad \text{2 montants verticaux } Z\text{ } 20\times 40,\text{ traverse supérieure } 20\times 20\text{) + porte-bobine + 4 patins caoutchouc}, \\
+   \text{Stators (corps fixes) des moteurs pas-à-pas NEMA 17 des axes } Z\text{ et } Y, \\
+   \text{Bloc d'alimentation 24 V, boîtier carte mère, écran LCD, tendeur avant } Y,\text{ capteurs } Z\text{- et } Y\text{-Endstop}.
+   \end{array}\right\}$$
 
-2. **Projection scalaire sur l'axe $\vec{z}_0$ :**
-   * Rotation : $0 = \omega_{21}(t) + \omega_m(t) \implies \omega_{21}(t) = -\omega_m(t)$.
-   * Vitesse linéaire en $O_2$ : $V_z(t) = -\frac{p_z}{2\pi}\omega_{21}(t) + 0$.
-   En substituant $\omega_{21}(t) = -\omega_m(t)$ :
-   $$\boxed{V_z(t) = \frac{p_z}{2\pi} \cdot \omega_m(t)}$$
+2. **$E_1$ — Arbre moteur & Vis mère $Z$ (Bleu, repère $\mathcal{R}_1$) :**
+   $$E_1 = \left\{\begin{array}{l}
+   \text{Rotor et arbre de sortie ($\varnothing 5\text{ mm}$) du moteur pas-à-pas NEMA 17 de l'axe } Z, \\
+   \text{Coupleur cylindrique fendu rigide en alliage d'aluminium + 2 vis de serrage CHC M3}, \\
+   \text{Vis mère trapézoïdale en acier inoxydable Tr8x8 ($\varnothing 8\text{ mm}$, filetage à droite, pas } p_z = 8\text{ mm/tr)}.
+   \end{array}\right\}$$
 
-3. **Relation intégrée et déplacement incrémental :**
-   $$\boxed{\Delta Z = \frac{p_z}{2\pi} \cdot \Delta \theta_m}$$
-   * **Pour 1 tour complet ($2\pi\text{ rad}$) :** $\Delta Z = p_z = 8\text{ mm}$.
-   * **Pour 1 pas moteur ($1{,}8^\circ = \frac{\pi}{100}\text{ rad}$) :** $\Delta Z_{\text{pas}} = \frac{8}{200} = 0{,}04\text{ mm} = 40\ \mu\text{m}$.
+3. **$E_2$ — Portique mobile horizontal $X$ (Rouge, repère $\mathcal{R}_2$) :**
+   $$E_2 = \left\{\begin{array}{l}
+   \text{Profilé aluminium horizontal } X\text{ V-Slot } 20\times 20\text{ mm + platines supports gauche et droite en acier}, \\
+   \text{Écrou trapézoïdal en laiton Tr8x8 fixé sur la platine gauche par 2 vis M3}, \\
+   \text{Axes boulonnés M5, entretoises, excentriques et bagues intérieures des 6 galets V-wheels de guidage } Z, \\
+   \text{Stators des moteurs NEMA 17 de l'axe } X\text{ et de l'extrudeur MK8, capteur } X\text{-Endstop, tendeur droit } X.
+   \end{array}\right\}$$
+
+4. **$E_3$ — Chariot de tête d'impression / Hotend (Vert, repère $\mathcal{R}_3$) :**
+   $$E_3 = \left\{\begin{array}{l}
+   \text{Platine chariot } X\text{ en acier plié + axes M5, entretoises, excentrique et bagues intérieures des 3 galets } X, \\
+   \text{Tête chaude complète (raccord PC4-M10, radiateur rouge, heatbreak, bloc de chauffe, buse laiton } \varnothing 0{,}4\text{ mm)}, \\
+   \text{Carénage métallique de tête et stators des 2 ventilateurs 4010 (refroidissement radiateur et buse)}.
+   \end{array}\right\}$$
+
+5. **$E_4$ — Plateau chauffant mobile $Y$ (Orange, repère $\mathcal{R}_4$) :**
+   $$E_4 = \left\{\begin{array}{l}
+   \text{Platine chariot } Y\text{ en aluminium + axes M5, entretoises, 2 excentriques et bagues intérieures des 4 galets } Y, \\
+   \text{4 vis M4 et 4 molettes crantées de nivellement (fixes en cours d'impression)}, \\
+   \text{Plaque chauffante en aluminium ($235\times 235\text{ mm}$, 24 V / 220 W), revêtement BuildTak, 4 pinces et pièce imprimée}.
+   \end{array}\right\}$$
+
+### 3.2. Graphe des liaisons normalisé
+
+![Graphe des liaisons normalisé de la Creality Ender 3](../04_schemas_cinematiques/graphe_des_liaisons.svg)
 
 ---
 
-## 6. Graphe des Liaisons (Représentation Topologique)
+## 4. Répertoire des Liaisons, Torseurs Cinématiques et Fermeture de Chaîne
 
-```text
-                               L12 : Hélicoïdale (O2, z0)
-                                     pas pz = 8 mm/tr
-                         ( E1 ) -------------------------- ( E2 )
-                           |                               /    \
-                           |                              /      \  L23 : Glissière (x0)
-        L01 : Pivot (O1, z0)       L02 : Glissière (z0)  /        \       centre O4
-                           |             centre O3      /          \
-                           |                           /            \
-      ( E4 ) ------------ ( E0 ) ----------------------             ( E3 )
-        L04 : Glissière     |
-        (y0), centre O5   =====  <-- Symbole normalisé du bâti fixe (hachures)
-                         ///////
-```
+### 4.1. Tableau des 5 liaisons élémentaires (3 familles distinctes) et torseurs dans $\mathcal{B}_0(\vec{x}_0, \vec{y}_0, \vec{z}_0)$
+
+| Liaison | Classes | Famille AFNOR & Caractéristique | Torseur cinématique $\{\mathcal{V}(E_j/E_i)\}$ exprimé dans $\mathcal{B}_0(\vec{x}_0, \vec{y}_0, \vec{z}_0)$ |
+| :--- | :---: | :--- | :--- |
+| **$L_{01}$** | $E_0 - E_1$ | **Pivot** d'axe $(O_1, \vec{z}_0)$ | $\{\mathcal{V}(E_1/E_0)\} = \begin{Bmatrix} 0 & 0 \\ 0 & 0 \\ \omega_{10}(t) & 0 \end{Bmatrix}_{O_1, \mathcal{B}_0}$ avec $\omega_{10}(t) = \dot{\theta}_1(t)$ |
+| **$L_{12}$** | $E_1 - E_2$ | **Hélicoïdale** d'axe $(O_2, \vec{z}_0)$, filet à droite, pas $p_z = 8\text{ mm/tr}$ | $\{\mathcal{V}(E_2/E_1)\} = \begin{Bmatrix} 0 & 0 \\ 0 & 0 \\ \omega_{21}(t) & v_{21}(t) \end{Bmatrix}_{O_2, \mathcal{B}_0}$ avec $v_{21}(t) = +\dfrac{p_z}{2\pi}\,\omega_{21}(t)$ |
+| **$L_{02}$** | $E_0 - E_2$ | **Glissière** de direction $\vec{z}_0$ (en $O_3$) | $\{\mathcal{V}(E_2/E_0)\} = \begin{Bmatrix} 0 & 0 \\ 0 & 0 \\ 0 & V_z(t) \end{Bmatrix}_{\forall P, \mathcal{B}_0}$ avec $V_z(t) = \dot{z}_2(t)$ |
+| **$L_{23}$** | $E_2 - E_3$ | **Glissière** de direction $\vec{x}_0$ (en $O_4$) | $\{\mathcal{V}(E_3/E_2)\} = \begin{Bmatrix} 0 & V_x(t) \\ 0 & 0 \\ 0 & 0 \end{Bmatrix}_{\forall P, \mathcal{B}_0}$ avec $V_x(t) = \dot{x}_3(t)$ |
+| **$L_{04}$** | $E_0 - E_4$ | **Glissière** de direction $\vec{y}_0$ (en $O_5$) | $\{\mathcal{V}(E_4/E_0)\} = \begin{Bmatrix} 0 & 0 \\ 0 & V_y(t) \\ 0 & 0 \end{Bmatrix}_{\forall P, \mathcal{B}_0}$ avec $V_y(t) = \dot{y}_4(t)$ |
+
+### 4.2. Fermeture cinématique de la boucle d'élévation $Z$ ($E_0 - E_1 - E_2 - E_0$)
+En réduisant au point $O_2 \in (O_1, \vec{z}_0)$ la relation de composition des torseurs cinématiques $\{\mathcal{V}(E_2/E_0)\} = \{\mathcal{V}(E_2/E_1)\} + \{\mathcal{V}(E_1/E_0)\}$ :
+$$\begin{cases}
+\text{Résultante selon } \vec{z}_0 : & 0 = \omega_{21}(t) + \omega_{10}(t) \implies \omega_{21}(t) = -\omega_{10}(t) \\[4pt]
+\text{Moment en } O_2\text{ selon } \vec{z}_0 : & V_z(t) = v_{21}(t) + 0 = +\dfrac{p_z}{2\pi}\,\omega_{21}(t)
+\end{cases}
+\quad \Longrightarrow \quad
+\boxed{V_z(t) = \dot{z}_2(t) = -\frac{p_z}{2\pi}\,\omega_{10}(t) = +\frac{p_z}{2\pi}\,\omega_m(t)}$$
+où $\omega_m(t) = -\omega_{10}(t) > 0$ est la vitesse angulaire motrice de montée (rotation horaire de la vis vue de dessus).
 
 ---
 
-## 7. Références Visuelles & Simulateurs Interactifs
+## 5. Schéma Cinématique Minimal 2D en Couleur (Partie III — Exigence 3)
 
-* **Tableau de bord interactif général :** [`index.html`](file:///Users/ignac/Documents/GitHub/MyRoom/02_AGENTS/tasks/2026-10-21-mpsi-sii-dm1/index.html)
-* **Explorateur 3D/2D switchable :** [`04_schemas_cinematiques/widget_1_explorateur_3d_2d.html`](file:///Users/ignac/Documents/GitHub/MyRoom/02_AGENTS/tasks/2026-10-21-mpsi-sii-dm1/04_schemas_cinematiques/widget_1_explorateur_3d_2d.html)
-* **Graphe & Simulateur dynamique Z :** [`04_schemas_cinematiques/widget_2_graphe_simulateur_z.html`](file:///Users/ignac/Documents/GitHub/MyRoom/02_AGENTS/tasks/2026-10-21-mpsi-sii-dm1/04_schemas_cinematiques/widget_2_graphe_simulateur_z.html)
-* **Inspecteur 6 DDL & Torseurs :** [`04_schemas_cinematiques/widget_3_inspecteur_ddl_torseurs.html`](file:///Users/ignac/Documents/GitHub/MyRoom/02_AGENTS/tasks/2026-10-21-mpsi-sii-dm1/04_schemas_cinematiques/widget_3_inspecteur_ddl_torseurs.html)
-* **Modèle 3D spatial $O_0..O_5$ :** [`04_schemas_cinematiques/widget_4_modele_3d_centres_o0_o5.html`](file:///Users/ignac/Documents/GitHub/MyRoom/02_AGENTS/tasks/2026-10-21-mpsi-sii-dm1/04_schemas_cinematiques/widget_4_modele_3d_centres_o0_o5.html)
+![Schéma cinématique minimal 2D en couleur de la Creality Ender 3](../04_schemas_cinematiques/schema_cinematique_2d.svg)
+
+---
+
+## 6. Schéma Cinématique Spatial 3D en Couleur (Partie III — Exigence 4)
+
+![Schéma cinématique spatial 3D en couleur de la Creality Ender 3](../04_schemas_cinematiques/schema_cinematique_3d.svg)
