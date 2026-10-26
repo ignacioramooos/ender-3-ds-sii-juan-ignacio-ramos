@@ -1,44 +1,53 @@
 # Identification des Classes d'Équivalence Cinématique ($E_k$)
 
 **Système étudié :** Imprimante 3D à dépôt de fil fondu (FDM) **Creality Ender 3 (modèle de base)**  
-**Matière :** Sciences Industrielles de l'Ingénieur (SII) — CPGE MPSI  
-**Référence :** DM n°1 — Modélisation des liaisons et Schématisation cinématique
+**Matière :** Sciences Industrielles de l'Ingénieur (SII) — CPGE MPSI (Lycée Stanislas)  
+**Référence de cours :** Séquence 2 — Cours CM4 : *Cinématique du Solide Indéformable* (§ 1.1 : *Hypothèse du solide indéformable*)  
+**Conformité :** Norme AFNOR NF EN ISO 3952 — Schématisation cinématique
 
 ![Photo annotée du système Creality Ender 3 avec repères locaux et classes d'équivalence](../02_photos/RAMOS-Ender3-Details.png)
 
 ---
 
-## 1. Hypothèses de modélisation et frontière d'étude
+## 1. Hypothèses de Modélisation du Solide Indéformable (CM4 § 1.1)
 
-Pour modéliser la chaîne cinématique de positionnement spatial $(X, Y, Z)$ de la buse d'extrusion par rapport au plateau d'impression en **phase d'impression nominale**, on adopte les hypothèses de la mécanique des solides indéformables :
+En cinématique rationnelle du solide indéformable, un solide $S$ est dit **indéformable** si la distance géométrique entre deux points quelconques $A$ et $B$ appartenant au solide reste rigoureusement invariante au cours du temps :
+$$\forall A, B \in S, \quad \|\vec{AB}\| = \text{constante} \iff \vec{AB}^2 = \text{constante}$$
 
-1. **Indéformabilité des solides :** Tous les composants structurels (profilés aluminium V-Slot, platines en acier pliées, vis mère en acier inoxydable, tiges et carters) sont supposés parfaitement rigides.
-2. **Exclusion des organes déformables de transmission :**
-   - Les **courroies crantées souples GT2** des axes $X$ et $Y$ étant des solides déformables, elles n'appartiennent à aucune classe d'équivalence de solides indéformables. Elles constituent la *motorisation interne* qui impose les lois d'entrée $x_3(t)$ et $y_4(t)$.
-   - Les **4 ressorts hélicoïdaux de nivellement** sous le plateau chauffant ne sont sollicités que lors du réglage manuel initial (hors impression). En cours d'impression, leur précontrainte maintient le plateau chauffant rigide vis-à-vis de sa platine support en aluminium : l'ensemble forme alors un unique sous-ensemble rigide $E_4$.
-   - Le **tube Bowden en PTFE** et les nappes électriques souples suivent passivement les mouvements sans imposer de contrainte géométrique.
-3. **Exclusion des éléments roulants de guidage :** Les bagues extérieures en polyoxyméthylène (POM / Delrin) et les billes des **13 galets à profil en V (*V-wheels*)** (6 sur l'axe $Z$, 3 sur l'axe $X$, 4 sur l'axe $Y$) assurent le contact roulant au sein des liaisons glissières $L_{02}$, $L_{23}$ et $L_{04}$. En revanche, leurs **axes vissés**, leurs **entretoises**, leurs **excentriques de réglage** (une fois serrés) et les **bagues intérieures** des roulements sont solidaires du chariot qui les porte.
+En conséquence directe :
+> Dans tout repère orthonormé direct $\mathcal{R}_S(O_S, \vec{x}_S, \vec{y}_S, \vec{z}_S)$ lié rigidement au solide $S$, le vecteur $\vec{AB}$ est un **vecteur fixe** :
+> $$\left.\frac{\mathrm{d}\vec{AB}}{\mathrm{d}t}\right|_{\mathcal{R}_S} = \vec{0}$$
+
+### 1.1. Définition d'une Classe d'Équivalence Cinématique
+Une **classe d'équivalence cinématique** (notée $E_k$) regroupe l'ensemble des pièces mécaniques réelles qui sont en **liaison encastrement complète mutuelle** (aucun mouvement relatif possible entre elles) durant la **phase d'impression 3D nominale**. Pour l'étude cinématique, chaque classe $E_k$ est assimilée à un unique solide indéformable idéal.
+
+### 1.2. Organes Exclus des Classes d'Équivalence
+1. **Les solides déformables :**
+   - Les **courroies crantées souples GT2** des axes $X$ et $Y$ sont des corps déformables en flexion et en translation. Elles constituent la motorisation interne et n'appartiennent à aucune classe d'équivalence.
+   - Les **4 ressorts hélicoïdaux de précontrainte** sous le plateau chauffant ne travaillent que lors du réglage manuel initial. En cours d'impression, ils maintiennent le lit rigide sur sa platine (classe $E_4$).
+   - Le **tube Bowden en PTFE** guidant le filament polymère et les faisceaux électriques suivent passivement les mouvements sans imposer de guidage mécanique.
+2. **Les corps roulants de guidage :**
+   - Les bagues extérieures en polyoxyméthylène (POM / Delrin) et les billes d'acier des **13 galets à profil en V (*V-wheels*)** (6 sur l'axe $Z$, 3 sur l'axe $X$, 4 sur l'axe $Y$) assurent le contact de roulement au sein des liaisons glissières. En revanche, leurs **axes boulonnés**, leurs **entretoises cylindriques**, leurs **excentriques de réglage** et leurs **bagues intérieures** sont solidaires du chariot qui les porte.
 
 ---
 
-## 2. Tableau récapitulatif des 5 classes d'équivalence ($E_0$ à $E_4$)
+## 2. Tableau Récapitulatif des 5 Classes d'Équivalence ($E_0$ à $E_4$)
 
-À chaque classe d'équivalence cinématique $E_k$ est associé un **repère local orthonormé direct $\mathcal{R}_k$** lié rigidement au solide $E_k$, ainsi qu'une **couleur normalisée unique** respectée sur l'ensemble des schémas cinématiques 2D et 3D :
+À chaque classe d'équivalence cinématique $E_k$ est associé un **repère local orthonormé direct $\mathcal{R}_k$** lié rigidement au solide $E_k$, ainsi qu'une **couleur normalisée unique** respectée rigoureusement sur les schémas cinématiques 2D et 3D :
 
-| Classe | Désignation fonctionnelle | Repère local lié | Couleur normalisée | Mouvement / Rôle cinématique |
+| Classe | Désignation fonctionnelle | Repère local lié | Couleur normalisée | Mouvement / Rôle cinématique par rapport à $\mathcal{R}_0$ |
 | :--- | :--- | :--- | :--- | :--- |
-| **$E_0$** | **Bâti fixe** (Châssis V-Slot) | $\mathcal{R}_0(O_0, \vec{x}_0, \vec{y}_0, \vec{z}_0)$ | **Noir** (`#0f172a`) | Référence fixe posée sur la table ($\underline{\underline{\equiv\mkern-10mu\perp}}$) |
-| **$E_1$** | **Arbre moteur & Vis mère $Z$** | $\mathcal{R}_1(O_1, \vec{x}_1, \vec{y}_1, \vec{z}_0)$ | **Bleu** (`#2563eb`) | Rotation $\theta_1(t)$ d'axe $(O_1, \vec{z}_0)$ |
-| **$E_2$** | **Portique mobile horizontal $X$** | $\mathcal{R}_2(O_3, \vec{x}_0, \vec{y}_0, \vec{z}_0)$ | **Rouge** (`#dc2626`) | Translation verticale $z_2(t)\,\vec{z}_0$ |
-| **$E_3$** | **Chariot de tête d'impression** | $\mathcal{R}_3(O_4, \vec{x}_0, \vec{y}_0, \vec{z}_0)$ | **Vert** (`#16a34a`) | Translation horizontale $x_3(t)\,\vec{x}_0$ / $E_2$ |
-| **$E_4$** | **Plateau chauffant mobile $Y$** | $\mathcal{R}_4(O_5, \vec{x}_0, \vec{y}_0, \vec{z}_0)$ | **Orange** (`#ea580c`) | Translation longitudinale $y_4(t)\,\vec{y}_0$ / $E_0$ |
+| **$E_0$** | **Bâti fixe** (Châssis V-Slot) | $\mathcal{R}_0(O_0, \vec{x}_0, \vec{y}_0, \vec{z}_0)$ | **Noir** (`#0f172a`) | Référence fixe au repos sur la table ($\underline{\underline{\equiv\mkern-10mu\perp}}$) |
+| **$E_1$** | **Arbre moteur & Vis mère $Z$** | $\mathcal{R}_1(O_1, \vec{x}_1, \vec{y}_1, \vec{z}_0)$ | **Bleu** (`#2563eb`) | Rotation d'angle $\theta_1(t)$ autour de l'axe vertical $(O_1, \vec{z}_0)$ |
+| **$E_2$** | **Portique mobile horizontal $X$** | $\mathcal{R}_2(O_3, \vec{x}_0, \vec{y}_0, \vec{z}_0)$ | **Rouge** (`#dc2626`) | Translation rectiligne verticale $z_2(t)\,\vec{z}_0$ |
+| **$E_3$** | **Chariot de tête d'impression** | $\mathcal{R}_3(O_4, \vec{x}_0, \vec{y}_0, \vec{z}_0)$ | **Vert** (`#16a34a`) | Translation rectiligne transversale $x_3(t)\,\vec{x}_0$ par rapport à $E_2$ |
+| **$E_4$** | **Plateau chauffant mobile $Y$** | $\mathcal{R}_4(O_5, \vec{x}_0, \vec{y}_0, \vec{z}_0)$ | **Orange** (`#ea580c`) | Translation rectiligne longitudinale $y_4(t)\,\vec{y}_0$ par rapport à $E_0$ |
 
 ---
 
-## 3. Inventaire exhaustif des pièces par classe d'équivalence
+## 3. Inventaire Exhaustif des Pièces Réelles par Classe d'Équivalence
 
-> **Règle impérative du barème (Partie III) :** *« Si les classes d'équivalence ne sont pas claires (par exemple un numéro seul sans indication des pièces), le graphe ne sera pas corrigé et aucun point ne sera attribué pour la suite du DM. »*  
-> Chaque sous-ensemble ci-dessous détaille explicitement toutes les pièces mécaniques solidaires (en liaison encastrement mutuelle).
+> **Règle impérative du barème :** *« Si les classes d'équivalence ne sont pas claires (par exemple un numéro seul sans indication des pièces), le graphe ne sera pas corrigé et aucun point ne sera attribué pour la suite du DM. »*
 
 ### 3.1. Classe $E_0$ — Bâti fixe (Couleur : Noir — Repère de référence $\mathcal{R}_0$)
 $$E_0 = \left\{ \begin{array}{l}

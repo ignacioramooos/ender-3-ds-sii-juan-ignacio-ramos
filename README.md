@@ -1,6 +1,7 @@
 # DM n°1 SII — Modélisation des Liaisons & Schématisation Cinématique (Creality Ender 3)
 
-**Élève :** Juan Ignacio RAMOS — **Classe :** MPSI (Lycée Stanislas)  
+**Élève :** Juan Ignacio RAMOS — **Classe :** CPGE MPSI (Lycée Stanislas Paris)  
+**Matière :** Sciences Industrielles de l'Ingénieur (SII) — Séquence 2 (CM4 : *Cinématique du Solide Indéformable*)  
 **Enseignants :** Mme Marianne Prot & M. Cullaz  
 **Système étudié :** Imprimante 3D à dépôt de fil fondu (FDM) **Creality Ender 3 (modèle de base)**  
 **Norme de référence :** AFNOR NF EN ISO 3952 (Schémas cinématiques — Symboles graphiques)

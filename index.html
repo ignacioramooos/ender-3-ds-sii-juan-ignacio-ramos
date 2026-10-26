@@ -301,10 +301,13 @@
                 </div>
             </div>
 
-            <p><strong>Fermeture cinématique sur la chaîne fermée $\{E_0 \to E_1 \to E_2 \to E_0\}$ réduite au point $O_2 \in (O_1, \vec{z}_0)$ :</strong></p>
-            $$\{\mathcal{V}(E_2/E_0)\} = \{\mathcal{V}(E_2/E_1)\} + \{\mathcal{V}(E_1/E_0)\} \quad \text{avec } \vec{V}(O_2 \in E_1/E_0) = \vec{V}(O_1 \in E_1/E_0) + \big(\omega_{10}\,\vec{z}_0\big) \wedge \big(z_2\,\vec{z}_0\big) = \vec{0}$$
-            <p>En projetant sur $\vec{z}_0$ : $0 = \omega_{21}(t) + \omega_{10}(t) \implies \omega_{21}(t) = -\omega_{10}(t) = +\omega_m(t)$, d'où la loi d'entrée-sortie :</p>
+            <p><strong>Fermeture cinématique sur la chaîne fermée $\{E_0 \to E_1 \to E_2 \to E_0\}$ réduite au point commun $O_2 \in (O_1, \vec{z}_0)$ :</strong></p>
+            $$\{\mathcal{V}(E_2/E_0)\}_{O_2} = \{\mathcal{V}(E_2/E_1)\}_{O_2} + \{\mathcal{V}(E_1/E_0)\}_{O_2}$$
+            <p>Transport du torseur pivot de $O_1$ en $O_2$ par la formule de Varignon (Règle BABAR du cours CM4) :</p>
+            $$\vec{V}(O_2 \in E_1/E_0) = \vec{V}(O_1 \in E_1/E_0) + \overrightarrow{O_2 O_1} \wedge \vec{\Omega}(E_1/E_0) = \vec{0} + (-z_2\,\vec{z}_0) \wedge (\omega_{10}\,\vec{z}_0) = \vec{0}$$
+            <p>En projetant sur l'axe $\vec{z}_0$ : $\omega_{21}(t) + \omega_{10}(t) = 0 \implies \omega_{21}(t) = -\omega_{10}(t)$, d'où la loi d'entrée-sortie :</p>
             $$\boxed{V_z(t) = \dot{z}_2(t) = v_{21}(t) = +\frac{p_z}{2\pi}\,\omega_{21}(t) = -\frac{p_z}{2\pi}\,\omega_{10}(t) = +\frac{p_z}{2\pi}\,\omega_m(t)}$$
+            <p>où $\omega_m(t) = -\omega_{10}(t) > 0$ est la vitesse angulaire motrice de montée (rotation horaire de la vis vue de dessus).</p>
         </div>
     </div>
 

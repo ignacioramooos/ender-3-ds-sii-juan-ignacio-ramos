@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DM n°1 SII — Dossier Papier Complet (Juan Ignacio RAMOS — MPSI)</title>
+  <title>DM n°1 SII — Feuille de Rendu A4 Imprimable (Juan Ignacio RAMOS — MPSI Stanislas)</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
@@ -12,7 +12,7 @@
     :root {
       --ink: #0f172a;
       --muted: #475569;
-      --border: #cbd5e1;
+      --light-border: #cbd5e1;
       --e0: #0f172a;
       --e1: #2563eb;
       --e2: #dc2626;
@@ -24,16 +24,17 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       background: #e2e8f0;
       color: var(--ink);
-      padding: 24px 12px;
-      line-height: 1.48;
+      padding: 20px 10px;
+      line-height: 1.35;
+      font-size: 11px;
     }
     .print-bar {
-      max-width: 1120px;
-      margin: 0 auto 18px auto;
+      max-width: 1080px;
+      margin: 0 auto 16px auto;
       background: #0f172a;
       color: #ffffff;
-      padding: 12px 20px;
-      border-radius: 10px;
+      padding: 10px 18px;
+      border-radius: 8px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -42,87 +43,119 @@
       background: #2563eb;
       color: #ffffff;
       border: none;
-      padding: 8px 16px;
+      padding: 7px 14px;
       border-radius: 6px;
       font-weight: 700;
-      font-size: 0.88rem;
+      font-size: 0.82rem;
       cursor: pointer;
       text-decoration: none;
       margin-left: 8px;
     }
     .print-bar a.sec { background: #334155; }
     .page {
-      max-width: 1120px;
-      margin: 0 auto 28px auto;
+      width: 210mm;
+      min-height: 297mm;
+      max-height: 297mm;
+      margin: 0 auto 24px auto;
       background: #ffffff;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 28px 34px;
-      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.1);
+      border: 1px solid var(--light-border);
+      border-radius: 6px;
+      padding: 7mm 9mm;
+      box-shadow: 0 8px 24px -4px rgba(15, 23, 42, 0.12);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      position: relative;
     }
-    /* En-tête conforme au modèle de la Page 2 de l'énoncé */
+    /* En-tête conforme au modèle Page 2 de l'énoncé */
     .assignment-header {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
-      border-bottom: 3px solid var(--ink);
-      padding-bottom: 14px;
-      margin-bottom: 18px;
+      align-items: stretch;
+      border: 2px solid var(--ink);
+      border-radius: 6px;
+      padding: 6px 10px;
+      margin-bottom: 6px;
+      background: #f8fafc;
     }
     .student-fields {
-      font-size: 1.02rem;
-      line-height: 1.65;
+      font-size: 10px;
+      line-height: 1.45;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
     .student-fields strong {
       display: inline-block;
-      min-width: 145px;
+      min-width: 110px;
       color: var(--ink);
     }
     .course-badge {
       text-align: right;
-      background: #f8fafc;
-      border: 1.5px solid var(--ink);
-      border-radius: 8px;
-      padding: 10px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-left: 1.5px solid #cbd5e1;
+      padding-left: 12px;
     }
     .course-badge h1 {
-      font-size: 1.08rem;
+      font-size: 11.5px;
       font-weight: 900;
       text-transform: uppercase;
       color: var(--ink);
     }
     .course-badge p {
-      font-size: 0.84rem;
+      font-size: 9.5px;
       color: var(--muted);
-      margin-top: 3px;
+      margin-top: 1px;
     }
-    /* Grille supérieure : Selfie à gauche + Photo annotée à droite (exactement comme Page 2 de l'énoncé) */
-    .photo-showcase {
+    .banner {
+      background: var(--ink);
+      color: #ffffff;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 800;
+      margin: 4px 0 3px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      letter-spacing: 0.02em;
+    }
+    .banner span.sub {
+      font-size: 8.5px;
+      font-weight: 600;
+      color: #cbd5e1;
+    }
+    /* Section Photos */
+    .photo-grid {
       display: grid;
-      grid-template-columns: 0.82fr 1.48fr;
-      gap: 16px;
-      margin-bottom: 20px;
+      grid-template-columns: 0.65fr 1.35fr;
+      gap: 6px;
+      margin-bottom: 4px;
       align-items: stretch;
     }
     .photo-card {
-      border: 1.5px solid var(--border);
-      border-radius: 8px;
+      border: 1px solid var(--light-border);
+      border-radius: 5px;
       overflow: hidden;
-      background: #f8fafc;
+      background: #ffffff;
       display: flex;
       flex-direction: column;
     }
-    .photo-card-header {
-      background: var(--ink);
-      color: #ffffff;
-      padding: 7px 12px;
-      font-size: 0.84rem;
+    .photo-card-head {
+      background: #f1f5f9;
+      color: var(--ink);
+      padding: 2px 6px;
+      font-size: 8.5px;
       font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.02em;
+      border-bottom: 1px solid var(--light-border);
+      display: flex;
+      justify-content: space-between;
     }
     .photo-card-body {
-      padding: 8px;
+      padding: 2px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -130,49 +163,97 @@
       background: #ffffff;
     }
     .photo-card-body img {
-      width: 100%;
-      height: auto;
-      border-radius: 4px;
+      max-width: 100%;
+      max-height: 195px;
+      object-fit: contain;
       display: block;
     }
-    .section-banner {
-      background: var(--ink);
-      color: #ffffff;
-      padding: 8px 14px;
-      border-radius: 6px;
-      font-size: 1rem;
-      font-weight: 800;
-      margin: 18px 0 12px 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .section-banner span.sub {
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: #cbd5e1;
-    }
-    .svg-box {
-      border: 1.5px solid var(--border);
-      border-radius: 8px;
+    /* Graphe des liaisons */
+    .graph-box {
+      border: 1px solid var(--light-border);
+      border-radius: 5px;
       overflow: hidden;
       background: #ffffff;
-      margin-bottom: 16px;
+      text-align: center;
+      padding: 2px;
+      margin-bottom: 4px;
     }
-    .svg-box img {
+    .graph-box img {
       width: 100%;
-      height: auto;
+      max-height: 250px;
+      object-fit: contain;
       display: block;
     }
+    /* Topo panel */
+    .topo-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 6px;
+      background: #f8fafc;
+      border: 1px solid var(--light-border);
+      border-radius: 5px;
+      padding: 5px 8px;
+      font-size: 9px;
+      line-height: 1.35;
+    }
+    .topo-grid h4 {
+      font-size: 9.5px;
+      font-weight: 800;
+      color: var(--ink);
+      margin-bottom: 2px;
+    }
+    /* Page 2 Styles */
+    .schemas-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+    .schema-card {
+      border: 1px solid var(--light-border);
+      border-radius: 5px;
+      overflow: hidden;
+      background: #ffffff;
+    }
+    .schema-card img {
+      width: 100%;
+      max-height: 175px;
+      object-fit: contain;
+      display: block;
+      padding: 2px;
+    }
+    .param-box {
+      border: 1px solid var(--light-border);
+      border-radius: 5px;
+      overflow: hidden;
+      background: #ffffff;
+      margin-bottom: 4px;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 6px;
+      padding: 3px 6px;
+      align-items: center;
+    }
+    .param-box img {
+      width: 100%;
+      max-height: 85px;
+      object-fit: contain;
+      display: block;
+    }
+    .param-text {
+      font-size: 8.5px;
+      line-height: 1.32;
+    }
+    /* Tableau normalisé */
     table.sii-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.86rem;
-      margin-bottom: 14px;
+      font-size: 8.5px;
+      margin-bottom: 4px;
     }
     table.sii-table th, table.sii-table td {
-      border: 1px solid var(--border);
-      padding: 8px 10px;
+      border: 1px solid var(--light-border);
+      padding: 3px 5px;
       text-align: left;
       vertical-align: middle;
     }
@@ -180,19 +261,62 @@
       background: #f1f5f9;
       font-weight: 800;
       color: var(--ink);
+      font-size: 8.5px;
     }
-    .closure-panel {
-      background: #f8fafc;
-      border: 1.5px solid #93c5fd;
-      border-left: 5px solid var(--e1);
-      border-radius: 8px;
-      padding: 12px 16px;
-      font-size: 0.9rem;
+    .matrix-display {
+      font-family: inherit;
+      font-size: 8.5px;
+    }
+    /* Fermeture Panel */
+    .closure-box {
+      background: #f0fdf4;
+      border: 1.5px solid #86efac;
+      border-left: 4px solid #16a34a;
+      border-radius: 5px;
+      padding: 5px 8px;
+      font-size: 8.5px;
+      line-height: 1.35;
+    }
+    .closure-box strong.head {
+      color: #166534;
+      font-size: 9px;
+      display: block;
+      margin-bottom: 2px;
+    }
+    .page-footer {
+      border-top: 1px solid var(--light-border);
+      padding-top: 3px;
+      margin-top: 2px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 8px;
+      color: var(--muted);
+      font-weight: 600;
     }
     @media print {
-      body { background: #ffffff; padding: 0; }
-      .print-bar { display: none; }
-      .page { box-shadow: none; border: none; padding: 8px 0; page-break-after: always; }
+      @page {
+        size: A4 portrait;
+        margin: 5mm 7mm;
+      }
+      body {
+        background: #ffffff;
+        padding: 0;
+        margin: 0;
+      }
+      .print-bar { display: none !important; }
+      .page {
+        width: 100% !important;
+        height: 287mm !important;
+        max-height: 287mm !important;
+        min-height: 287mm !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        page-break-after: always !important;
+        break-after: page !important;
+      }
     }
   </style>
 </head>
@@ -200,7 +324,7 @@
 
   <div class="print-bar">
     <div>
-      <strong>Dossier de Rendu Papier DM n°1 (Modèle Page 2 de l'Énoncé)</strong> — Prêt à imprimer ou recopier à la main
+      <strong>DM n°1 SII — Feuille de Rendu A4 Imprimable (Modèle Page 2 de l'Énoncé)</strong> • Conforme Cours CM4 Stanislas
     </div>
     <div>
       <a href="../index.html" class="sec">← Portail Principal</a>
@@ -209,119 +333,237 @@
     </div>
   </div>
 
-  <!-- PAGE 1 : EN-TÊTE, PHOTOS (SELFIE + SYSTÈME PARAMÉTRÉ) & GRAPHE DES LIAISONS -->
+  <!-- ==================================================================================== -->
+  <!-- PAGE 1 / 2 (RECTO) : EN-TÊTE OFFICIEL, PHOTOS, PARAMÉTRAGE & GRAPHE DES LIAISONS      -->
+  <!-- ==================================================================================== -->
   <div class="page">
-    <div class="assignment-header">
-      <div class="student-fields">
-        <div><strong>Nom :</strong> RAMOS</div>
-        <div><strong>Prénom :</strong> Juan Ignacio</div>
-        <div><strong>Classe :</strong> MPSI (Lycée Stanislas)</div>
-        <div><strong>Système étudié :</strong> Imprimante 3D Creality Ender 3 (modèle de base)</div>
+    <div>
+      <!-- En-tête officiel CPGE MPSI Stanislas -->
+      <div class="assignment-header">
+        <div class="student-fields">
+          <div><strong>Nom :</strong> RAMOS</div>
+          <div><strong>Prénom :</strong> Juan Ignacio</div>
+          <div><strong>Classe :</strong> CPGE MPSI (Lycée Stanislas)</div>
+          <div><strong>Système étudié :</strong> Imprimante 3D à dépôt de fil fondu (FDM) Creality Ender 3 (modèle de base)</div>
+        </div>
+        <div class="course-badge">
+          <h1>DM n°1 — Modélisation des Liaisons &amp; Schématisation</h1>
+          <p>Sciences Industrielles de l'Ingénieur (SII) — Mme M. Prot &amp; M. Cullaz</p>
+          <p style="margin-top:2px; font-weight:700; color:#1d4ed8;">
+            Séquence 2 (CM4) : Cinématique du Solide • AFNOR NF EN ISO 3952
+          </p>
+        </div>
       </div>
-      <div class="course-badge">
-        <h1>DM n°1 — Modélisation des Liaisons / Schématisation</h1>
-        <p>Sciences Industrielles de l'Ingénieur (SII) — Mme M. Prot &amp; M. Cullaz</p>
-        <p style="margin-top:4px; font-weight:700; color:#1d4ed8;">5 Classes d'équivalence ($E_0$ à $E_4$) • 5 Liaisons (3 familles distinctes)</p>
+
+      <!-- Section 1 : Photos & Paramétrage -->
+      <div class="banner">
+        <span>1. PRÉSENTATION PHOTOGRAPHIQUE &amp; PARAMÉTRAGE DU SYSTÈME RÉEL (PARTIE III — EXIGENCE 1)</span>
+        <span class="sub">Vérification de validation : 5 Classes ($E_0..E_4$) • 5 Liaisons (3 familles distinctes)</span>
+      </div>
+      <div class="photo-grid">
+        <div class="photo-card">
+          <div class="photo-card-head">
+            <span>Photo 1 — Élève avec le système</span>
+            <span><code>RAMOS-Selfie.png</code></span>
+          </div>
+          <div class="photo-card-body">
+            <img src="../02_photos/RAMOS-Selfie.png" alt="Selfie de Juan Ignacio Ramos avec la Creality Ender 3">
+          </div>
+        </div>
+        <div class="photo-card">
+          <div class="photo-card-head">
+            <span>Photo 2 — Système paramétré : Trièdre $\mathcal{R}_0$, Repères $\mathcal{R}_1..\mathcal{R}_4$, Centres $O_1..O_5$ &amp; Pièces</span>
+            <span><code>RAMOS-Ender3-Details.png</code></span>
+          </div>
+          <div class="photo-card-body">
+            <img src="../02_photos/RAMOS-Ender3-Details.png" alt="Planche annotée Creality Ender 3">
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2 : Graphe des Liaisons Normalisé -->
+      <div class="banner">
+        <span>2. GRAPHE DES LIAISONS NORMALISÉ AVEC CLASSES D'ÉQUIVALENCE EXPLICITES (PARTIE III — EXIGENCE 2)</span>
+        <span class="sub">Mise en valeur du bâti $E_0$ ($\underline{\underline{\equiv\mkern-10mu\perp}}$) • Inventaire complet des pièces réelles</span>
+      </div>
+      <div class="graph-box">
+        <img src="../04_schemas_cinematiques/graphe_des_liaisons.svg" alt="Graphe des liaisons normalisé de la Creality Ender 3">
+      </div>
+
+      <!-- Section 3 : Analyse Topologique & Hypothèses du Solide (CM4) -->
+      <div class="banner">
+        <span>3. ANALYSE TOPOLOGIQUE &amp; HYPOTHÈSES DU COURS CM4 (CINÉMATIQUE DU SOLIDE INDÉFORMABLE)</span>
+        <span class="sub">Nombre cyclomatique $\gamma = 1$ • Structure hybride série-parallèle</span>
+      </div>
+      <div class="topo-grid">
+        <div>
+          <h4>Topologie cinématique du système Creality Ender 3 :</h4>
+          <ul style="padding-left:14px; margin:0;">
+            <li><strong>$N = 5$ classes d'équivalence indéformables :</strong> Bâti $E_0$ (Noir), Vis $E_1$ (Bleu), Portique $E_2$ (Rouge), Tête $E_3$ (Vert), Plateau $E_4$ (Orange).</li>
+            <li><strong>$L = 5$ liaisons mécaniques normalisées :</strong> 1 Pivot ($L_{01}$), 1 Hélicoïdale ($L_{12}$ Tr8x8), 3 Glissières ($L_{02}, L_{23}, L_{04}$).</li>
+            <li><strong>Nombre cyclomatique $\gamma = L - N + 1 = 5 - 5 + 1 = 1$ :</strong> Une unique chaîne fermée élémentaire (boucle d'élévation $Z$ : $E_0 - E_1 - E_2 - E_0$) et deux chaînes ouvertes séries orthogonales ($E_2 - E_3$ selon $\vec{x}_0$ et $E_0 - E_4$ selon $\vec{y}_0$).</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Hypothèses fondamentales de CM4 :</h4>
+          <ul style="padding-left:14px; margin:0;">
+            <li><strong>Solide indéformable :</strong> $\forall A, B \in S,\; \|\vec{AB}\| = \text{cte} \iff \left.\frac{\mathrm{d}\vec{AB}}{\mathrm{d}t}\right|_{R_S} = \vec{0}$.</li>
+            <li><strong>Torseur cinématique $\{\mathcal{V}_{S/R}\}$ :</strong> Résultante $\vec{\Omega}_{S/R}$ (vecteur libre constant) et moment $\vec{V}_{A \in S/R}$ (champ affine antisymétrique de Varignon).</li>
+            <li><strong>Piège majeur de concours :</strong> Le champ des accélérations n'est <em>PAS</em> un torseur en raison du terme centripète $\vec{\Omega} \wedge (\vec{\Omega} \wedge \vec{AB})$.</li>
+          </ul>
+        </div>
       </div>
     </div>
 
-    <div class="photo-showcase">
-      <div class="photo-card">
-        <div class="photo-card-header">1. Photo de l'élève avec le système (RAMOS-Selfie.png)</div>
-        <div class="photo-card-body">
-          <img src="../02_photos/RAMOS-Selfie.png" alt="Selfie de Juan Ignacio Ramos avec l'imprimante 3D Creality Ender 3">
-        </div>
-      </div>
-      <div class="photo-card">
-        <div class="photo-card-header">2. Système paramétré : Repères locaux ($\mathcal{R}_0$ à $\mathcal{R}_4$), Centres ($O_0$ à $O_5$) &amp; Pièces</div>
-        <div class="photo-card-body">
-          <img src="../02_photos/RAMOS-Ender3-Details.png" alt="Photo annotée du système Creality Ender 3 avec repères locaux et classes d'équivalence">
-        </div>
-      </div>
-    </div>
-
-    <div class="section-banner">
-      <span>Graphe des liaisons (avec classes d'équivalence explicites et mise en valeur du bâti $E_0$)</span>
-      <span class="sub">Norme AFNOR NF EN ISO 3952</span>
-    </div>
-    <div class="svg-box">
-      <img src="../04_schemas_cinematiques/graphe_des_liaisons.svg" alt="Graphe des liaisons normalisé">
+    <!-- Pied de page 1 -->
+    <div class="page-footer">
+      <span>CPGE MPSI — Lycée Stanislas Paris • Sciences Industrielles de l'Ingénieur (SII)</span>
+      <span>Feuille de Rendu DM n°1 — Modèle Page 2 de l'Énoncé</span>
+      <span>Page 1 / 2 (Recto)</span>
     </div>
   </div>
 
-  <!-- PAGE 2 : SCHÉMA CINÉMATIQUE 2D EN COULEUR, SCHÉMA 3D EN COULEUR & SYNTHÈSE MATHÉMATIQUE -->
+  <!-- ==================================================================================== -->
+  <!-- PAGE 2 / 2 (VERSO) : SCHÉMAS 2D/3D, TORSEURS DES LIAISONS & FERMETURE CINÉMATIQUE    -->
+  <!-- ==================================================================================== -->
   <div class="page">
-    <div class="section-banner" style="margin-top:0;">
-      <span>Schéma cinématique 2D en couleur — Projection frontale $(O_0, \vec{x}_0, \vec{z}_0)$ avec $\vec{y}_0$ entrant ($\otimes$)</span>
-      <span class="sub">Bijection stricte : 1 couleur = 1 classe $E_k$</span>
-    </div>
-    <div class="svg-box">
-      <img src="../04_schemas_cinematiques/schema_cinematique_2d.svg" alt="Schéma cinématique 2D en couleur">
+    <div>
+      <!-- En-tête condensé Verso -->
+      <div class="assignment-header" style="padding:4px 8px; margin-bottom:5px;">
+        <div style="font-weight:800; font-size:10px; color:var(--ink);">
+          DM n°1 SII — Schémas Cinématiques Normalisés, Torseurs des Liaisons &amp; Fermeture Cinématique Z
+        </div>
+        <div style="font-size:9.5px; color:var(--muted); font-weight:700;">
+          Élève : Juan Ignacio RAMOS • Classe : MPSI (Lycée Stanislas)
+        </div>
+      </div>
+
+      <!-- Section 4 : Schémas 2D & 3D côte-à-côte -->
+      <div class="banner">
+        <span>4. SCHÉMAS CINÉMATIQUES NORMALISÉS EN COULEUR (PARTIE III — EXIGENCES 3 &amp; 4 • AFNOR NF EN ISO 3952)</span>
+        <span class="sub">Bijection stricte : 1 couleur = 1 classe • Trièdre direct $\mathcal{R}_0$ avec $\vec{y}_0$ entrant ($\otimes$)</span>
+      </div>
+      <div class="schemas-grid">
+        <div class="schema-card">
+          <div class="photo-card-head">
+            <span>Schéma Minimal 2D en Couleur — Vue Frontale $(O_0, \vec{x}_0, \vec{z}_0)$</span>
+            <span>$\otimes\,\vec{y}_0 = \vec{z}_0 \wedge \vec{x}_0$</span>
+          </div>
+          <img src="../04_schemas_cinematiques/schema_cinematique_2d.svg" alt="Schéma cinématique 2D minimal en couleur">
+        </div>
+        <div class="schema-card">
+          <div class="photo-card-head">
+            <span>Schéma Spatial 3D en Couleur — Perspective Cavalière</span>
+            <span>Fuyante $\vec{y}_0$ ($\alpha \approx 34^\circ, k \approx 0{,}6$)</span>
+          </div>
+          <img src="../04_schemas_cinematiques/schema_cinematique_3d.svg" alt="Schéma cinématique spatial 3D en couleur">
+        </div>
+      </div>
+
+      <!-- Section 5 : Paramétrage Angulaire & Vecteur Buse/Plateau -->
+      <div class="banner">
+        <span>5. PARAMÉTRAGE ANGULAIRE ($\mathcal{B}_0 \to \mathcal{B}_1$), CHAÎNE DES CENTRES &amp; VECTEUR BUSE/PLATEAU ($\overrightarrow{O_5 O_4}$)</span>
+        <span class="sub">Formule de dérivation vectorielle (Bour) • Découplage cartésien spatial</span>
+      </div>
+      <div class="param-box">
+        <div>
+          <img src="../04_schemas_cinematiques/figures_parametrage_angles.svg" alt="Figure plane de changement de base et chaîne des centres">
+        </div>
+        <div class="param-text">
+          <strong>Figure plane $(\mathcal{B}_0 \to \mathcal{B}_1)$ :</strong> Rotation $\theta_1(t) = (\widehat{\vec{x}_0, \vec{x}_1})$ autour de $\vec{z}_0 = \vec{z}_1 \implies \vec{\Omega}(E_1/E_0) = \dot{\theta}_1(t)\,\vec{z}_0 = \omega_{10}(t)\,\vec{z}_0$.<br>
+          <strong>Vecteur position relative Buse/Plateau :</strong> $\overrightarrow{O_5 O_4} = x_3(t)\,\vec{x}_0 + (d_y - y_4(t))\,\vec{y}_0 + (h_1 - h_5 + z_2(t))\,\vec{z}_0$.<br>
+          <strong>Vitesse relative d'extrusion (Formule de Bour) :</strong><br>
+          $\vec{V}(O_4 \in E_3/E_4) = \left.\frac{\mathrm{d}\overrightarrow{O_5 O_4}}{\mathrm{d}t}\right|_{\mathcal{B}_0} = \dot{x}_3(t)\,\vec{x}_0 - \dot{y}_4(t)\,\vec{y}_0 + \dot{z}_2(t)\,\vec{z}_0$ (Translation spatiale à 3 DDL indépendants).
+        </div>
+      </div>
+
+      <!-- Section 6 : Tableau Canonique des Liaisons & Torseurs Cinématiques -->
+      <div class="banner">
+        <span>6. RÉPERTOIRE CANONIQUE DES 5 LIAISONS &amp; TORSEURS CINÉMATIQUES (NOTATIONS DU COURS CM4)</span>
+        <span class="sub">Notation matricielle en colonne $3\times 2$ et intrinsèque en ligne • $N_s$ DDL autorisés &amp; $N_c = 6 - N_s$ DDL bloqués</span>
+      </div>
+      <table class="sii-table">
+        <thead>
+          <tr>
+            <th style="width:7%;">Liaison</th>
+            <th style="width:16%;">Classes reliées &amp; Repères</th>
+            <th style="width:23%;">Famille AFNOR &amp; Caractéristique géométrique</th>
+            <th style="width:12%;">DDL ($N_s / N_c$) &amp; Typologie CM4</th>
+            <th style="width:42%;">Torseur cinématique $\{\mathcal{V}\}$ exprimé dans $\mathcal{B}_0(\vec{x}_0, \vec{y}_0, \vec{z}_0)$</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>$L_{01}$</strong></td>
+            <td>$E_0 [\mathcal{R}_0] \leftrightarrow E_1 [\mathcal{R}_1]$</td>
+            <td><strong>Pivot</strong> d'axe $(O_1, \vec{z}_0)$<br>Roulements NEMA 17 + coupleur alu</td>
+            <td>$1\text{ DDL } (1\text{R}, 0\text{T})$<br>$N_c = 5$<br><strong>Torseur Glisseur</strong></td>
+            <td class="matrix-display">
+              $\{\mathcal{V}(E_1/E_0)\} = \begin{Bmatrix} 0 & 0 \\ 0 & 0 \\ \omega_{10}(t) & 0 \end{Bmatrix}_{O_1, \mathcal{B}_0} = \left\{ \dot{\theta}_1(t)\,\vec{z}_0 \;;\; \vec{0} \right\}_{O_1 \in (O_1, \vec{z}_0)}$
+            </td>
+          </tr>
+          <tr>
+            <td><strong>$L_{12}$</strong></td>
+            <td>$E_1 [\mathcal{R}_1] \leftrightarrow E_2 [\mathcal{R}_2]$</td>
+            <td><strong>Hélicoïdale</strong> d'axe $(O_2, \vec{z}_0)$<br>Filet à droite, pas $p_z = 8\text{ mm/tr}$</td>
+            <td>$1\text{ DDL couplé}$<br>$N_c = 5$<br><strong>Torseur Hélicoïdal</strong></td>
+            <td class="matrix-display">
+              $\{\mathcal{V}(E_2/E_1)\} = \begin{Bmatrix} 0 & 0 \\ 0 & 0 \\ \omega_{21}(t) & v_{21}(t) \end{Bmatrix}_{O_2, \mathcal{B}_0}$ avec relation : $v_{21}(t) = +\dfrac{p_z}{2\pi}\,\omega_{21}(t)$
+            </td>
+          </tr>
+          <tr>
+            <td><strong>$L_{02}$</strong></td>
+            <td>$E_0 [\mathcal{R}_0] \leftrightarrow E_2 [\mathcal{R}_2]$</td>
+            <td><strong>Glissière</strong> de direction $\vec{z}_0$ (en $O_3$)<br>6 galets V-wheels sur montants $Z$</td>
+            <td>$1\text{ DDL } (0\text{R}, 1\text{T})$<br>$N_c = 5$<br><strong>Torseur Couple</strong></td>
+            <td class="matrix-display">
+              $\{\mathcal{V}(E_2/E_0)\} = \begin{Bmatrix} 0 & 0 \\ 0 & 0 \\ 0 & \dot{z}_2(t) \end{Bmatrix}_{\forall P, \mathcal{B}_0} = \left\{ \vec{0} \;;\; V_z(t)\,\vec{z}_0 \right\}_{\forall P}$ (Champ uniforme)
+            </td>
+          </tr>
+          <tr>
+            <td><strong>$L_{23}$</strong></td>
+            <td>$E_2 [\mathcal{R}_2] \leftrightarrow E_3 [\mathcal{R}_3]$</td>
+            <td><strong>Glissière</strong> de direction $\vec{x}_0$ (en $O_4$)<br>3 galets V-wheels sur profilé $X$</td>
+            <td>$1\text{ DDL } (0\text{R}, 1\text{T})$<br>$N_c = 5$<br><strong>Torseur Couple</strong></td>
+            <td class="matrix-display">
+              $\{\mathcal{V}(E_3/E_2)\} = \begin{Bmatrix} 0 & \dot{x}_3(t) \\ 0 & 0 \\ 0 & 0 \end{Bmatrix}_{\forall P, \mathcal{B}_0} = \left\{ \vec{0} \;;\; V_x(t)\,\vec{x}_0 \right\}_{\forall P}$ (Champ uniforme)
+            </td>
+          </tr>
+          <tr>
+            <td><strong>$L_{04}$</strong></td>
+            <td>$E_0 [\mathcal{R}_0] \leftrightarrow E_4 [\mathcal{R}_4]$</td>
+            <td><strong>Glissière</strong> de direction $\vec{y}_0$ (en $O_5$)<br>4 galets V-wheels sur rail central $Y$</td>
+            <td>$1\text{ DDL } (0\text{R}, 1\text{T})$<br>$N_c = 5$<br><strong>Torseur Couple</strong></td>
+            <td class="matrix-display">
+              $\{\mathcal{V}(E_4/E_0)\} = \begin{Bmatrix} 0 & 0 \\ 0 & \dot{y}_4(t) \\ 0 & 0 \end{Bmatrix}_{\forall P, \mathcal{B}_0} = \left\{ \vec{0} \;;\; V_y(t)\,\vec{y}_0 \right\}_{\forall P}$ (Champ uniforme)
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Section 7 : Fermeture Cinématique Z & Commande Trapézoïdale -->
+      <div class="banner">
+        <span>7. FERMETURE CINÉMATIQUE DE LA BOUCLE $Z$ ($E_0 - E_1 - E_2 - E_0$) &amp; COMMANDE TRAPÉZOÏDALE</span>
+        <span class="sub">Règle absolue d'addition au MÊME point $O_2$ (Varignon / BABAR) • Méthode de l'aire géométrique</span>
+      </div>
+      <div class="closure-box">
+        <strong class="head">Composition des torseurs cinématiques au point commun $O_2 \in (O_1, \vec{z}_0)$ :</strong>
+        • <strong>Transport du torseur pivot par la formule de Varignon (Règle BABAR) :</strong> $\vec{V}(O_2 \in E_1/E_0) = \vec{V}(O_1 \in E_1/E_0) + \overrightarrow{O_2 O_1} \wedge \vec{\Omega}(E_1/E_0) = \vec{0} + (-z_2(t)\vec{z}_0) \wedge (\omega_{10}(t)\vec{z}_0) = \vec{0}$.<br>
+        • <strong>Fermeture cinématique :</strong> $\{\mathcal{V}(E_2/E_0)\}_{O_2} = \{\mathcal{V}(E_2/E_1)\}_{O_2} + \{\mathcal{V}(E_1/E_0)\}_{O_2} \implies$
+        $\begin{Bmatrix} 0 & 0 \\ 0 & 0 \\ 0 & V_z(t) \end{Bmatrix}_{O_2} = \begin{Bmatrix} 0 & 0 \\ 0 & 0 \\ \omega_{21}(t) + \omega_{10}(t) & v_{21}(t) + 0 \end{Bmatrix}_{O_2}$.<br>
+        • <strong>Projections scalaires selon $\vec{z}_0$ :</strong>
+        $\omega_{21}(t) = -\omega_{10}(t) = -\dot{\theta}_1(t)$ &nbsp;|&nbsp;
+        $V_z(t) = \dot{z}_2(t) = v_{21}(t) = +\dfrac{p_z}{2\pi}\,\omega_{21}(t) = -\dfrac{p_z}{2\pi}\,\omega_{10}(t) = \mathbf{+\dfrac{p_z}{2\pi}\,\omega_m(t)}$
+        avec $\omega_m(t) = -\omega_{10}(t) > 0$ (vitesse motrice de montée, rotation horaire de la vis vue de dessus).<br>
+        • <strong>Cinématique de commande en trapèze de vitesse (CM4 § 5.3) :</strong> Accélération uniforme $\ddot{z}_2 = +\gamma$ ($t \in [0, t_1]$), régime permanent $\dot{z}_2 = V_{\max}$ ($t \in [t_1, t_2]$), décélération uniforme $\ddot{z}_2 = -\gamma$ ($t \in [t_2, t_3]$). La course verticale est donnée directement par la <em>méthode de l'aire</em> : $\Delta z_2 = \int_0^{t_3} \dot{z}_2(t)\,\mathrm{d}t = \frac{(t_3 + (t_2 - t_1))\cdot V_{\max}}{2}$. Résolution : $2{,}5\text{ }\mu\text{m/micropas}$ ($400\text{ pas/mm}$).
+      </div>
     </div>
 
-    <div class="section-banner">
-      <span>Schéma cinématique 3D en couleur — Perspective axonométrique / cavalière</span>
-      <span class="sub">Fuyante longitudinale $\vec{y}_0 = \vec{z}_0 \wedge \vec{x}_0$</span>
-    </div>
-    <div class="svg-box">
-      <img src="../04_schemas_cinematiques/schema_cinematique_3d.svg" alt="Schéma cinématique 3D en couleur">
-    </div>
-
-    <div class="section-banner">
-      <span>Paramétrage Angulaire ($\mathcal{B}_0 \to \mathcal{B}_1$), Chaîne des Centres &amp; Torseurs Cinématiques</span>
-      <span class="sub">Synthèse analytique CPGE MPSI</span>
-    </div>
-    <div class="svg-box">
-      <img src="../04_schemas_cinematiques/figures_parametrage_angles.svg" alt="Figure plane de changement de base et chaîne vectorielle des centres">
-    </div>
-
-    <table class="sii-table">
-      <thead>
-        <tr>
-          <th>Liaison</th>
-          <th>Classes reliées &amp; Repères locaux</th>
-          <th>Nom normalisé AFNOR &amp; Caractéristique</th>
-          <th>Torseur cinématique dans $\mathcal{B}_0(\vec{x}_0, \vec{y}_0, \vec{z}_0)$</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>$L_{01}$</strong></td>
-          <td>$E_0 [\mathcal{R}_0] \leftrightarrow E_1 [\mathcal{R}_1]$</td>
-          <td><strong>Pivot</strong> d'axe $(O_1, \vec{z}_0)$ — Rotation $\theta_1(t) = (\widehat{\vec{x}_0, \vec{x}_1})$</td>
-          <td>$\{\mathcal{V}(E_1/E_0)\} = \left\{ \vec{\Omega}(E_1/E_0) = \dot{\theta}_1(t)\,\vec{z}_0 \;;\; \vec{V}(O_1 \in E_1/E_0) = \vec{0} \right\}_{O_1}$</td>
-        </tr>
-        <tr>
-          <td><strong>$L_{12}$</strong></td>
-          <td>$E_1 [\mathcal{R}_1] \leftrightarrow E_2 [\mathcal{R}_2]$</td>
-          <td><strong>Hélicoïdale</strong> d'axe $(O_2, \vec{z}_0)$, filet à droite, pas $p_z = 8\text{ mm/tr}$</td>
-          <td>$\{\mathcal{V}(E_2/E_1)\} = \left\{ \omega_{21}(t)\,\vec{z}_0 \;;\; v_{21}(t)\,\vec{z}_0 = +\dfrac{p_z}{2\pi}\,\omega_{21}(t)\,\vec{z}_0 \right\}_{O_2}$</td>
-        </tr>
-        <tr>
-          <td><strong>$L_{02}$</strong></td>
-          <td>$E_0 [\mathcal{R}_0] \leftrightarrow E_2 [\mathcal{R}_2]$</td>
-          <td><strong>Glissière</strong> de direction $\vec{z}_0$ (en $O_3$) — Translation $z_2(t)\,\vec{z}_0$</td>
-          <td>$\{\mathcal{V}(E_2/E_0)\} = \left\{ \vec{0} \;;\; \dot{z}_2(t)\,\vec{z}_0 \right\}_{\forall P}$</td>
-        </tr>
-        <tr>
-          <td><strong>$L_{23}$</strong></td>
-          <td>$E_2 [\mathcal{R}_2] \leftrightarrow E_3 [\mathcal{R}_3]$</td>
-          <td><strong>Glissière</strong> de direction $\vec{x}_0$ (en $O_4$) — Translation $x_3(t)\,\vec{x}_0$</td>
-          <td>$\{\mathcal{V}(E_3/E_2)\} = \left\{ \vec{0} \;;\; \dot{x}_3(t)\,\vec{x}_0 \right\}_{\forall P}$</td>
-        </tr>
-        <tr>
-          <td><strong>$L_{04}$</strong></td>
-          <td>$E_0 [\mathcal{R}_0] \leftrightarrow E_4 [\mathcal{R}_4]$</td>
-          <td><strong>Glissière</strong> de direction $\vec{y}_0$ (en $O_5$) — Translation $y_4(t)\,\vec{y}_0$</td>
-          <td>$\{\mathcal{V}(E_4/E_0)\} = \left\{ \vec{0} \;;\; \dot{y}_4(t)\,\vec{y}_0 \right\}_{\forall P}$</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="closure-panel">
-      <strong>Fermeture cinématique de la chaîne fermée $Z$ ($E_0 - E_1 - E_2 - E_0$) réduite en $O_2$ :</strong>
-      $\{\mathcal{V}(E_2/E_0)\} = \{\mathcal{V}(E_2/E_1)\} + \{\mathcal{V}(E_1/E_0)\} \implies \omega_{21}(t) = -\omega_{10}(t) = -\dot{\theta}_1(t)$ et
-      $\dot{z}_2(t) = v_{21}(t) = +\dfrac{p_z}{2\pi}\,\omega_{21}(t) = -\dfrac{p_z}{2\pi}\,\dot{\theta}_1(t) = +\dfrac{p_z}{2\pi}\,\omega_m(t)$.
+    <!-- Pied de page 2 -->
+    <div class="page-footer">
+      <span>CPGE MPSI — Lycée Stanislas Paris • Sciences Industrielles de l'Ingénieur (SII)</span>
+      <span>Feuille de Rendu DM n°1 — Modèle Page 2 de l'Énoncé</span>
+      <span>Page 2 / 2 (Verso)</span>
     </div>
   </div>
 

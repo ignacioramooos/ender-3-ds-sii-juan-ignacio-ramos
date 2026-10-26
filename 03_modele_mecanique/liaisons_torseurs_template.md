@@ -1,73 +1,92 @@
 # Répertoire des Liaisons Mécaniques et Torseurs Cinématiques ($\{\mathcal{V}(E_j/E_i)\}$)
 
 **Système étudié :** Imprimante 3D Creality Ender 3 (modèle de base)  
-**Matière :** Sciences Industrielles de l'Ingénieur (SII) — CPGE MPSI  
-**Conformité :** Norme AFNOR NF EN ISO 3952 — Modélisation des liaisons parfaites
+**Matière :** Sciences Industrielles de l'Ingénieur (SII) — CPGE MPSI (Lycée Stanislas)  
+**Référence de cours :** Séquence 2 — Cours CM4 : *Cinématique du Solide Indéformable*  
+**Conformité :** Norme AFNOR NF EN ISO 3952 — Modélisation des liaisons mécaniques parfaites
 
 ---
 
-## 1. Synthèse des 5 liaisons élémentaires du système
+## 1. Rappels Théoriques Fondamentaux du Cours CM4
 
-> **Validation de la consigne (Partie I) :** Le système étudié présente **5 liaisons mécaniques élémentaires** réparties en **3 familles de liaisons normalisées distinctes** :
-> 1. **Liaison Pivot** ($L_{01}$) — 1 degré de liberté en rotation ($1\text{ R}, 0\text{ T}$) ;
-> 2. **Liaison Hélicoïdale** ($L_{12}$) — 1 degré de liberté conjugué rotation-translation ($1\text{ R conjuguée à } 1\text{ T}$) ;
-> 3. **Liaison Glissière** ($L_{02}$, $L_{23}$, $L_{04}$) — 1 degré de liberté en translation rectiligne selon les trois directions orthogonales de l'espace ($\vec{z}_0$, $\vec{x}_0$, $\vec{y}_0$).
+### 1.1. Définition et Structure d'un Torseur Cinématique
+Un torseur cinématique $\{\mathcal{V}(S_j/S_i)\}$ est un couple ordonné constitué de deux champs vectoriels :
+1. **La Résultante $\vec{\Omega}(S_j/S_i)$ :** Vecteur vitesse instantanée de rotation de $S_j$ par rapport à $S_i$. C'est un **vecteur libre**, indépendant du point de réduction géométrique.
+2. **Le Moment $\vec{V}(P \in S_j/S_i)$ :** Champ affine antisymétrique des vitesses (vitesse instantanée du point coïncidant appartenant à $S_j$ passant par $P$ à l'instant $t$).
 
-| Code | Classes reliées | Famille normalisée (AFNOR) | Caractéristique géométrique | Degrés de liberté ($N_c$) | Paramètre cinématique |
-| :--- | :--- | :--- | :--- | :---: | :--- |
-| **$L_{01}$** | $E_0 \leftrightarrow E_1$ | **Pivot** | Axe $(O_1, \vec{z}_0)$ | $1$ ($\text{R}_{z_0}$) | $\theta_1(t) = (\widehat{\vec{x}_0, \vec{x}_1})$ |
-| **$L_{12}$** | $E_1 \leftrightarrow E_2$ | **Hélicoïdale** (filet à droite) | Axe $(O_2, \vec{z}_0) = (O_1, \vec{z}_0)$, pas $p_z = 8\text{ mm/tr}$ | $1$ ($\text{R}_{z_0}\text{-T}_{z_0}$ liés) | $\omega_{21}(t)$ et $v_{21}(t) = +\frac{p_z}{2\pi}\omega_{21}(t)$ |
-| **$L_{02}$** | $E_0 \leftrightarrow E_2$ | **Glissière** | Direction $\vec{z}_0$ (en $O_3$) | $1$ ($\text{T}_{z_0}$) | $z_2(t)\,\vec{z}_0$ ($\dot{z}_2(t) = V_z(t)$) |
-| **$L_{23}$** | $E_2 \leftrightarrow E_3$ | **Glissière** | Direction $\vec{x}_0$ (en $O_4$) | $1$ ($\text{T}_{x_0}$) | $x_3(t)\,\vec{x}_0$ ($\dot{x}_3(t) = V_x(t)$) |
-| **$L_{04}$** | $E_0 \leftrightarrow E_4$ | **Glissière** | Direction $\vec{y}_0$ (en $O_5$) | $1$ ($\text{T}_{y_0}$) | $y_4(t)\,\vec{y}_0$ ($\dot{y}_4(t) = V_y(t)$) |
+### 1.2. Relation de Transport du Torseur (Formule du solide / Varignon — Règle « BABAR »)
+Pour transporter l'expression d'un torseur d'un point $A$ à un point $B$, on applique la **formule de Varignon** (CM4 § 1.3), mémorisée par la règle mnémotechnique **BABAR** (CM4 § 1.4) :
+$$\vec{V}(B \in S_j/S_i) = \vec{V}(A \in S_j/S_i) + \overrightarrow{BA} \wedge \vec{\Omega}(S_j/S_i) = \vec{V}(A \in S_j/S_i) + \vec{\Omega}(S_j/S_i) \wedge \overrightarrow{AB}$$
 
----
+### 1.3. Propriété d'Équiprojectivité (CM4 § 1.5)
+$$\forall A, B \in S, \quad \vec{V}(B \in S/R) \cdot \overrightarrow{AB} = \vec{V}(A \in S/R) \cdot \overrightarrow{AB}$$
+> **Condition impérative :** $A$ et $B$ doivent appartenir physiquement au **MÊME solide indéformable**.
 
-## 2. Analyse détaillée et écriture des torseurs cinématiques dans $\mathcal{B}_0(\vec{x}_0, \vec{y}_0, \vec{z}_0)$
+### 1.4. Typologie des Torseurs Cinématiques (CM4 § 2.5)
+1. **Torseur Couple ($\vec{\Omega} = \vec{0}$, $\vec{V} \neq \vec{0}$) :** Moment uniforme en tout point de l'espace. Caractérise un **mouvement de translation** (Glissières $L_{02}, L_{23}, L_{04}$).
+2. **Torseur Glisseur ($\vec{\Omega} \neq \vec{0}$, automoment $I = \vec{\Omega} \cdot \vec{V}_A = 0$) :** Il existe une droite centrale appelée **axe instantané de rotation $\Delta$** sur laquelle le moment est nul ($\forall P \in \Delta, \vec{V}_P = \vec{0}$). Caractérise une **rotation pure autour d'un axe** (Pivot $L_{01}$).
+3. **Torseur Hélicoïdal (Automoment $I = \vec{\Omega} \cdot \vec{V}_A \neq 0$) :** Le moment est colinéaire à la résultante sur l'axe central. Caractérise le **mouvement hélicoïdal vis-écrou** ($L_{12}$).
 
-### 2.1. Liaison $L_{01}$ entre le bâti $E_0$ et la vis mère $E_1$ : Liaison Pivot d'axe $(O_1, \vec{z}_0)$
-- **Réalisation technologique :** Guidage en rotation assuré en interne par les deux roulements rigides à billes du moteur pas-à-pas NEMA 17 de l'axe $Z$ (dont le stator est encastré sur le montant gauche de $E_0$), prolongé par le coupleur rigide fendu en aluminium vers la vis trapézoïdale $E_1$.
-- **Degrés de liberté :** 1 rotation d'axe $(O_1, \vec{z}_0)$ ; 0 translation ($\forall P \in (O_1, \vec{z}_0),\; \vec{V}(P \in E_1/E_0) = \vec{0}$).
-- **Torseur cinématique en tout point $P$ de l'axe $(O_1, \vec{z}_0)$ :**
-  $$\{\mathcal{V}(E_1/E_0)\} = \begin{Bmatrix} \vec{\Omega}(E_1/E_0) = \omega_{10}(t)\,\vec{z}_0 \\ \vec{V}(O_1 \in E_1/E_0) = \vec{0} \end{Bmatrix}_{O_1} = \begin{Bmatrix} 0 & 0 \\ 0 & 0 \\ \omega_{10}(t) & 0 \end{Bmatrix}_{O_1, \mathcal{B}_0} \quad \text{avec } \omega_{10}(t) = \dot{\theta}_1(t)$$
+> [!WARNING]
+> **Piège de concours MPSI (CM4 § 3.3) :** Le champ des accélérations n'est **PAS un torseur** en raison de la présence du terme de double produit vectoriel $\vec{\Omega} \wedge (\vec{\Omega} \wedge \overrightarrow{AB})$ (accélération centripète). De même, le champ des accélérations n'est pas équiprojectif.
 
 ---
 
-### 2.2. Liaison $L_{12}$ entre la vis mère $E_1$ et le portique $E_2$ : Liaison Hélicoïdale d'axe $(O_2, \vec{z}_0)$
-- **Réalisation technologique :** Contact hélicoïdal entre la vis trapézoïdale en acier inoxydable Tr8x8 ($E_1$, diamètre nominal $8\text{ mm}$, filetage à 4 filets à droite, avance par tour / pas hélicoïdal $p_z = 8\text{ mm/tr}$) et l'écrou trapézoïdal en laiton fixé sur la platine gauche du portique ($E_2$). L'axe $(O_2, \vec{z}_0)$ est confondu avec $(O_1, \vec{z}_0)$.
-- **Loi de conjugaison hélicoïdale intrinsèque (filetage à droite dans un repère direct $\mathcal{B}_0$) :**
-  Pour une liaison hélicoïdale à **filetage à droite** d'axe $(O_2, \vec{z}_0)$ exprimée dans la base directe $\mathcal{B}_0$, le vecteur vitesse de glissement et le vecteur taux de rotation le long de l'axe sont de **même signe** :
-  $$\vec{V}(O_2 \in E_2/E_1) = +\frac{p_z}{2\pi}\,\vec{\Omega}(E_2/E_1) \quad \Longleftrightarrow \quad v_{21}(t) = +\frac{p_z}{2\pi}\,\omega_{21}(t)$$
-- **Torseur cinématique au centre $O_2$ (ou en tout point de l'axe $(O_1, \vec{z}_0)$) :**
-  $$\{\mathcal{V}(E_2/E_1)\} = \begin{Bmatrix} \vec{\Omega}(E_2/E_1) = \omega_{21}(t)\,\vec{z}_0 \\ \vec{V}(O_2 \in E_2/E_1) = v_{21}(t)\,\vec{z}_0 \end{Bmatrix}_{O_2} = \begin{Bmatrix} 0 & 0 \\ 0 & 0 \\ \omega_{21}(t) & +\dfrac{p_z}{2\pi}\,\omega_{21}(t) \end{Bmatrix}_{O_2, \mathcal{B}_0}$$
+## 2. Synthèse des 5 Liaisons Normalisées de la Creality Ender 3
 
-> **Point de vigilance méthodologique (Sens physique de montée du portique $E_2$) :**  
-> Dans la Creality Ender 3, l'écrou laiton $E_2$ est **bloqué en rotation** par rapport au bâti $E_0$ par la liaison glissière $L_{02}$ ($\vec{\Omega}(E_2/E_0) = \vec{0}$).  
-> Par composition des rotations :
-> $$\vec{\Omega}(E_2/E_0) = \vec{\Omega}(E_2/E_1) + \vec{\Omega}(E_1/E_0) = \vec{0} \quad \Longrightarrow \quad \omega_{21}(t) = -\omega_{10}(t)$$
-> Par conséquent, la vitesse verticale d'élévation du portique $E_2$ par rapport au bâti $E_0$ vaut :
-> $$V_z(t) = \dot{z}_2(t) = v_{21}(t) = +\frac{p_z}{2\pi}\,\omega_{21}(t) = -\frac{p_z}{2\pi}\,\omega_{10}(t)$$
-> - Pour faire **monter** le portique ($V_z(t) > 0$), l'écrou $E_2$ doit décrire un mouvement relatif positif par rapport à la vis ($\omega_{21}(t) > 0$), ce qui impose que la vis mère $E_1$ tourne dans le **sens horaire vue de dessus** par rapport au bâti ($\omega_{10}(t) = -\omega_m(t) < 0$, où $\omega_m(t) = |\omega_{10}(t)| > 0$ est la vitesse angulaire motrice de montée) :
->   $$V_z(t) = +\frac{p_z}{2\pi}\,\omega_m(t)$$
+Le système comporte **5 liaisons élémentaires** réparties en **3 familles normalisées distinctes** (respectant le cahier des charges de la Partie I) :
+
+| Code | Classes reliées | Famille AFNOR | Caractéristique géométrique | DDL ($N_s / N_c$) | Typologie CM4 | Paramètre cinématique |
+| :--- | :---: | :--- | :--- | :---: | :--- | :--- |
+| **$L_{01}$** | $E_0 \leftrightarrow E_1$ | **Pivot** | Axe $(O_1, \vec{z}_0)$ | $1\text{ (1R, 0T)}$<br>$N_c = 5$ | **Torseur Glisseur** d'axe $(O_1, \vec{z}_0)$ | $\theta_1(t) = (\widehat{\vec{x}_0, \vec{x}_1})$ |
+| **$L_{12}$** | $E_1 \leftrightarrow E_2$ | **Hélicoïdale** | Axe $(O_2, \vec{z}_0)$, pas $p_z = 8\text{ mm/tr}$ (filet à droite) | $1\text{ couplé}$<br>$N_c = 5$ | **Torseur Hélicoïdal** ($I \neq 0$) | $\omega_{21}(t)$ et $v_{21}(t) = +\frac{p_z}{2\pi}\omega_{21}(t)$ |
+| **$L_{02}$** | $E_0 \leftrightarrow E_2$ | **Glissière** | Direction $\vec{z}_0$ (en $O_3$) | $1\text{ (0R, 1T)}$<br>$N_c = 5$ | **Torseur Couple** ($\vec{\Omega} = \vec{0}$) | $z_2(t)\,\vec{z}_0$ ($\dot{z}_2(t) = V_z(t)$) |
+| **$L_{23}$** | $E_2 \leftrightarrow E_3$ | **Glissière** | Direction $\vec{x}_0$ (en $O_4$) | $1\text{ (0R, 1T)}$<br>$N_c = 5$ | **Torseur Couple** ($\vec{\Omega} = \vec{0}$) | $x_3(t)\,\vec{x}_0$ ($\dot{x}_3(t) = V_x(t)$) |
+| **$L_{04}$** | $E_0 \leftrightarrow E_4$ | **Glissière** | Direction $\vec{y}_0$ (en $O_5$) | $1\text{ (0R, 1T)}$<br>$N_c = 5$ | **Torseur Couple** ($\vec{\Omega} = \vec{0}$) | $y_4(t)\,\vec{y}_0$ ($\dot{y}_4(t) = V_y(t)$) |
 
 ---
 
-### 2.3. Liaison $L_{02}$ entre le bâti $E_0$ et le portique $E_2$ : Liaison Glissière de direction $\vec{z}_0$
-- **Réalisation technologique :** Guidage prismatique bilatéral assuré par **6 galets en POM à profil en V (*V-wheels*)** (3 galets sur la platine gauche, 3 galets sur la platine droite de $E_2$, chacun muni d'un excentrique de précontrainte) roulant sans glisser dans les rainures des deux montants verticaux V-Slot $20\times 40\text{ mm}$ du bâti $E_0$. Sur le schéma cinématique minimal, ces deux guidages parallèles redondants sont représentés par **une unique liaison glissière équivalente $L_{02}$** de centre $O_3$ et de direction $\vec{z}_0$.
-- **Propriété du champ des vitesses (translation pure) :** $\vec{\Omega}(E_2/E_0) = \vec{0}$, donc le champ des vecteurs vitesse est uniforme ($\forall P,\; \vec{V}(P \in E_2/E_0) = V_z(t)\,\vec{z}_0 = \dot{z}_2(t)\,\vec{z}_0$).
-- **Torseur cinématique en tout point $P$ de l'espace (en particulier en $O_3$ et en $O_2$) :**
-  $$\{\mathcal{V}(E_2/E_0)\} = \begin{Bmatrix} \vec{\Omega}(E_2/E_0) = \vec{0} \\ \vec{V}(O_3 \in E_2/E_0) = V_z(t)\,\vec{z}_0 \end{Bmatrix}_{O_3} = \begin{Bmatrix} 0 & 0 \\ 0 & 0 \\ 0 & \dot{z}_2(t) \end{Bmatrix}_{\forall P, \mathcal{B}_0}$$
+## 3. Analyse Détaillée et Écriture des Torseurs dans $\mathcal{B}_0(\vec{x}_0, \vec{y}_0, \vec{z}_0)$
+
+### 3.1. Liaison $L_{01}$ ($E_0 \leftrightarrow E_1$) : Liaison Pivot d'axe $(O_1, \vec{z}_0)$
+- **Réalisation technologique :** Guidage en rotation assuré par les deux roulements rigides à billes internes du moteur pas-à-pas NEMA 17 de l'axe $Z$ (dont le stator est encastré sur le montant gauche de $E_0$), prolongé par le coupleur rigide fendu en aluminium vers la vis trapézoïdale $E_1$.
+- **Degrés de liberté :** $N_s = 1$ en rotation ($\text{R}_{z_0}$), $N_c = 5$ degrés bloqués ($\forall P \in (O_1, \vec{z}_0), \vec{V}(P \in E_1/E_0) = \vec{0}$).
+- **Torseur cinématique (Notations CM4 § 2.3) :**
+  $$\{\mathcal{V}(E_1/E_0)\} = \begin{Bmatrix} \vec{\Omega}(E_1/E_0) \\ \vec{V}(O_1 \in E_1/E_0) \end{Bmatrix}_{O_1} = \begin{Bmatrix} 0 & 0 \\ 0 & 0 \\ \omega_{10}(t) & 0 \end{Bmatrix}_{O_1, \mathcal{B}_0} = \left\{ \dot{\theta}_1(t)\,\vec{z}_0 \;;\; \vec{0} \right\}_{O_1}$$
+  C'est un **torseur glisseur** dont l'axe central est la droite $(O_1, \vec{z}_0)$.
 
 ---
 
-### 2.4. Liaison $L_{23}$ entre le portique $E_2$ et la tête d'impression $E_3$ : Liaison Glissière de direction $\vec{x}_0$
-- **Réalisation technologique :** Guidage prismatique assuré par **3 galets V-wheels** portés par la platine du chariot de tête $E_3$ (2 galets supérieurs à axes fixes et 1 galet inférieur monté sur écrou excentrique) roulant dans les rainures du profilé aluminium horizontal V-Slot $20\times 20\text{ mm}$ du portique $E_2$. La translation selon $\vec{x}_0$ est commandée par le moteur NEMA 17 de l'axe $X$ via une courroie crantée GT2.
-- **Torseur cinématique en tout point $P$ de l'espace (en particulier en $O_4$) :**
-  $$\{\mathcal{V}(E_3/E_2)\} = \begin{Bmatrix} \vec{\Omega}(E_3/E_2) = \vec{0} \\ \vec{V}(O_4 \in E_3/E_2) = V_x(t)\,\vec{x}_0 \end{Bmatrix}_{O_4} = \begin{Bmatrix} 0 & \dot{x}_3(t) \\ 0 & 0 \\ 0 & 0 \end{Bmatrix}_{\forall P, \mathcal{B}_0}$$
+### 3.2. Liaison $L_{12}$ ($E_1 \leftrightarrow E_2$) : Liaison Hélicoïdale d'axe $(O_2, \vec{z}_0)$
+- **Réalisation technologique :** Contact hélicoïdal entre la vis trapézoïdale Tr8x8 en acier inoxydable ($E_1$, 4 filets à droite, pas hélicoïdal $p_z = 8\text{ mm/tr}$) et l'écrou trapézoïdal en laiton fixé sur la platine gauche du portique ($E_2$).
+- **Loi de conjugaison hélicoïdale intrinsèque (CM4 § 5.6) :**
+  Pour un filetage à droite dans un repère direct $\mathcal{B}_0$ :
+  $$v_{21}(t) = +\frac{p_z}{2\pi}\,\omega_{21}(t) \quad \iff \quad \vec{V}(O_2 \in E_2/E_1) = +\frac{p_z}{2\pi}\,\vec{\Omega}(E_2/E_1)$$
+- **Torseur cinématique :**
+  $$\{\mathcal{V}(E_2/E_1)\} = \begin{Bmatrix} 0 & 0 \\ 0 & 0 \\ \omega_{21}(t) & v_{21}(t) \end{Bmatrix}_{O_2, \mathcal{B}_0} = \left\{ \omega_{21}(t)\,\vec{z}_0 \;;\; +\frac{p_z}{2\pi}\,\omega_{21}(t)\,\vec{z}_0 \right\}_{O_2}$$
+  C'est un **torseur hélicoïdal** d'automoment non nul $I = \vec{\Omega} \cdot \vec{V} = +\frac{p_z}{2\pi}\omega_{21}^2 \neq 0$.
 
 ---
 
-### 2.5. Liaison $L_{04}$ entre le bâti $E_0$ et le plateau chauffant $E_4$ : Liaison Glissière de direction $\vec{y}_0$
-- **Réalisation technologique :** Guidage prismatique assuré par **4 galets V-wheels** (2 galets gauches à axes fixes et 2 galets droits montés sur écrous excentriques) portés par la platine inférieure en aluminium du plateau $E_4$, roulant dans les rainures latérales du profilé central V-Slot $40\times 40\text{ mm}$ du bâti $E_0$. La translation selon $\vec{y}_0$ est commandée par le moteur NEMA 17 de l'axe $Y$ via une courroie crantée GT2.
-- **Torseur cinématique en tout point $P$ de l'espace (en particulier en $O_5$) :**
-  $$\{\mathcal{V}(E_4/E_0)\} = \begin{Bmatrix} \vec{\Omega}(E_4/E_0) = \vec{0} \\ \vec{V}(O_5 \in E_4/E_0) = V_y(t)\,\vec{y}_0 \end{Bmatrix}_{O_5} = \begin{Bmatrix} 0 & 0 \\ 0 & \dot{y}_4(t) \\ 0 & 0 \end{Bmatrix}_{\forall P, \mathcal{B}_0}$$
+### 3.3. Liaison $L_{02}$ ($E_0 \leftrightarrow E_2$) : Liaison Glissière de direction $\vec{z}_0$
+- **Réalisation technologique :** Guidage prismatique bilatéral assuré par 6 galets V-wheels en POM (3 à gauche, 3 à droite avec excentriques de rattrapage de jeu) roulant dans les rainures des profilés verticaux du bâti $E_0$. Sur le schéma cinématique minimal, il est modélisé par **une unique liaison glissière équivalente** de centre $O_3$.
+- **Propriété du champ des vitesses (Translation pure — CM4 § 5.1) :** $\vec{\Omega}(E_2/E_0) = \vec{0}$, donc le champ des vitesses est uniforme en tout point de l'espace.
+- **Torseur cinématique :**
+  $$\{\mathcal{V}(E_2/E_0)\} = \begin{Bmatrix} 0 & 0 \\ 0 & 0 \\ 0 & \dot{z}_2(t) \end{Bmatrix}_{\forall P, \mathcal{B}_0} = \left\{ \vec{0} \;;\; V_z(t)\,\vec{z}_0 \right\}_{\forall P}$$
+  C'est un **torseur couple**.
+
+---
+
+### 3.4. Liaison $L_{23}$ ($E_2 \leftrightarrow E_3$) : Liaison Glissière de direction $\vec{x}_0$
+- **Réalisation technologique :** Guidage prismatique assuré par 3 galets V-wheels portés par le chariot de tête $E_3$ roulant dans le profilé horizontal du portique $E_2$.
+- **Torseur cinématique :**
+  $$\{\mathcal{V}(E_3/E_2)\} = \begin{Bmatrix} 0 & \dot{x}_3(t) \\ 0 & 0 \\ 0 & 0 \end{Bmatrix}_{\forall P, \mathcal{B}_0} = \left\{ \vec{0} \;;\; V_x(t)\,\vec{x}_0 \right\}_{\forall P}$$
+  C'est un **torseur couple**.
+
+---
+
+### 3.5. Liaison $L_{04}$ ($E_0 \leftrightarrow E_4$) : Liaison Glissière de direction $\vec{y}_0$
+- **Réalisation technologique :** Guidage prismatique assuré par 4 galets V-wheels sous le plateau chauffant $E_4$ roulant sur le rail central $Y$ du bâti $E_0$.
+- **Torseur cinématique :**
+  $$\{\mathcal{V}(E_4/E_0)\} = \begin{Bmatrix} 0 & 0 \\ 0 & \dot{y}_4(t) \\ 0 & 0 \end{Bmatrix}_{\forall P, \mathcal{B}_0} = \left\{ \vec{0} \;;\; V_y(t)\,\vec{y}_0 \right\}_{\forall P}$$
+  C'est un **torseur couple**.
