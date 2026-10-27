@@ -107,7 +107,7 @@ html, body {
 .widget-viewport {
   position: relative;
   width: 100%;
-  height: 420px;
+  height: 480px;
   overflow: hidden;
   border-radius: var(--r-m);
   background: #111827;
@@ -199,17 +199,17 @@ html, body {
     <div class="header-card">
       <div class="header-title">
         <span>Schéma Cinématique 3D Spatial — Creality Ender 3</span>
-        <span class="badge-pill">CPGE SII Normalisé</span>
+        <span class="badge-pill">CPGE MPSI — Lycée Stanislas Cannes</span>
       </div>
-      <p style="margin:0; font-size:13px; color:var(--on-surface-variant);">Classes d'équivalence cinématique (E0..E4), centres géométriques O1..O5 et pilotage en temps réel</p>
+      <p style="margin:0; font-size:13px; color:var(--on-surface-variant);">Sous-ensembles cinématiques, centres géométriques O₀..O₅ et pilotage en temps réel</p>
     </div>
 
     <div class="legend-deck">
-      <div class="legend-item" onclick="highlightClass(0)"><div class="legend-swatch" style="background: #222222;"></div><span>E0 : Bâti fixe</span></div>
-      <div class="legend-item" onclick="highlightClass(1)"><div class="legend-swatch" style="background: #1E88E5;"></div><span>E1 : Vis Z</span></div>
-      <div class="legend-item" onclick="highlightClass(2)"><div class="legend-swatch" style="background: #E53935;"></div><span>E2 : Portique X</span></div>
-      <div class="legend-item" onclick="highlightClass(3)"><div class="legend-swatch" style="background: #43A047;"></div><span>E3 : Tête X</span></div>
-      <div class="legend-item" onclick="highlightClass(4)"><div class="legend-swatch" style="background: #FB8C00;"></div><span>E4 : Plateau Y</span></div>
+      <div class="legend-item" onclick="highlightClass(0)"><div class="legend-swatch" style="background: #222222;"></div><span>Châssis fixe</span></div>
+      <div class="legend-item" onclick="highlightClass(1)"><div class="legend-swatch" style="background: #1E88E5;"></div><span>Vis centrale</span></div>
+      <div class="legend-item" onclick="highlightClass(2)"><div class="legend-swatch" style="background: #E53935;"></div><span>Traverse horizontale</span></div>
+      <div class="legend-item" onclick="highlightClass(3)"><div class="legend-swatch" style="background: #43A047;"></div><span>Chariot tête extrudeur</span></div>
+      <div class="legend-item" onclick="highlightClass(4)"><div class="legend-swatch" style="background: #f472b6;"></div><span>Plateau mobile</span></div>
     </div>
 
     <div class="widget-viewport" id="viewport-zone">
@@ -217,24 +217,19 @@ html, body {
         <div class="hud-card">
           <div class="hud-title">Vecteur Position Relative O₅O₄ (Buse / Plateau)</div>
           <div>O₅O₄ = <span id="vec-readout" class="hud-value">[0, 0, 100]</span> mm</div>
-          <div style="margin-top: 4px;">θ₁ (Vis Z) = <span id="theta-readout" class="hud-value">94.25 rad (5400.0°)</span></div>
+          <div style="margin-top: 4px;">θ₁ (Vis centrale) = <span id="theta-readout" class="hud-value">94.25 rad (5400.0°)</span></div>
         </div>
         <button id="toggle-markers" class="toggle-btn is-active" onclick="toggleMarkers()">
-          <span>Repères & Centres O₀..O₅</span>
+          <span>Repères &amp; Centres O₀..O₅</span>
         </button>
       </div>
-    </div>
-
-    <div class="info-card" id="info-box">
-      <div style="font-weight:600; margin-bottom:4px;" id="info-title">Survolez ou cliquez sur une classe cinématique ou un centre</div>
-      <div id="info-desc" style="color:var(--on-surface-variant);">Utilisez les curseurs ci-dessous pour modifier la position des solides en temps réel.</div>
     </div>
 
     <div class="control-deck">
       <div class="control-row">
         <div class="control-label">
-          <span class="control-label-tag" style="background: #43A047;">E3 / E2</span>
-          <span>Position Tête x(t) [Glissière O₄]</span>
+          <span class="control-label-tag" style="background: #43A047;">Axe X</span>
+          <span>Chariot tête extrudeur x(t) [Glissière O₄]</span>
         </div>
         <div class="lumi-slider-container">
           <input type="range" id="slider-x" class="lumi-slider" data-key="x" min="-110" max="110" value="0">
@@ -244,8 +239,8 @@ html, body {
 
       <div class="control-row">
         <div class="control-label">
-          <span class="control-label-tag" style="background: #FB8C00;">E4 / E0</span>
-          <span>Position Plateau y(t) [Glissière O₅]</span>
+          <span class="control-label-tag" style="background: #f472b6;">Axe Y</span>
+          <span>Plateau mobile y(t) [Glissière O₅]</span>
         </div>
         <div class="lumi-slider-container">
           <input type="range" id="slider-y" class="lumi-slider" data-key="y" min="-110" max="110" value="0">
@@ -255,8 +250,8 @@ html, body {
 
       <div class="control-row">
         <div class="control-label">
-          <span class="control-label-tag" style="background: #E53935;">E2 / E0</span>
-          <span>Hauteur Portique z(t) [Liée à θ₁ (E1)]</span>
+          <span class="control-label-tag" style="background: #E53935;">Axe Z</span>
+          <span>Traverse horizontale z(t) [Liée à θ₁ (Vis centrale)]</span>
         </div>
         <div class="lumi-slider-container">
           <input type="range" id="slider-z" class="lumi-slider" data-key="z" min="0" max="250" value="120">
@@ -276,34 +271,34 @@ html, body {
 
     const CLASS_INFO = {
       E0: {
-        title: "Classe E0 — Bâti fixe (Noir / Anthracite)",
-        desc: "Profilés alu 4040/2040 de base, montants verticaux Z, traverse supérieure 2020, pieds amortisseurs, stators des moteurs Z et Y."
+        title: "Châssis fixe (Noir)",
+        desc: "Châssis d'aluminium, contient l'électronique entre autres."
       },
       E1: {
-        title: "Classe E1 — Arbre & Vis Trapézoïdale Z (Bleu)",
-        desc: "Coupleur alu et vis d'entraînement Tr8x8 (pas pz = 8 mm/tour) guidée en pivot en O1 par rapport au bâti E0."
+        title: "Vis centrale (Bleu)",
+        desc: "Moteur stepper, axe Z."
       },
       E2: {
-        title: "Classe E2 — Portique mobile X (Rouge)",
-        desc: "Traverse horizontale alu 2020, écrou laiton Tr8x8 en O2 (hélicoïdale avec E1), moteur X, et platines guidées en glissière (O3) sur E0."
+        title: "Traverse horizontale (Rouge)",
+        desc: "Bouge de haut en bas (axe Z) et tient l'extrudeur."
       },
       E3: {
-        title: "Classe E3 — Chariot Tête d'impression (Vert)",
-        desc: "Platine support mobile le long de E2 (glissière en O4 d'axe x0), radiateur rouge, bloc de chauffe et buse d'extrusion."
+        title: "Chariot tête extrudeur (Vert)",
+        desc: "Bouge sur l'axe X (droite / gauche)."
       },
       E4: {
-        title: "Classe E4 — Plateau chauffant Y (Orange)",
-        desc: "Platine mobile à 4 galets guidée sur le rail central Y de E0 (glissière en O5 d'axe y0), plateau alu chauffant et BuildTak."
+        title: "Plateau mobile (Rose clair)",
+        desc: "Bouge sur l'axe Y, il est chauffé."
       }
     };
 
     const JOINT_INFO = {
-      O0: { title: "Repère d'Origine R₀(O₀, x₀, y₀, z₀)", desc: "Point d'origine fixé au centre de la base arrière du bâti E0." },
-      O1: { title: "Centre O₁ — Liaison Pivot [E0 / E1]", desc: "Axe (O₁, z₀) : Rotation θ₁(t) de la vis Z par rapport au bâti E0." },
-      O2: { title: "Centre O₂ — Liaison Hélicoïdale [E1 / E2]", desc: "Axe (O₂, z₀) : Écrou en laiton sur vis Tr8x8. z(t) = (p_z / 2π) · θ₁(t)." },
-      O3: { title: "Centre O₃ — Liaison Glissière [E0 / E2]", desc: "Direction z₀ : Portique rouge E2 guidé sur les montants du bâti E0." },
-      O4: { title: "Centre O₄ — Liaison Glissière [E2 / E3]", desc: "Direction x₀ : Tête verte E3 guidée sur le portique E2." },
-      O5: { title: "Centre O₅ — Liaison Glissière [E0 / E4]", desc: "Direction y₀ : Plateau orange E4 guidé sur le rail central Y." }
+      O0: { title: "Repère d'Origine R₀(O₀, x₀, y₀, z₀)", desc: "Point d'origine fixé au centre de la base du Châssis fixe." },
+      O1: { title: "Centre O₁ — Liaison Pivot [Châssis / Vis centrale]", desc: "Axe (O₁, z₀) : Rotation θ₁(t) de la Vis centrale par rapport au Châssis fixe." },
+      O2: { title: "Centre O₂ — Liaison Hélicoïdale [Vis centrale / Traverse]", desc: "Axe (O₂, z₀) : Écrou en laiton sur vis Tr8x8. z(t) = (p_z / 2π) · θ₁(t)." },
+      O3: { title: "Centre O₃ — Liaison Glissière [Châssis / Traverse]", desc: "Direction z₀ : Traverse horizontale guidée sur les montants du Châssis fixe." },
+      O4: { title: "Centre O₄ — Liaison Glissière [Traverse / Chariot]", desc: "Direction x₀ : Chariot tête extrudeur guidé sur la Traverse horizontale." },
+      O5: { title: "Centre O₅ — Liaison Glissière [Châssis / Plateau]", desc: "Direction y₀ : Plateau mobile guidé sur le rail central Y." }
     };
 
     function initThreeScene() {
@@ -352,7 +347,7 @@ html, body {
       const matE1 = new THREE.MeshStandardMaterial({ color: 0x1E88E5, roughness: 0.3, metalness: 0.5 });
       const matE2 = new THREE.MeshStandardMaterial({ color: 0xE53935, roughness: 0.4 });
       const matE3 = new THREE.MeshStandardMaterial({ color: 0x43A047, roughness: 0.4 });
-      const matE4 = new THREE.MeshStandardMaterial({ color: 0xFB8C00, roughness: 0.4 });
+      const matE4 = new THREE.MeshStandardMaterial({ color: 0xf472b6, roughness: 0.4 });
 
       scene.add(new THREE.GridHelper(500, 20, 0x555555, 0x333333));
 
@@ -406,7 +401,7 @@ html, body {
       createMarker('O2', 0xE53935);
       createMarker('O3', 0xE53935);
       createMarker('O4', 0x43A047);
-      createMarker('O5', 0xFB8C00);
+      createMarker('O5', 0xf472b6);
 
       const lineMat = new THREE.LineDashedMaterial({ color: 0x60a5fa, dashSize: 5, gapSize: 3 });
       vectorLine = new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(), new THREE.Vector3()]), lineMat);
@@ -499,8 +494,10 @@ html, body {
     }
 
     function displayInfo(title, desc) {
-      document.getElementById('info-title').textContent = title;
-      document.getElementById('info-desc').textContent = desc;
+      const t = document.getElementById('info-title');
+      const d = document.getElementById('info-desc');
+      if (t) t.textContent = title;
+      if (d) d.textContent = desc;
     }
 
     function toggleMarkers() {

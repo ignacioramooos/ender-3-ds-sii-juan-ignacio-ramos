@@ -1,17 +1,17 @@
-# PROMPT 1 : CLASSES D'ÉQUIVALENCE & PARAMÉTRAGE
-
-> **Objectif :** Obtenir la liste exhaustive des pièces physiques réelles de la Creality Ender 3 pour chaque classe d'équivalence et le paramétrage complet (repères locaux et repère principal).
+# PROMPT 1 : SOUS-ENSEMBLES & PARAMÉTRAGE
 
 ```text
-Tu es professeur de SII en CPGE MPSI.
-Dans le cadre de mon DM n°1 sur l'imprimante 3D Creality Ender 3 (modèle de base), définis de manière ultra-rigoureuse :
+Tu es professeur de SII en CPGE MPSI au Lycée Stanislas Cannes (Mme M. Prot).
+Dans le cadre de mon DM n°1 sur l'imprimante 3D Creality Ender 3, définis :
 
-1. Les 5 classes d'équivalence cinématiques (E0 bâti, E1 arbre Z, E2 portique X, E3 chariot tête, E4 plateau Y).
-Pour chaque classe, liste exhaustivement et avec le vocabulaire technique exact toutes les pièces physiques réelles de la Creality Ender 3 qui la composent (profilés aluminium 2020/2040 en V-slot, stators/rotors des moteurs NEMA 17, platines pliées, vis trapézoïdale Tr8x8, écrou laiton, galets V-wheel, coupleur rigide en alu, hotend, buse, etc.).
-Rappel : l'enseignante pénalise d'un zéro toute classe non justifiée par ses pièces réelles.
+1. Les 5 sous-ensembles cinématiques :
+- Châssis fixe (Noir) : Châssis d'aluminium, contient l'électronique entre autres.
+- Vis centrale (Bleu) : Moteur stepper, axe Z.
+- Traverse horizontale (Rouge) : Bouge de haut en bas (axe Z) et tient l'extrudeur.
+- Chariot tête extrudeur (Vert) : Bouge sur l'axe X (droite / gauche).
+- Plateau mobile (Rose clair) : Bouge sur l'axe Y, il est chauffé.
 
 2. Le paramétrage géométrique :
-- Repère principal R0(O0, x0, y0, z0) direct lié au bâti E0.
+- Repère principal R0(O0, x0, y0, z0) direct lié au Châssis fixe.
 - Centres géométriques O1, O2, O3, O4, O5 des liaisons et orientation des axes.
-- Codes couleurs associés (E0 : Noir avec symbole bâti, E1 : Bleu, E2 : Rouge, E3 : Vert, E4 : Orange).
 ```

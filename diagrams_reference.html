@@ -19,7 +19,7 @@
       --c-e1: #2563eb;
       --c-e2: #dc2626;
       --c-e3: #16a34a;
-      --c-e4: #ea580c;
+      --c-e4: #f472b6;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -73,6 +73,7 @@
       border-radius: 8px;
       margin-bottom: 24px;
       align-items: center;
+      justify-content: space-between;
     }
     .legend-pill {
       display: inline-flex;
@@ -122,23 +123,6 @@
       height: auto;
       display: block;
     }
-    .notes-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-top: 14px;
-    }
-    .note-box {
-      background: #f8fafc;
-      border-left: 4px solid var(--c-e1);
-      padding: 14px 16px;
-      border-radius: 0 8px 8px 0;
-      font-size: 0.92rem;
-    }
-    .note-box.red { border-left-color: var(--c-e2); }
-    .note-box.green { border-left-color: var(--c-e3); }
-    .note-box.orange { border-left-color: var(--c-e4); }
-    .note-box h3 { font-size: 0.96rem; margin-bottom: 6px; color: var(--c-e0); }
     .toolbar {
       max-width: 1180px;
       margin: 0 auto 20px auto;
@@ -174,7 +158,7 @@
 
   <div class="toolbar">
     <div>
-      <strong>Planches de Référence SII (Haute Précision AFNOR NF EN ISO 3952)</strong> — Conforme Cours CM4 Stanislas
+      <strong>Planches de Référence SII</strong> — CPGE MPSI — Lycée Stanislas Cannes (Mme M. Prot)
     </div>
     <div>
       <a href="index.html" class="secondary">← Retour au Portail</a>
@@ -188,33 +172,32 @@
     <div class="cartouche">
       <div class="cartouche-cell">
         <div class="cartouche-title">DM n°1 — Modélisation des Liaisons &amp; Schématisation</div>
-        <div class="cartouche-sub">Système étudié : <strong>Imprimante 3D Creality Ender 3 (modèle de base)</strong></div>
+        <div class="cartouche-sub">Système étudié : <strong>Imprimante 3D Creality Ender 3</strong></div>
       </div>
       <div class="cartouche-cell">
         <div><strong>Élève :</strong> RAMOS Juan Ignacio</div>
-        <div class="cartouche-sub"><strong>Classe :</strong> CPGE MPSI — Lycée Stanislas</div>
+        <div class="cartouche-sub"><strong>Classe :</strong> CPGE MPSI — Lycée Stanislas Cannes</div>
       </div>
       <div class="cartouche-cell">
         <div><strong>Planche 1 / 3</strong></div>
-        <div class="cartouche-sub">Paramétrage, Repères Locaux &amp; Photo Annotée</div>
+        <div class="cartouche-sub">Photo Annotée &amp; Paramétrage Vectoriel</div>
       </div>
     </div>
 
     <div class="legend-bar">
-      <strong style="font-size:0.88rem; margin-right:4px;">Code Couleur Bijectif ($E_k \leftrightarrow \mathcal{R}_k$) :</strong>
-      <span class="legend-pill"><span class="dot" style="background:var(--c-e0)"></span>$E_0$ : Bâti fixe $[\mathcal{R}_0]$</span>
-      <span class="legend-pill"><span class="dot" style="background:var(--c-e1)"></span>$E_1$ : Vis mère $Z$ $[\mathcal{R}_1]$</span>
-      <span class="legend-pill"><span class="dot" style="background:var(--c-e2)"></span>$E_2$ : Portique $X$ $[\mathcal{R}_2]$</span>
-      <span class="legend-pill"><span class="dot" style="background:var(--c-e3)"></span>$E_3$ : Chariot Tête $[\mathcal{R}_3]$</span>
-      <span class="legend-pill"><span class="dot" style="background:var(--c-e4)"></span>$E_4$ : Plateau $Y$ $[\mathcal{R}_4]$</span>
+      <span class="legend-pill"><span class="dot" style="background:var(--c-e0)"></span>Châssis fixe (Noir)</span>
+      <span class="legend-pill" style="color:var(--c-e1)"><span class="dot" style="background:var(--c-e1)"></span>Vis centrale (Bleu)</span>
+      <span class="legend-pill" style="color:var(--c-e2)"><span class="dot" style="background:var(--c-e2)"></span>Traverse horizontale (Rouge)</span>
+      <span class="legend-pill" style="color:var(--c-e3)"><span class="dot" style="background:var(--c-e3)"></span>Chariot tête extrudeur (Vert)</span>
+      <span class="legend-pill" style="color:#be185d"><span class="dot" style="background:var(--c-e4)"></span>Plateau mobile (Rose clair)</span>
     </div>
 
     <h2 class="sec-title">
-      <span>1. Paramétrage Photographique du Système &amp; Repères Locaux ($\mathcal{R}_0$ à $\mathcal{R}_4$)</span>
-      <span class="badge">Partie III — Exigence 1</span>
+      <span>1. Présentation Photographique du Système &amp; Sous-ensembles Cinématiques</span>
+      <span class="badge">5 Sous-ensembles • Centres $O_0 \dots O_5$</span>
     </h2>
     <div class="diagram-frame">
-      <img src="02_photos/RAMOS-Ender3-Details.png" alt="Photo annotée du système Creality Ender 3 avec repères locaux et classes d'équivalence">
+      <img src="02_photos/RAMOS-Ender3-Details.png" alt="Photo annotée du système Creality Ender 3">
     </div>
 
     <h2 class="sec-title">
@@ -235,47 +218,36 @@
       </div>
       <div class="cartouche-cell">
         <div><strong>Élève :</strong> RAMOS Juan Ignacio</div>
-        <div class="cartouche-sub"><strong>Norme :</strong> AFNOR NF EN ISO 3952</div>
+        <div class="cartouche-sub"><strong>Professeur :</strong> Mme M. Prot</div>
       </div>
       <div class="cartouche-cell">
         <div><strong>Planche 2 / 3</strong></div>
-        <div class="cartouche-sub">Topologie &amp; Projection Plane $(O_0, \vec{x}_0, \vec{z}_0)$</div>
+        <div class="cartouche-sub">Graphe &amp; Projection Plane $(O_0, \vec{x}_0, \vec{z}_0)$</div>
       </div>
     </div>
 
     <h2 class="sec-title">
-      <span>3. Graphe des Liaisons Normalisé avec Classes d'Équivalence Explicites</span>
-      <span class="badge">Partie III — Exigence 2</span>
+      <span>3. Graphe des Liaisons</span>
+      <span class="badge">Châssis fixe • Vis centrale • Traverse horizontale • Chariot tête extrudeur • Plateau mobile</span>
     </h2>
     <div class="diagram-frame">
-      <img src="04_schemas_cinematiques/graphe_des_liaisons.svg" alt="Graphe des liaisons normalisé de la Creality Ender 3">
+      <img src="04_schemas_cinematiques/graphe_des_liaisons.svg" alt="Graphe des liaisons de la Creality Ender 3">
     </div>
 
     <h2 class="sec-title">
       <span>4. Schéma Cinématique Minimal 2D en Couleur — Vue Frontale $(O_0, \vec{x}_0, \vec{z}_0)$</span>
-      <span class="badge">Partie III — Exigence 3</span>
+      <span class="badge">Projection Plane $(O_0, \vec{x}_0, \vec{z}_0)$</span>
     </h2>
     <div class="diagram-frame">
       <img src="04_schemas_cinematiques/schema_cinematique_2d.svg" alt="Schéma cinématique minimal 2D en couleur">
     </div>
-
-    <div class="notes-grid">
-      <div class="note-box">
-        <h3>Orientation directe du trièdre $\mathcal{R}_0$ en projection 2D</h3>
-        <p>Dans le plan frontal $(O_0, \vec{x}_0, \vec{z}_0)$ avec $\vec{x}_0$ vers la droite et $\vec{z}_0$ vers le haut, la condition de trièdre orthonormé direct impose $\vec{y}_0 = \vec{z}_0 \wedge \vec{x}_0$, soit $\vec{y}_0$ <strong>entrant dans la feuille</strong> ($\otimes\,\vec{y}_0$).</p>
-      </div>
-      <div class="note-box red">
-        <h3>Fermeture cinématique de la boucle $Z$ (Transport par la règle BABAR)</h3>
-        <p>Au point commun $O_2 \in (O_1, \vec{z}_0)$ : $\{\mathcal{V}(E_2/E_0)\}_{O_2} = \{\mathcal{V}(E_2/E_1)\}_{O_2} + \{\mathcal{V}(E_1/E_0)\}_{O_2}$ donne $\omega_{21}(t) = -\omega_{10}(t)$ et $V_z(t) = \dot{z}_2(t) = v_{21}(t) = +\dfrac{p_z}{2\pi}\omega_{21}(t) = -\dfrac{p_z}{2\pi}\omega_{10}(t) = +\dfrac{p_z}{2\pi}\omega_m(t)$.</p>
-      </div>
-    </div>
   </section>
 
-  <!-- PLANCHE 3 : SCHÉMA CINÉMATIQUE 3D & SYNTHÈSE DES TORSEURS -->
+  <!-- PLANCHE 3 : SCHÉMA CINÉMATIQUE 3D -->
   <section class="sheet">
     <div class="cartouche">
       <div class="cartouche-cell">
-        <div class="cartouche-title">Schéma Cinématique Spatial 3D &amp; Torseurs Cinématiques</div>
+        <div class="cartouche-title">Schéma Cinématique Spatial 3D</div>
         <div class="cartouche-sub">Système : <strong>Imprimante 3D Creality Ender 3</strong></div>
       </div>
       <div class="cartouche-cell">
@@ -284,35 +256,16 @@
       </div>
       <div class="cartouche-cell">
         <div><strong>Planche 3 / 3</strong></div>
-        <div class="cartouche-sub">Représentation 3D &amp; Répertoire des Torseurs</div>
+        <div class="cartouche-sub">Représentation Spatiale 3D en Couleur</div>
       </div>
     </div>
 
     <h2 class="sec-title">
       <span>5. Schéma Cinématique Spatial 3D en Couleur</span>
-      <span class="badge">Partie III — Exigence 4</span>
+      <span class="badge">Perspective Cavalière • Fuyante $\vec{y}_0$</span>
     </h2>
     <div class="diagram-frame">
       <img src="04_schemas_cinematiques/schema_cinematique_3d.svg" alt="Schéma cinématique spatial 3D en couleur">
-    </div>
-
-    <div class="notes-grid">
-      <div class="note-box green">
-        <h3>Typologie CM4 des 5 Torseurs dans $\mathcal{B}_0(\vec{x}_0, \vec{y}_0, \vec{z}_0)$</h3>
-        <p>
-          • <strong>$L_{01}$ (Pivot) :</strong> Torseur Glisseur d'axe $(O_1, \vec{z}_0)$ : $\{\mathcal{V}(E_1/E_0)\} = \begin{Bmatrix} \omega_{10}(t)\,\vec{z}_0 \\ \vec{0} \end{Bmatrix}_{O_1}$ ($N_s=1\text{R}, N_c=5$).<br>
-          • <strong>$L_{12}$ (Hélicoïdale à droite) :</strong> Torseur Hélicoïdal : $\{\mathcal{V}(E_2/E_1)\} = \begin{Bmatrix} \omega_{21}(t)\,\vec{z}_0 \\ +\frac{p_z}{2\pi}\omega_{21}(t)\,\vec{z}_0 \end{Bmatrix}_{O_2}$ ($N_s=1\text{ couplé}, N_c=5$).<br>
-          • <strong>$L_{02}, L_{23}, L_{04}$ (Glissières) :</strong> Torseurs Couples ($\vec{\Omega} = \vec{0}$, champ uniforme) : $\{\mathcal{V}(E_2/E_0)\} = \begin{Bmatrix} \vec{0} \\ \dot{z}_2\,\vec{z}_0 \end{Bmatrix}_{\forall P}$, $\{\mathcal{V}(E_3/E_2)\} = \begin{Bmatrix} \vec{0} \\ \dot{x}_3\,\vec{x}_0 \end{Bmatrix}_{\forall P}$, $\{\mathcal{V}(E_4/E_0)\} = \begin{Bmatrix} \vec{0} \\ \dot{y}_4\,\vec{y}_0 \end{Bmatrix}_{\forall P}$ ($N_s=1\text{T}, N_c=5$).
-        </p>
-      </div>
-      <div class="note-box orange">
-        <h3>Loi de position relative Buse / Plateau &amp; Commande Trapézoïdale</h3>
-        <p>
-          • <strong>Vecteur position relative :</strong> $\overrightarrow{O_5 O_4} = x_3(t)\,\vec{x}_0 + \big(d_y - y_4(t)\big)\,\vec{y}_0 + \big(h_1 - h_5 + z_2(t)\big)\,\vec{z}_0$<br>
-          • <strong>Vitesse d'extrusion (Bour) :</strong> $\vec{V}(O_4 \in E_3/E_4) = \dot{x}_3(t)\,\vec{x}_0 - \dot{y}_4(t)\,\vec{y}_0 + \dot{z}_2(t)\,\vec{z}_0$<br>
-          • <strong>Loi de commande trapézoïdale (CM4 § 5.3) :</strong> $\Delta z_2 = \frac{(t_3 + (t_2 - t_1))\cdot V_{\max}}{2}$ (méthode de l'aire).
-        </p>
-      </div>
     </div>
   </section>
 

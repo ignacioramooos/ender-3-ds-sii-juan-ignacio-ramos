@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DM n°1 SII — Feuille de Rendu A4 Imprimable (Juan Ignacio RAMOS — MPSI Stanislas)</title>
+  <title>DM n°1 SII — Feuille de Rendu A4 Imprimable (Juan Ignacio RAMOS — MPSI Stanislas Cannes)</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
@@ -20,7 +20,8 @@
       --e1: #2563eb;
       --e2: #dc2626;
       --e3: #16a34a;
-      --e4: #ea580c;
+      --e4: #f472b6;
+      --e4-text: #be185d;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -92,7 +93,7 @@
     .page-content {
       display: flex;
       flex-direction: column;
-      gap: 1.8mm;
+      gap: 2mm;
       flex: 1;
       width: 100%;
       min-width: 0;
@@ -106,7 +107,7 @@
       font-size: 1em !important;
     }
 
-    /* Cartouche d'en-tête officiel (Modèle Page 2 de l'énoncé) */
+    /* Cartouche d'en-tête officiel */
     .cartouche-header {
       display: grid;
       grid-template-columns: 0.98fr 1.22fr;
@@ -158,7 +159,7 @@
       margin-top: 0.5mm;
       font-weight: 600;
     }
-    .cartouche-right .cm4-tag {
+    .cartouche-right .sub-tag {
       display: inline-block;
       align-self: flex-end;
       margin-top: 0.6mm;
@@ -198,7 +199,7 @@
       flex-shrink: 0;
     }
 
-    /* Bandeau de section numéroté (sans débordement horizontal ni retour à la ligne) */
+    /* Bandeau de section numéroté */
     .section-banner {
       background: var(--ink);
       color: #ffffff;
@@ -227,7 +228,7 @@
       flex-shrink: 0;
     }
 
-    /* Légende bijective des 5 classes sur 1 seule ligne garantie */
+    /* Légende des 5 sous-ensembles sur 1 seule ligne */
     .color-legend {
       display: flex;
       justify-content: space-between;
@@ -235,25 +236,25 @@
       background: var(--surface);
       border: 1px solid var(--border-strong);
       border-radius: 4px;
-      padding: 0.9mm 2mm;
-      font-size: 6.5pt;
+      padding: 1mm 2.4mm;
+      font-size: 6.7pt;
     }
     .legend-chip {
       display: inline-flex;
       align-items: center;
-      gap: 0.8mm;
+      gap: 1mm;
       font-weight: 700;
       white-space: nowrap;
     }
     .dot {
-      width: 1.9mm;
-      height: 1.9mm;
+      width: 2.1mm;
+      height: 2.1mm;
       border-radius: 50%;
       display: inline-block;
       flex-shrink: 0;
     }
 
-    /* Grille Photos Page 1 — Proportions exactes sans marge latérale */
+    /* Grille Photos Page 1 */
     .photos-row {
       display: grid;
       grid-template-columns: 0.68fr 1.12fr;
@@ -303,7 +304,7 @@
     }
     .card-img-wrap img {
       width: 100%;
-      height: 74mm;
+      height: 76mm;
       object-fit: cover;
       object-position: center;
       display: block;
@@ -318,53 +319,17 @@
       border: 1.1px solid var(--border-strong);
       border-radius: 4px;
       background: #ffffff;
-      padding: 0.9mm 1.4mm;
+      padding: 1.2mm 1.6mm;
       display: flex;
       align-items: center;
       justify-content: center;
+      flex: 1;
     }
     .diagram-box img {
       width: 100%;
       height: auto;
       display: block;
       object-fit: contain;
-    }
-
-    /* Grille synthèse topologique / analytique en bas de page */
-    .two-col-notes {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2.6mm;
-    }
-    .info-card {
-      background: var(--surface);
-      border: 1px solid var(--border-strong);
-      border-left: 3.2px solid var(--ink);
-      border-radius: 4px;
-      padding: 1.2mm 2mm;
-      font-size: 7.2pt;
-      line-height: 1.26;
-      min-width: 0;
-    }
-    .info-card.blue { border-left-color: var(--e1); }
-    .info-card.red { border-left-color: var(--e2); }
-    .info-card.green { border-left-color: var(--e3); }
-    .info-card.orange { border-left-color: var(--e4); }
-    .info-card h4 {
-      font-size: 6.8pt;
-      font-weight: 800;
-      color: var(--ink);
-      margin-bottom: 0.4mm;
-      text-transform: uppercase;
-      letter-spacing: 0.005em;
-      white-space: nowrap;
-    }
-    .info-card ul {
-      padding-left: 3mm;
-      margin: 0;
-    }
-    .info-card li {
-      margin-bottom: 0.2mm;
     }
 
     /* Tableaux SII (Page 3) */
@@ -377,7 +342,7 @@
     }
     table.sii-table th, table.sii-table td {
       border: 1px solid var(--border-strong);
-      padding: 0.65mm 1.3mm;
+      padding: 0.75mm 1.4mm;
       text-align: left;
       vertical-align: middle;
     }
@@ -394,11 +359,11 @@
     }
     .badge-class {
       display: inline-block;
-      padding: 0.2mm 1.1mm;
+      padding: 0.25mm 1.1mm;
       border-radius: 3px;
       color: #ffffff;
       font-weight: 800;
-      font-size: 6.8pt;
+      font-size: 6.6pt;
       white-space: nowrap;
     }
     .torseur-cell {
@@ -498,7 +463,7 @@
   <!-- Barre de navigation interactive (Masquée à l'impression PDF) -->
   <div class="print-bar">
     <div>
-      <strong>DM n°1 SII — Feuille de Rendu A4 Imprimable (Modèle Page 2 de l'Énoncé)</strong> • CPGE MPSI Stanislas
+      <strong>DM n°1 SII — Feuille de Rendu A4 Imprimable</strong> • CPGE MPSI — Lycée Stanislas Cannes
     </div>
     <div class="actions">
       <a href="../index.html" class="sec">← Portail Global</a>
@@ -508,40 +473,39 @@
   </div>
 
   <!-- ============================================================================================ -->
-  <!-- PAGE 1 / 3 : EN-TÊTE OFFICIEL, PHOTOS DE VALIDATION & GRAPHE DES LIAISONS (MODÈLE PAGE 2)    -->
+  <!-- PAGE 1 / 3 : EN-TÊTE OFFICIEL, PHOTOS DE VALIDATION & GRAPHE DES LIAISONS                    -->
   <!-- ============================================================================================ -->
   <section class="a4-page">
     <div class="page-content">
 
-      <!-- Cartouche officiel conforme à la Page 2 de l'énoncé -->
+      <!-- Cartouche officiel -->
       <header class="cartouche-header">
         <div class="cartouche-left">
           <div class="field-row"><span class="field-label">Nom :</span><span>RAMOS</span></div>
           <div class="field-row"><span class="field-label">Prénom :</span><span>Juan Ignacio</span></div>
-          <div class="field-row"><span class="field-label">Classe :</span><span>CPGE MPSI (Lycée Stanislas Paris)</span></div>
+          <div class="field-row"><span class="field-label">Classe :</span><span>CPGE MPSI (Lycée Stanislas Cannes)</span></div>
           <div class="field-row"><span class="field-label">Système étudié :</span><span><strong>Imprimante 3D FDM Creality Ender 3</strong></span></div>
         </div>
         <div class="cartouche-right">
           <h1>DM n°1 — Modélisation des Liaisons &amp; Schématisation</h1>
-          <div class="prof-line">Sciences Industrielles de l'Ingénieur (SII) — Mme M. Prot &amp; M. Cullaz</div>
-          <div class="cm4-tag">Séquence 2 (CM4) : Cinématique du Solide Indéformable • Norme ISO 3952</div>
+          <div class="prof-line">Sciences Industrielles de l'Ingénieur (SII) — Mme M. Prot</div>
+          <div class="sub-tag">Cinématique du Solide Indéformable • Graphe &amp; Schémas 2D / 3D</div>
         </div>
       </header>
 
-      <!-- Barre de correspondance bijective Couleur / Classe / Repère -->
+      <!-- Barre de correspondance Couleur / Sous-ensemble -->
       <div class="color-legend">
-        <strong style="color:var(--ink);">Bijection Couleur $\leftrightarrow$ $E_k[\mathcal{R}_k]$ :</strong>
-        <span class="legend-chip"><span class="dot" style="background:var(--e0);"></span>$E_0[\mathcal{R}_0]$ Bâti fixe (Noir)</span>
-        <span class="legend-chip"><span class="dot" style="background:var(--e1);"></span>$E_1[\mathcal{R}_1]$ Vis mère $Z$ (Bleu)</span>
-        <span class="legend-chip"><span class="dot" style="background:var(--e2);"></span>$E_2[\mathcal{R}_2]$ Portique $X$ (Rouge)</span>
-        <span class="legend-chip"><span class="dot" style="background:var(--e3);"></span>$E_3[\mathcal{R}_3]$ Tête Buse (Vert)</span>
-        <span class="legend-chip"><span class="dot" style="background:var(--e4);"></span>$E_4[\mathcal{R}_4]$ Plateau $Y$ (Orange)</span>
+        <span class="legend-chip"><span class="dot" style="background:var(--e0);"></span>Châssis fixe (Noir)</span>
+        <span class="legend-chip" style="color:var(--e1);"><span class="dot" style="background:var(--e1);"></span>Vis centrale (Bleu)</span>
+        <span class="legend-chip" style="color:var(--e2);"><span class="dot" style="background:var(--e2);"></span>Traverse horizontale (Rouge)</span>
+        <span class="legend-chip" style="color:var(--e3);"><span class="dot" style="background:var(--e3);"></span>Chariot tête extrudeur (Vert)</span>
+        <span class="legend-chip" style="color:var(--e4-text);"><span class="dot" style="background:var(--e4);"></span>Plateau mobile (Rose clair)</span>
       </div>
 
       <!-- Section 1 : Photographies du système réel -->
       <div class="section-banner">
-        <span class="sec-main">1. Présentation Photographique &amp; Paramétrage du Système Réel (Partie III — Exigence 1)</span>
-        <span class="sec-sub">5 Classes ($E_0 \dots E_4$) • 5 Liaisons (3 familles)</span>
+        <span class="sec-main">1. Présentation Photographique &amp; Repérage du Système Réel</span>
+        <span class="sec-sub">5 Sous-ensembles • 5 Liaisons élémentaires</span>
       </div>
 
       <div class="photos-row">
@@ -556,7 +520,7 @@
         </div>
         <div class="card-frame">
           <div class="card-title-bar">
-            <span>1.2. Système paramétré : Repères ($\mathcal{R}_k$), Centres ($O_i$) &amp; Pièces</span>
+            <span>1.2. Système annoté : Sous-ensembles &amp; Centres ($O_0 \dots O_5$)</span>
             <code>RAMOS-Ender3-Details.png</code>
           </div>
           <div class="card-img-wrap">
@@ -565,38 +529,20 @@
         </div>
       </div>
 
-      <!-- Section 2 : Graphe des liaisons normalisé -->
+      <!-- Section 2 : Graphe des liaisons -->
       <div class="section-banner">
-        <span class="sec-main">2. Graphe des Liaisons Normalisé &amp; Classes d'Équivalence Explicites (Exigence 2)</span>
-        <span class="sec-sub">Bâti $E_0$ ($\underline{\underline{\equiv\mkern-10mu\perp}}$) • Norme AFNOR ISO 3952</span>
+        <span class="sec-main">2. Graphe des Liaisons</span>
+        <span class="sec-sub">Châssis fixe • Vis centrale • Traverse horizontale • Chariot tête extrudeur • Plateau mobile</span>
       </div>
 
       <div class="diagram-box">
-        <img src="../04_schemas_cinematiques/graphe_des_liaisons.svg" style="max-height: 102mm;" alt="Graphe des liaisons normalisé de la Creality Ender 3">
-      </div>
-
-      <!-- Synthèse topologique et hypothèses CM4 -->
-      <div class="two-col-notes">
-        <div class="info-card blue">
-          <h4>Structure Topologique &amp; Nombre Cyclomatique ($\gamma = 1$)</h4>
-          <ul>
-            <li><strong>Graphe connexe à $N = 5$ sommets ($E_0 \dots E_4$) et $L = 5$ liaisons :</strong> $\gamma = L - N + 1 = 5 - 5 + 1 = 1$ unique boucle fermée.</li>
-            <li><strong>Architecture hybride :</strong> 1 chaîne fermée d'élévation verticale $Z$ ($E_0 - E_1 - E_2 - E_0$) + 2 chaînes ouvertes séries ($E_2 - E_3$ selon $\vec{x}_0$, $E_0 - E_4$ selon $\vec{y}_0$).</li>
-          </ul>
-        </div>
-        <div class="info-card red">
-          <h4>Hypothèses Fondamentales du Solide Indéformable (CM4)</h4>
-          <ul>
-            <li><strong>Invariance des distances :</strong> $\forall A, B \in E_k,\; \|\overrightarrow{AB}\| = \text{cte} \iff \left.\frac{\mathrm{d}\overrightarrow{AB}}{\mathrm{d}t}\right|_{\mathcal{R}_k} = \vec{0}$.</li>
-            <li><strong>Piège de concours (CM4 § 3.3) :</strong> Le champ des vitesses est un torseur équiprojectif, mais le champ des accélérations <em>n'est PAS un torseur</em> ($\vec{\Omega}\wedge(\vec{\Omega}\wedge\overrightarrow{AB})$).</li>
-          </ul>
-        </div>
+        <img src="../04_schemas_cinematiques/graphe_des_liaisons.svg" style="max-height: 132mm;" alt="Graphe des liaisons de la Creality Ender 3">
       </div>
 
     </div>
 
     <footer class="a4-footer">
-      <span>CPGE MPSI — Lycée Stanislas Paris • SII (Mme M. Prot &amp; M. Cullaz)</span>
+      <span>CPGE MPSI — Lycée Stanislas Cannes • SII (Mme M. Prot)</span>
       <span>DM n°1 : Modélisation Cinématique de la Creality Ender 3 — Juan Ignacio RAMOS</span>
       <span>Page 1 / 3</span>
     </footer>
@@ -609,122 +555,104 @@
     <div class="page-content">
 
       <header class="running-header">
-        <span class="rh-title">DM n°1 SII — Schémas Cinématiques Normalisés 2D &amp; 3D en Couleur (Norme ISO 3952)</span>
-        <span class="rh-meta">Juan Ignacio RAMOS • CPGE MPSI (Lycée Stanislas)</span>
+        <span class="rh-title">DM n°1 SII — Schémas Cinématiques 2D &amp; 3D en Couleur</span>
+        <span class="rh-meta">Juan Ignacio RAMOS • CPGE MPSI (Lycée Stanislas Cannes)</span>
       </header>
 
       <!-- Section 3 : Schéma Cinématique 2D en pleine largeur -->
       <div class="section-banner">
-        <span class="sec-main">3. Schéma Cinématique Minimal 2D en Couleur — Vue Frontale $(O_0, \vec{x}_0, \vec{z}_0)$ (Exigence 3)</span>
+        <span class="sec-main">3. Schéma Cinématique Minimal 2D en Couleur — Vue Frontale $(O_0, \vec{x}_0, \vec{z}_0)$</span>
         <span class="sec-sub">Trièdre direct $\mathcal{R}_0$ : $\vec{y}_0 = \vec{z}_0 \wedge \vec{x}_0$ entrant ($\otimes$)</span>
       </div>
 
       <div class="diagram-box">
-        <img src="../04_schemas_cinematiques/schema_cinematique_2d.svg" style="max-height: 105mm;" alt="Schéma cinématique minimal 2D en couleur">
+        <img src="../04_schemas_cinematiques/schema_cinematique_2d.svg" style="max-height: 122mm;" alt="Schéma cinématique minimal 2D en couleur">
       </div>
 
       <!-- Section 4 : Schéma Cinématique 3D en pleine largeur -->
       <div class="section-banner">
-        <span class="sec-main">4. Schéma Cinématique Spatial 3D en Couleur — Perspective Cavalière (Exigence 4)</span>
+        <span class="sec-main">4. Schéma Cinématique Spatial 3D en Couleur — Perspective Cavalière</span>
         <span class="sec-sub">Fuyante longitudinale $\vec{y}_0$ ($\alpha \approx 34^\circ, k \approx 0{,}6$)</span>
       </div>
 
       <div class="diagram-box">
-        <img src="../04_schemas_cinematiques/schema_cinematique_3d.svg" style="max-height: 105mm;" alt="Schéma cinématique spatial 3D en couleur">
-      </div>
-
-      <!-- Justifications de représentation normalisée 2D/3D -->
-      <div class="two-col-notes">
-        <div class="info-card green">
-          <h4>Règles de Représentation Normalisée 2D (Projection Plane)</h4>
-          <ul>
-            <li><strong>Orientation directe de $\mathcal{R}_0$ :</strong> Avec $\vec{x}_0$ vers la droite et $\vec{z}_0$ vers le haut, la règle de la main droite impose $\vec{y}_0 = \vec{z}_0 \wedge \vec{x}_0$ <strong>entrant dans la feuille ($\otimes$)</strong>.</li>
-            <li><strong>Symboles AFNOR :</strong> Pivot $L_{01}$ avec arrêts axiaux ; Hélicoïdale $L_{12}$ à filet à droite ; Glissières $L_{02}, L_{23}$ de profil (croix) et $L_{04}$ vue en bout en $O_5$.</li>
-          </ul>
-        </div>
-        <div class="info-card orange">
-          <h4>Règles de Représentation Spatiale 3D (Perspective)</h4>
-          <ul>
-            <li><strong>Conservation des parallélismes :</strong> Le plan frontal $(O_0, \vec{x}_0, \vec{z}_0)$ est en vraie grandeur ; toutes les arêtes selon $\vec{y}_0$ suivent la même fuyante ($\text{pente } -2/+3$).</li>
-            <li><strong>Modèle minimal isostatique :</strong> Les 6 galets V-wheels $Z$ sont réduits à la glissière équivalente $L_{02}$ en $O_3$, et les 4 galets $Y$ à la glissière $L_{04}$ en $O_5$.</li>
-          </ul>
-        </div>
+        <img src="../04_schemas_cinematiques/schema_cinematique_3d.svg" style="max-height: 122mm;" alt="Schéma cinématique spatial 3D en couleur">
       </div>
 
     </div>
 
     <footer class="a4-footer">
-      <span>CPGE MPSI — Lycée Stanislas Paris • SII (Mme M. Prot &amp; M. Cullaz)</span>
+      <span>CPGE MPSI — Lycée Stanislas Cannes • SII (Mme M. Prot)</span>
       <span>DM n°1 : Modélisation Cinématique de la Creality Ender 3 — Juan Ignacio RAMOS</span>
       <span>Page 2 / 3</span>
     </footer>
   </section>
 
   <!-- ============================================================================================ -->
-  <!-- PAGE 3 / 3 : PARAMÉTRAGE VECTORIEL, CLASSES EXPLICITES, TORSEURS CM4 & FERMETURE BOUCLE Z    -->
+  <!-- PAGE 3 / 3 : PARAMÉTRAGE VECTORIEL, SOUS-ENSEMBLES, TORSEURS & FERMETURE BOUCLE Z            -->
   <!-- ============================================================================================ -->
   <section class="a4-page">
     <div class="page-content">
 
       <header class="running-header">
-        <span class="rh-title">DM n°1 SII — Paramétrage Vectoriel, Torseurs Cinématiques (CM4) &amp; Fermeture $Z$</span>
-        <span class="rh-meta">Juan Ignacio RAMOS • CPGE MPSI (Lycée Stanislas)</span>
+        <span class="rh-title">DM n°1 SII — Paramétrage Vectoriel, Torseurs Cinématiques &amp; Fermeture $Z$</span>
+        <span class="rh-meta">Juan Ignacio RAMOS • CPGE MPSI (Lycée Stanislas Cannes)</span>
       </header>
 
       <!-- Section 5 : Figure plane de changement de base et chaîne vectorielle des centres -->
       <div class="section-banner">
         <span class="sec-main">5. Figure Plane de Changement de Base ($\mathcal{B}_0 \to \mathcal{B}_1$) &amp; Chaîne Vectorielle ($O_0 \dots O_5$)</span>
-        <span class="sec-sub">Formule de dérivation vectorielle de Bour (CM4 § 1.2)</span>
+        <span class="sec-sub">Formule de dérivation vectorielle de Bour</span>
       </div>
 
-      <div class="diagram-box">
+      <div class="diagram-box" style="flex:0;">
         <img src="../04_schemas_cinematiques/figures_parametrage_angles.svg" style="max-height: 58mm;" alt="Figure plane de changement de base et chaîne vectorielle des centres">
       </div>
 
-      <!-- Section 6 : Inventaire synthétique des 5 classes d'équivalence -->
+      <!-- Section 6 : Inventaire synthétique des 5 sous-ensembles -->
       <div class="section-banner">
-        <span class="sec-main">6. Définition Explicite des 5 Classes d'Équivalence ($E_0 \dots E_4$) &amp; Repères Locaux</span>
+        <span class="sec-main">6. Définition des 5 Sous-ensembles Cinématiques &amp; Repères Locaux</span>
         <span class="sec-sub">Solides indéformables en phase d'impression nominale</span>
       </div>
 
       <table class="sii-table">
         <thead>
           <tr>
-            <th style="width:10.5%;">Classe</th>
-            <th style="width:18.5%;">Repère local &amp; Base</th>
-            <th style="width:50%;">Inventaire explicite des pièces réelles constitutives (solides)</th>
-            <th style="width:21%;">Mouvement / $\mathcal{R}_0$ fixe</th>
+            <th style="width:17.5%;">Sous-ensemble</th>
+            <th style="width:17.5%;">Repère local &amp; Base</th>
+            <th style="width:44%;">Description &amp; Pièces constitutives</th>
+            <th style="width:21%;">Mouvement / Châssis fixe</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><span class="badge-class" style="background:var(--e0);">$E_0$ (Noir)</span></td>
+            <td><span class="badge-class" style="background:var(--e0);">Châssis fixe</span></td>
             <td>$\mathcal{R}_0(O_0, \vec{x}_0, \vec{y}_0, \vec{z}_0)$<br>Bâti de référence</td>
-            <td>Profilés alu V-Slot (cadre $4040$, rail $Y$ $4040$, 2 montants $Z$ $2040$, traverse $2020$), stators des moteurs NEMA 17 $Z$ et $Y$, alimentation 24V, carte mère, écran LCD, capteurs fin de course $Z/Y$.</td>
-            <td><strong>Bâti fixe de référence</strong><br>Symbole normalisé : $\underline{\underline{\equiv\mkern-10mu\perp}}$</td>
+            <td><strong>Châssis d'aluminium, contient l'électronique entre autres</strong> (profilés alu V-Slot, stators des moteurs stepper $Z$ et $Y$, alimentation 24V, carte mère, écran LCD).</td>
+            <td><strong>Bâti fixe de référence</strong><br>Symbole : $\underline{\underline{\equiv\mkern-10mu\perp}}$</td>
           </tr>
           <tr>
-            <td><span class="badge-class" style="background:var(--e1);">$E_1$ (Bleu)</span></td>
+            <td><span class="badge-class" style="background:var(--e1);">Vis centrale</span></td>
             <td>$\mathcal{R}_1(O_1, \vec{x}_1, \vec{y}_1, \vec{z}_0)$<br>$O_1$ : centre coupleur</td>
-            <td>Rotor et arbre de sortie ($\varnothing 5\text{ mm}$) du moteur pas-à-pas $Z$, coupleur cylindrique rigide fendu en aluminium (+ 2 vis CHC M3), vis mère trapézoïdale inox Tr8x8 (filet à droite, $p_z = 8\text{ mm/tr}$).</td>
+            <td><strong>Moteur stepper, axe $Z$</strong> (rotor du moteur stepper $Z$, coupleur rigide fendu en aluminium, vis centrale trapézoïdale inox Tr8x8 de pas $p_z = 8\text{ mm/tr}$).</td>
             <td><strong>Rotation</strong> d'axe $(O_1, \vec{z}_0)$<br>$\theta_1(t) = (\widehat{\vec{x}_0, \vec{x}_1})$</td>
           </tr>
           <tr>
-            <td><span class="badge-class" style="background:var(--e2);">$E_2$ (Rouge)</span></td>
+            <td><span class="badge-class" style="background:var(--e2);">Traverse horiz.</span></td>
             <td>$\mathcal{R}_2(O_3, \vec{x}_0, \vec{y}_0, \vec{z}_0)$<br>$O_3$ : centre guidage $Z$</td>
-            <td>Profilé horizontal $X$ ($2020$), platines acier gauche/droite, <strong>écrou trapézoïdal en laiton Tr8x8</strong>, axes M5 et bagues intérieures des 6 galets V-wheels $Z$, stators des moteurs $X$ et extrudeur MK8.</td>
+            <td><strong>Bouge de haut en bas (axe $Z$) et tient l'extrudeur</strong> (profilé horizontal $X$, platines latérales, écrou trapézoïdal en laiton Tr8x8, guidage vertical $Z$, moteur stepper $X$).</td>
             <td><strong>Translation verticale</strong><br>$\overrightarrow{O_1 O_2} = z_2(t)\,\vec{z}_0$</td>
           </tr>
           <tr>
-            <td><span class="badge-class" style="background:var(--e3);">$E_3$ (Vert)</span></td>
+            <td><span class="badge-class" style="background:var(--e3);">Chariot extrudeur</span></td>
             <td>$\mathcal{R}_3(O_4, \vec{x}_0, \vec{y}_0, \vec{z}_0)$<br>$O_4$ : centre chariot $X$</td>
-            <td>Platine chariot $X$ en acier, axes M5 et bagues intérieures des 3 galets V-wheels $X$, tête chaude complète (radiateur rouge, heatbreak, bloc de chauffe, <strong>buse laiton $\varnothing 0{,}4\text{ mm}$</strong>), carénage et ventilateurs.</td>
-            <td><strong>Translation selon $\vec{x}_0$ / $E_2$</strong><br>Buse : $x_3(t)\,\vec{x}_0 + z_2(t)\,\vec{z}_0$</td>
+            <td><strong>Bouge sur l'axe $X$ (droite / gauche)</strong> (platine chariot $X$, galets de guidage $X$, tête chaude complète d'extrusion avec buse laiton $\varnothing 0{,}4\text{ mm}$ et ventilateurs).</td>
+            <td><strong>Translation selon $\vec{x}_0$</strong><br>Buse : $x_3(t)\,\vec{x}_0 + z_2(t)\,\vec{z}_0$</td>
           </tr>
           <tr>
-            <td><span class="badge-class" style="background:var(--e4);">$E_4$ (Orange)</span></td>
+            <td><span class="badge-class" style="background:var(--e4); color:#ffffff;">Plateau mobile</span></td>
             <td>$\mathcal{R}_4(O_5, \vec{x}_0, \vec{y}_0, \vec{z}_0)$<br>$O_5$ : centre chariot $Y$</td>
-            <td>Platine chariot $Y$, axes M5 et bagues intérieures des 4 galets V-wheels $Y$, 4 vis M4 et molettes de nivellement (fixes en impression), plateau chauffant alu $235\times 235\text{ mm}$, revêtement BuildTak et pièce.</td>
+            <td><strong>Bouge sur l'axe $Y$, il est chauffé</strong> (platine support $Y$, galets de guidage sur le rail central $Y$, molettes de nivellement, plateau chauffant aluminium $235\times 235\text{ mm}$).</td>
             <td><strong>Translation longitudinale</strong><br>$\overrightarrow{O_0 O_5} = y_4(t)\,\vec{y}_0 + h_5\,\vec{z}_0$</td>
           </tr>
         </tbody>
@@ -732,63 +660,63 @@
 
       <!-- Section 7 : Tableau canonique des 5 liaisons et torseurs cinématiques -->
       <div class="section-banner">
-        <span class="sec-main">7. Répertoire Canonique des 5 Liaisons &amp; Torseurs Cinématiques dans $\mathcal{B}_0$</span>
-        <span class="sec-sub">Notations CM4 (§ 2.5) : Colonne $3\times 2$ &amp; Ligne • $N_s + N_c = 6$</span>
+        <span class="sec-main">7. Répertoire des 5 Liaisons &amp; Torseurs Cinématiques dans $\mathcal{B}_0$</span>
+        <span class="sec-sub">Degrés de liberté : $N_s + N_c = 6$</span>
       </div>
 
       <table class="sii-table">
         <thead>
           <tr>
             <th style="width:6.5%;">Liaison</th>
-            <th style="width:13.5%;">Classes</th>
-            <th style="width:23%;">Famille AFNOR &amp; Support</th>
-            <th style="width:15%;">DDL ($N_s / N_c$) &amp; Type</th>
-            <th style="width:42%;">Torseur cinématique $\{\mathcal{V}\}$ exprimé dans $\mathcal{B}_0(\vec{x}_0, \vec{y}_0, \vec{z}_0)$</th>
+            <th style="width:18.5%;">Sous-ensembles</th>
+            <th style="width:20%;">Famille &amp; Support</th>
+            <th style="width:14%;">DDL ($N_s / N_c$)</th>
+            <th style="width:41%;">Torseur cinématique $\{\mathcal{V}\}$ exprimé dans $\mathcal{B}_0(\vec{x}_0, \vec{y}_0, \vec{z}_0)$</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td><strong>$L_{01}$</strong></td>
-            <td>$E_0[\mathcal{R}_0] \leftrightarrow E_1[\mathcal{R}_1]$</td>
-            <td><strong>Pivot</strong> d'axe $(O_1, \vec{z}_0)$<br>Roulements moteur $Z$ + coupleur</td>
+            <td>Châssis $\leftrightarrow$ Vis centrale</td>
+            <td><strong>Pivot</strong> d'axe $(O_1, \vec{z}_0)$<br>Moteur stepper $Z$ + coupleur</td>
             <td>$N_s = 1\text{ (1R, 0T)}$<br>$N_c = 5$ • <strong>Glisseur</strong></td>
-            <td class="torseur-cell">$\{\mathcal{V}(E_1/E_0)\} = \left\{\begin{smallmatrix} 0 & 0 \\ 0 & 0 \\ \omega_{10}(t) & 0 \end{smallmatrix}\right\}_{O_1, \mathcal{B}_0} = \left\{ \dot{\theta}_1(t)\,\vec{z}_0 \;;\; \vec{0} \right\}_{O_1 \in (O_1, \vec{z}_0)}$</td>
+            <td class="torseur-cell">$\{\mathcal{V}(\text{Vis}/\text{Châssis})\} = \left\{\begin{smallmatrix} 0 & 0 \\ 0 & 0 \\ \omega_{10}(t) & 0 \end{smallmatrix}\right\}_{O_1, \mathcal{B}_0} = \left\{ \dot{\theta}_1(t)\,\vec{z}_0 \;;\; \vec{0} \right\}_{O_1}$</td>
           </tr>
           <tr>
             <td><strong>$L_{12}$</strong></td>
-            <td>$E_1[\mathcal{R}_1] \leftrightarrow E_2[\mathcal{R}_2]$</td>
-            <td><strong>Hélicoïdale</strong> d'axe $(O_2, \vec{z}_0)$<br>Filet à droite, pas $p_z = 8\text{ mm/tr}$</td>
+            <td>Vis centrale $\leftrightarrow$ Traverse</td>
+            <td><strong>Hélicoïdale</strong> d'axe $(O_2, \vec{z}_0)$<br>Filet à droite, $p_z = 8\text{ mm/tr}$</td>
             <td>$N_s = 1\text{ couplé}$<br>$N_c = 5$ • <strong>Hélicoïdal</strong></td>
-            <td class="torseur-cell">$\{\mathcal{V}(E_2/E_1)\} = \left\{\begin{smallmatrix} 0 & 0 \\ 0 & 0 \\ \omega_{21}(t) & v_{21}(t) \end{smallmatrix}\right\}_{O_2, \mathcal{B}_0}$ avec $v_{21}(t) = +\frac{p_z}{2\pi}\,\omega_{21}(t)$</td>
+            <td class="torseur-cell">$\{\mathcal{V}(\text{Traverse}/\text{Vis})\} = \left\{\begin{smallmatrix} 0 & 0 \\ 0 & 0 \\ \omega_{21}(t) & v_{21}(t) \end{smallmatrix}\right\}_{O_2, \mathcal{B}_0}$ avec $v_{21}(t) = +\frac{p_z}{2\pi}\,\omega_{21}(t)$</td>
           </tr>
           <tr>
             <td><strong>$L_{02}$</strong></td>
-            <td>$E_0[\mathcal{R}_0] \leftrightarrow E_2[\mathcal{R}_2]$</td>
-            <td><strong>Glissière</strong> de direction $\vec{z}_0$ (en $O_3$)<br>6 galets V-wheels sur montants $Z$</td>
+            <td>Châssis $\leftrightarrow$ Traverse</td>
+            <td><strong>Glissière</strong> de dir. $\vec{z}_0$ (en $O_3$)<br>Guidage vertical sur le châssis</td>
             <td>$N_s = 1\text{ (0R, 1T)}$<br>$N_c = 5$ • <strong>Couple</strong></td>
-            <td class="torseur-cell">$\{\mathcal{V}(E_2/E_0)\} = \left\{\begin{smallmatrix} 0 & 0 \\ 0 & 0 \\ 0 & \dot{z}_2(t) \end{smallmatrix}\right\}_{\forall P, \mathcal{B}_0} = \left\{ \vec{0} \;;\; V_z(t)\,\vec{z}_0 \right\}_{\forall P}$ (Champ uniforme)</td>
+            <td class="torseur-cell">$\{\mathcal{V}(\text{Traverse}/\text{Châssis})\} = \left\{\begin{smallmatrix} 0 & 0 \\ 0 & 0 \\ 0 & \dot{z}_2(t) \end{smallmatrix}\right\}_{\forall P, \mathcal{B}_0} = \left\{ \vec{0} \;;\; V_z(t)\,\vec{z}_0 \right\}_{\forall P}$</td>
           </tr>
           <tr>
             <td><strong>$L_{23}$</strong></td>
-            <td>$E_2[\mathcal{R}_2] \leftrightarrow E_3[\mathcal{R}_3]$</td>
-            <td><strong>Glissière</strong> de direction $\vec{x}_0$ (en $O_4$)<br>3 galets V-wheels sur profilé $X$</td>
+            <td>Traverse $\leftrightarrow$ Chariot</td>
+            <td><strong>Glissière</strong> de dir. $\vec{x}_0$ (en $O_4$)<br>Guidage horizontal (axe $X$)</td>
             <td>$N_s = 1\text{ (0R, 1T)}$<br>$N_c = 5$ • <strong>Couple</strong></td>
-            <td class="torseur-cell">$\{\mathcal{V}(E_3/E_2)\} = \left\{\begin{smallmatrix} 0 & \dot{x}_3(t) \\ 0 & 0 \\ 0 & 0 \end{smallmatrix}\right\}_{\forall P, \mathcal{B}_0} = \left\{ \vec{0} \;;\; V_x(t)\,\vec{x}_0 \right\}_{\forall P}$ (Champ uniforme)</td>
+            <td class="torseur-cell">$\{\mathcal{V}(\text{Chariot}/\text{Traverse})\} = \left\{\begin{smallmatrix} 0 & \dot{x}_3(t) \\ 0 & 0 \\ 0 & 0 \end{smallmatrix}\right\}_{\forall P, \mathcal{B}_0} = \left\{ \vec{0} \;;\; V_x(t)\,\vec{x}_0 \right\}_{\forall P}$</td>
           </tr>
           <tr>
             <td><strong>$L_{04}$</strong></td>
-            <td>$E_0[\mathcal{R}_0] \leftrightarrow E_4[\mathcal{R}_4]$</td>
-            <td><strong>Glissière</strong> de direction $\vec{y}_0$ (en $O_5$)<br>4 galets V-wheels sur rail central $Y$</td>
+            <td>Châssis $\leftrightarrow$ Plateau</td>
+            <td><strong>Glissière</strong> de dir. $\vec{y}_0$ (en $O_5$)<br>Guidage sur le rail central $Y$</td>
             <td>$N_s = 1\text{ (0R, 1T)}$<br>$N_c = 5$ • <strong>Couple</strong></td>
-            <td class="torseur-cell">$\{\mathcal{V}(E_4/E_0)\} = \left\{\begin{smallmatrix} 0 & 0 \\ 0 & \dot{y}_4(t) \\ 0 & 0 \end{smallmatrix}\right\}_{\forall P, \mathcal{B}_0} = \left\{ \vec{0} \;;\; V_y(t)\,\vec{y}_0 \right\}_{\forall P}$ (Champ uniforme)</td>
+            <td class="torseur-cell">$\{\mathcal{V}(\text{Plateau}/\text{Châssis})\} = \left\{\begin{smallmatrix} 0 & 0 \\ 0 & \dot{y}_4(t) \\ 0 & 0 \end{smallmatrix}\right\}_{\forall P, \mathcal{B}_0} = \left\{ \vec{0} \;;\; V_y(t)\,\vec{y}_0 \right\}_{\forall P}$</td>
           </tr>
         </tbody>
       </table>
 
-      <!-- Section 8 : Fermeture cinématique de la boucle Z & Commande en trapèze de vitesse -->
+      <!-- Section 8 : Fermeture cinématique de la boucle Z -->
       <div class="section-banner">
-        <span class="sec-main">8. Fermeture Cinématique de la Boucle $Z$ ($E_0 - E_1 - E_2 - E_0$) &amp; Profil Trapézoïdal</span>
-        <span class="sec-sub">Addition au même point $O_2$ (Varignon / BABAR — CM4)</span>
+        <span class="sec-main">8. Fermeture Cinématique de la Boucle $Z$ (Châssis — Vis centrale — Traverse)</span>
+        <span class="sec-sub">Composition des torseurs en $O_2$ (Varignon)</span>
       </div>
 
       <div class="closure-card">
@@ -798,11 +726,11 @@
         </div>
         <div class="closure-grid">
           <div>
-            • <strong>1. Transport en $O_2$ par Varignon (Règle BABAR) :</strong><br>
-            $\vec{V}(O_2 \in E_1/E_0) = \vec{V}(O_1 \in E_1/E_0) + \overrightarrow{O_2 O_1} \wedge \vec{\Omega}(E_1/E_0) = \vec{0} + (-z_2\,\vec{z}_0) \wedge (\omega_{10}\,\vec{z}_0) = \vec{0}$.<br>
-            • <strong>2. Équation de fermeture en $O_2$ :</strong> $\{\mathcal{V}(E_2/E_0)\}_{O_2} = \{\mathcal{V}(E_2/E_1)\}_{O_2} + \{\mathcal{V}(E_1/E_0)\}_{O_2}$<br>
+            • <strong>1. Transport en $O_2$ par Varignon :</strong><br>
+            $\vec{V}(O_2 \in \text{Vis}/\text{Châssis}) = \vec{V}(O_1 \in \text{Vis}/\text{Châssis}) + \overrightarrow{O_2 O_1} \wedge \vec{\Omega}(\text{Vis}/\text{Châssis}) = \vec{0} + (-z_2\,\vec{z}_0) \wedge (\omega_{10}\,\vec{z}_0) = \vec{0}$.<br>
+            • <strong>2. Équation de fermeture en $O_2$ :</strong> $\{\mathcal{V}(\text{Traverse}/\text{Châssis})\}_{O_2} = \{\mathcal{V}(\text{Traverse}/\text{Vis})\}_{O_2} + \{\mathcal{V}(\text{Vis}/\text{Châssis})\}_{O_2}$<br>
             $\implies \omega_{21}(t) + \omega_{10}(t) = 0 \iff \omega_{21}(t) = -\omega_{10}(t) = -\dot{\theta}_1(t)$.<br>
-            • <strong>3. Profil trapézoïdal (CM4 § 5.3 — Méthode de l'aire) :</strong> $\Delta z_2 = \frac{(t_3 + (t_2 - t_1))\cdot V_{\max}}{2}$.
+            • <strong>3. Profil trapézoïdal (Méthode de l'aire) :</strong> $\Delta z_2 = \frac{(t_3 + (t_2 - t_1))\cdot V_{\max}}{2}$.
           </div>
           <div>
             <div class="formula-highlight">
@@ -817,7 +745,7 @@
     </div>
 
     <footer class="a4-footer">
-      <span>CPGE MPSI — Lycée Stanislas Paris • SII (Mme M. Prot &amp; M. Cullaz)</span>
+      <span>CPGE MPSI — Lycée Stanislas Cannes • SII (Mme M. Prot)</span>
       <span>DM n°1 : Modélisation Cinématique de la Creality Ender 3 — Juan Ignacio RAMOS</span>
       <span>Page 3 / 3</span>
     </footer>

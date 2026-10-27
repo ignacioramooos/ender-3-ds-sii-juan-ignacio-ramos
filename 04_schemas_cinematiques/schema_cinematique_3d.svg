@@ -12,8 +12,8 @@
     <marker id="arr3-grn" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
       <path d="M 0 1 L 9 5 L 0 9 z" fill="#16a34a"/>
     </marker>
-    <marker id="arr3-org" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
-      <path d="M 0 1 L 9 5 L 0 9 z" fill="#ea580c"/>
+    <marker id="arr3-pnk" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#ec4899"/>
     </marker>
     <pattern id="hatch-3d" width="8" height="8" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
       <line x1="0" y1="0" x2="0" y2="8" stroke="#0f172a" stroke-width="1.8" />
@@ -23,29 +23,26 @@
   <!-- Title Banner -->
   <rect x="20" y="16" width="1140" height="54" rx="10" fill="#0f172a"/>
   <text x="40" y="49" fill="#ffffff" font-size="18.5" font-weight="800">SCHÉMA CINÉMATIQUE SPATIAL 3D EN COULEUR — Perspective Axonométrique / Cavalière</text>
-  <text x="1140" y="48" text-anchor="end" fill="#94a3b8" font-size="14" font-weight="600">Norme AFNOR NF EN ISO 3952</text>
+  <text x="1140" y="48" text-anchor="end" fill="#94a3b8" font-size="14" font-weight="600">CPGE MPSI — Lycée Stanislas Cannes</text>
 
   <!-- Color Legend Strip -->
   <g transform="translate(20, 82)">
     <rect x="0" y="0" width="1140" height="38" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
-    <circle cx="25" cy="19" r="7" fill="#0f172a"/><text x="38" y="24" fill="#0f172a" font-size="13" font-weight="800">E₀ : Bâti fixe (Noir)</text>
-    <circle cx="210" cy="19" r="7" fill="#2563eb"/><text x="223" y="24" fill="#2563eb" font-size="13" font-weight="800">E₁ : Vis mère Z &amp; Arbre (Bleu)</text>
-    <circle cx="455" cy="19" r="7" fill="#dc2626"/><text x="468" y="24" fill="#dc2626" font-size="13" font-weight="800">E₂ : Portique X &amp; Écrou Z (Rouge)</text>
-    <circle cx="720" cy="19" r="7" fill="#16a34a"/><text x="733" y="24" fill="#16a34a" font-size="13" font-weight="800">E₃ : Chariot Tête &amp; Buse (Vert)</text>
-    <circle cx="955" cy="19" r="7" fill="#ea580c"/><text x="968" y="24" fill="#ea580c" font-size="13" font-weight="800">E₄ : Plateau Y (Orange)</text>
+    <circle cx="24" cy="19" r="7" fill="#0f172a"/><text x="36" y="24" fill="#0f172a" font-size="12.5" font-weight="800">Châssis fixe (Noir)</text>
+    <circle cx="205" cy="19" r="7" fill="#2563eb"/><text x="217" y="24" fill="#2563eb" font-size="12.5" font-weight="800">Vis centrale (Bleu)</text>
+    <circle cx="400" cy="19" r="7" fill="#dc2626"/><text x="412" y="24" fill="#dc2626" font-size="12.5" font-weight="800">Traverse horizontale (Rouge)</text>
+    <circle cx="655" cy="19" r="7" fill="#16a34a"/><text x="667" y="24" fill="#16a34a" font-size="12.5" font-weight="800">Chariot tête extrudeur (Vert)</text>
+    <circle cx="915" cy="19" r="7" fill="#f472b6"/><text x="927" y="24" fill="#db2777" font-size="12.5" font-weight="800">Plateau mobile (Rose clair)</text>
   </g>
 
   <!-- ==================== 1. 3D DIRECT TRIHEDRON R0(O0, x0, y0, z0) ==================== -->
   <g transform="translate(80, 680)">
     <rect x="-50" y="-135" width="195" height="175" rx="10" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
     <text x="47" y="-112" text-anchor="middle" fill="#0f172a" font-size="13" font-weight="800">Trièdre direct 3D R₀</text>
-    <!-- Z0 vertical ascending (0, -80) -->
     <line x1="5" y1="0" x2="5" y2="-80" stroke="#0f172a" stroke-width="3" marker-end="url(#arr3-blk)"/>
     <text x="-24" y="-70" fill="#0f172a" font-size="16" font-weight="800"><tspan font-style="italic" font-weight="800">z</tspan><tspan dx="-0.56em" dy="-7.5" font-size="70%" font-style="normal" font-weight="800">→</tspan><tspan dx="-0.04em" dy="10.5" font-size="74%" font-style="normal" font-weight="800">0</tspan><tspan dy="-3">&#8203;</tspan></text>
-    <!-- X0 horizontal right (+85, 0) -->
     <line x1="5" y1="0" x2="90" y2="0" stroke="#0f172a" stroke-width="3" marker-end="url(#arr3-blk)"/>
     <text x="97" y="5" fill="#0f172a" font-size="16" font-weight="800"><tspan font-style="italic" font-weight="800">x</tspan><tspan dx="-0.56em" dy="-7.5" font-size="70%" font-style="normal" font-weight="800">→</tspan><tspan dx="-0.04em" dy="10.5" font-size="74%" font-style="normal" font-weight="800">0</tspan><tspan dy="-3">&#8203;</tspan></text>
-    <!-- Y0 receding into depth (+60, -40) — strictly parallel to all Y lines! -->
     <line x1="5" y1="0" x2="65" y2="-40" stroke="#0f172a" stroke-width="3" marker-end="url(#arr3-blk)"/>
     <text x="71" y="-42" fill="#0f172a" font-size="16" font-weight="800"><tspan font-style="italic" font-weight="800">y</tspan><tspan dx="-0.56em" dy="-7.5" font-size="70%" font-style="normal" font-weight="800">→</tspan><tspan dx="-0.04em" dy="10.5" font-size="74%" font-style="normal" font-weight="800">0</tspan><tspan dy="-3">&#8203;</tspan></text>
     <circle cx="5" cy="0" r="4.5" fill="#0f172a"/>
@@ -53,70 +50,55 @@
     <text x="47" y="32" text-anchor="middle" fill="#475569" font-size="11" font-weight="600">Fuyante <tspan font-style="italic" font-weight="800">y</tspan><tspan dx="-0.56em" dy="-7.5" font-size="70%" font-style="normal" font-weight="800">→</tspan><tspan dx="-0.04em" dy="10.5" font-size="74%" font-style="normal" font-weight="800">0</tspan><tspan dy="-3">&#8203;</tspan> : pente (-2 / +3)</text>
   </g>
 
-  <!-- ==================== 2. BÂTI FIXE 3D E0 (NOIR) ==================== -->
+  <!-- ==================== 2. CHÂSSIS FIXE 3D (NOIR) ==================== -->
   <polygon points="280,680 920,680 1070,580 430,580" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6 4"/>
-  <!-- Front base bar along x0 -->
   <line x1="280" y1="680" x2="920" y2="680" stroke="#0f172a" stroke-width="4"/>
   <rect x="300" y="680" width="600" height="14" fill="url(#hatch-3d)"/>
 
-  <!-- Central Y guide rail of E0 along y0 (slope = -2/3) -->
+  <!-- Central Y guide rail of Châssis fixe along y0 (slope = -2/3) -->
   <line x1="600" y1="700" x2="810" y2="560" stroke="#0f172a" stroke-width="4.5"/>
-  <!-- Origin O0 at the mid-base intersection (660, 660) -->
   <circle cx="660" cy="660" r="5" fill="#ffffff" stroke="#0f172a" stroke-width="3"/>
-  <text x="638" y="675" text-anchor="end" fill="#0f172a" font-size="14" font-weight="800">O₀ (Bâti E₀)</text>
+  <text x="638" y="675" text-anchor="end" fill="#0f172a" font-size="14" font-weight="800">O₀ (Châssis fixe)</text>
 
-  <!-- Left vertical Z column of E0 at (x = 340, y = 640) -->
+  <!-- Left vertical Z column of Châssis fixe at (x = 340, y = 640) -->
   <line x1="280" y1="680" x2="340" y2="640" stroke="#0f172a" stroke-width="4"/>
   <line x1="340" y1="640" x2="340" y2="165" stroke="#0f172a" stroke-width="4.5"/>
-  <!-- Top ground symbol on vertical column E0 -->
   <line x1="315" y1="165" x2="365" y2="165" stroke="#0f172a" stroke-width="4"/>
   <rect x="315" y="150" width="50" height="15" fill="url(#hatch-3d)"/>
-  <text x="340" y="142" text-anchor="middle" fill="#0f172a" font-size="14" font-weight="800">E₀ (Montant Z)</text>
+  <text x="340" y="142" text-anchor="middle" fill="#0f172a" font-size="14" font-weight="800">Châssis fixe (Montant Z)</text>
 
-  <!-- Support arm from E0 column (340, 580) along +x0 to Pivot L01 center O1 (450, 580) -->
   <line x1="340" y1="580" x2="450" y2="580" stroke="#0f172a" stroke-width="4"/>
 
-  <!-- ==================== 3. LIAISON PIVOT 3D L01 (O1, z0) & VIS E1 (BLEU) ==================== -->
-  <!-- Vertical axis of screw E1 at x = 450 -->
+  <!-- ==================== 3. LIAISON PIVOT 3D L01 (O1, z0) & VIS CENTRALE (BLEU) ==================== -->
   <line x1="450" y1="620" x2="450" y2="165" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="6 4"/>
-  <!-- Continuous screw shaft E1 (Blue) -->
   <line x1="450" y1="595" x2="450" y2="185" stroke="#2563eb" stroke-width="4.5"/>
-  <text x="462" y="196" fill="#2563eb" font-size="14.5" font-weight="800">E₁ (Vis mère Z)</text>
+  <text x="462" y="196" fill="#2563eb" font-size="14.5" font-weight="800">Vis centrale (axe Z)</text>
 
-  <!-- Normalized 3D Cylinder Symbol for Pivot L01 at O1 (450, 535) -->
+  <!-- 3D Cylinder Symbol for Pivot L01 at O1 (450, 535) -->
   <g transform="translate(450, 535)">
-    <!-- Cylinder body (Black E0) -->
     <path d="M -20 -28 L -20 28 A 20 8 0 0 0 20 28 L 20 -28 Z" fill="#ffffff" stroke="#0f172a" stroke-width="3"/>
-    <!-- Top ellipse of cylinder (Black E0) -->
     <ellipse cx="0" cy="-28" rx="20" ry="8" fill="#f8fafc" stroke="#0f172a" stroke-width="3"/>
-    <!-- Shaft E1 (Blue) emerging top and bottom -->
     <line x1="0" y1="-46" x2="0" y2="-28" stroke="#2563eb" stroke-width="4.5"/>
     <line x1="0" y1="36" x2="0" y2="52" stroke="#2563eb" stroke-width="4.5"/>
-    <!-- Internal dashed shaft line -->
     <line x1="0" y1="-28" x2="0" y2="36" stroke="#2563eb" stroke-width="2.5" stroke-dasharray="4 3"/>
-    <!-- 3D Axial Stop Rings / Flanges (Butées axiales) in Blue (E1) above and below cylinder -->
     <ellipse cx="0" cy="-35" rx="12" ry="4.5" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
     <line x1="-14" y1="42" x2="14" y2="42" stroke="#2563eb" stroke-width="3.5"/>
-    <!-- Center point O1 -->
     <circle cx="0" cy="0" r="4.5" fill="#ffffff" stroke="#2563eb" stroke-width="2.5"/>
-    <!-- Rotation arrow theta_1(t) around z0 -->
     <path d="M -18 -54 A 22 8 0 1 0 18 -54" fill="none" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arr3-blu)"/>
-    <text x="28" y="-50" fill="#2563eb" font-size="14" font-weight="800">θ₁(t) [R₁]</text>
-    <!-- Callout box placed in the open left space at (-395, -105) — completely above the 3D R0 trihedron box! -->
+    <text x="28" y="-50" fill="#2563eb" font-size="14" font-weight="800">θ₁(t)</text>
     <rect x="-395" y="-105" width="250" height="48" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
     <polyline points="-145,-81 -70,-81 -22,-10" fill="none" stroke="#2563eb" stroke-width="1.8" stroke-dasharray="4 3"/>
     <text x="-270" y="-85" text-anchor="middle" fill="#1d4ed8" font-size="13.5" font-weight="800">L₀₁ : Pivot 3D d'axe (O₁, <tspan font-style="italic" font-weight="800">z</tspan><tspan dx="-0.56em" dy="-7.5" font-size="70%" font-style="normal" font-weight="800">→</tspan><tspan dx="-0.04em" dy="10.5" font-size="74%" font-style="normal" font-weight="800">0</tspan><tspan dy="-3">&#8203;</tspan>)</text>
     <text x="-270" y="-66" text-anchor="middle" fill="#475569" font-size="12" font-weight="700">Cylindre creux à butées axiales</text>
   </g>
 
-  <!-- ==================== 4. PORTIQUE X 3D (E2, ROUGE) : GLISSIÈRE 3D L02 (O3) & HÉLICOÏDALE 3D L12 (O2) ==================== -->
-  <!-- Gantry elevation level: y = 340 -->
+  <!-- ==================== 4. TRAVERSE HORIZONTALE 3D (ROUGE) ==================== -->
   <line x1="360" y1="340" x2="430" y2="340" stroke="#dc2626" stroke-width="5"/>
   <line x1="470" y1="340" x2="712" y2="340" stroke="#dc2626" stroke-width="5"/>
   <line x1="788" y1="335" x2="960" y2="335" stroke="#dc2626" stroke-width="5"/>
-  <text x="895" y="319" fill="#dc2626" font-size="15" font-weight="800">E₂ (Portique X)</text>
+  <text x="880" y="319" fill="#dc2626" font-size="15" font-weight="800">Traverse horizontale</text>
 
-  <!-- Normalized 3D Rectangular Prism for Glissière L02 at O3 (340, 340) -->
+  <!-- 3D Rectangular Prism for Glissière L02 at O3 (340, 340) -->
   <g transform="translate(340, 340)">
     <rect x="-18" y="-32" width="30" height="68" fill="#ffffff" stroke="#dc2626" stroke-width="3"/>
     <polygon points="-18,-32 12,-32 27,-42 -3,-42" fill="#fee2e2" stroke="#dc2626" stroke-width="3" stroke-linejoin="round"/>
@@ -127,10 +109,10 @@
     <text x="-42" y="4" text-anchor="end" fill="#dc2626" font-size="14" font-weight="800">z₂(t)·<tspan font-style="italic" font-weight="800">z</tspan><tspan dx="-0.56em" dy="-7.5" font-size="70%" font-style="normal" font-weight="800">→</tspan><tspan dx="-0.04em" dy="10.5" font-size="74%" font-style="normal" font-weight="800">0</tspan><tspan dy="-3">&#8203;</tspan></text>
     <rect x="-255" y="-65" width="205" height="46" rx="6" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
     <text x="-152" y="-45" text-anchor="middle" fill="#991b1b" font-size="13.5" font-weight="800">L₀₂ : Glissière 3D (O₃, <tspan font-style="italic" font-weight="800">z</tspan><tspan dx="-0.56em" dy="-7.5" font-size="70%" font-style="normal" font-weight="800">→</tspan><tspan dx="-0.04em" dy="10.5" font-size="74%" font-style="normal" font-weight="800">0</tspan><tspan dy="-3">&#8203;</tspan>)</text>
-    <text x="-152" y="-28" text-anchor="middle" fill="#dc2626" font-size="12" font-weight="700">Prisme rectangulaire [R₂]</text>
+    <text x="-152" y="-28" text-anchor="middle" fill="#dc2626" font-size="12" font-weight="700">Prisme rectangulaire vertical</text>
   </g>
 
-  <!-- Normalized 3D Cylinder with Helix for Hélicoïdale L12 at O2 (450, 340) -->
+  <!-- 3D Cylinder with Helix for Hélicoïdale L12 at O2 (450, 340) -->
   <g transform="translate(450, 340)">
     <path d="M -20 -30 L -20 30 A 20 8 0 0 0 20 30 L 20 -30 Z" fill="#ffffff" stroke="#dc2626" stroke-width="3"/>
     <ellipse cx="0" cy="-30" rx="20" ry="8" fill="#fee2e2" stroke="#dc2626" stroke-width="3"/>
@@ -139,15 +121,13 @@
     <path d="M -20 22 Q 0 34 20 18" fill="none" stroke="#2563eb" stroke-width="3"/>
     <line x1="0" y1="-30" x2="0" y2="-55" stroke="#2563eb" stroke-width="4.5"/>
     <circle cx="0" cy="0" r="4.5" fill="#ffffff" stroke="#dc2626" stroke-width="2.5"/>
-    <!-- Callout box placed higher up at y = -122 so it never touches L23! -->
     <rect x="26" y="-122" width="230" height="48" rx="6" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
     <line x1="14" y1="-34" x2="36" y2="-74" stroke="#dc2626" stroke-width="2"/>
     <text x="141" y="-102" text-anchor="middle" fill="#991b1b" font-size="13.5" font-weight="800">L₁₂ : Hélicoïdale 3D (O₂, <tspan font-style="italic" font-weight="800">z</tspan><tspan dx="-0.56em" dy="-7.5" font-size="70%" font-style="normal" font-weight="800">→</tspan><tspan dx="-0.04em" dy="10.5" font-size="74%" font-style="normal" font-weight="800">0</tspan><tspan dy="-3">&#8203;</tspan>)</text>
     <text x="141" y="-83" text-anchor="middle" fill="#1d4ed8" font-size="12" font-weight="700">Cylindre à filet hélicoïdal (p<tspan font-size="75%" dy="3">z</tspan><tspan dy="-3">&#8203;</tspan>)</text>
   </g>
 
-  <!-- ==================== 5. CHARIOT TÊTE 3D (E3, VERT) : GLISSIÈRE 3D L23 (O4, x0) ==================== -->
-  <!-- Horizontal 3D Rectangular Prism at O4 (750, 340) along the x0 gantry bar -->
+  <!-- ==================== 5. CHARIOT TÊTE EXTRUDEUR 3D (VERT) : GLISSIÈRE 3D L23 (O4, x0) ==================== -->
   <g transform="translate(750, 340)">
     <rect x="-38" y="-14" width="68" height="30" fill="#ffffff" stroke="#16a34a" stroke-width="3"/>
     <polygon points="-38,-14 30,-14 45,-24 -23,-24" fill="#dcfce7" stroke="#16a34a" stroke-width="3" stroke-linejoin="round"/>
@@ -155,38 +135,37 @@
     <circle cx="0" cy="0" r="4.5" fill="#ffffff" stroke="#16a34a" stroke-width="2.5"/>
     <line x1="-35" y1="-36" x2="45" y2="-36" stroke="#16a34a" stroke-width="3" marker-end="url(#arr3-grn)"/>
     <text x="54" y="-31" fill="#16a34a" font-size="14" font-weight="800">x₃(t)·<tspan font-style="italic" font-weight="800">x</tspan><tspan dx="-0.56em" dy="-7.5" font-size="70%" font-style="normal" font-weight="800">→</tspan><tspan dx="-0.04em" dy="10.5" font-size="74%" font-style="normal" font-weight="800">0</tspan><tspan dy="-3">&#8203;</tspan></text>
-    <text x="0" y="-52" text-anchor="middle" fill="#15803d" font-size="13.5" font-weight="800">L₂₃ : Glissière 3D (O₄, <tspan font-style="italic" font-weight="800">x</tspan><tspan dx="-0.56em" dy="-7.5" font-size="70%" font-style="normal" font-weight="800">→</tspan><tspan dx="-0.04em" dy="10.5" font-size="74%" font-style="normal" font-weight="800">0</tspan><tspan dy="-3">&#8203;</tspan>) — Prisme [R₃]</text>
+    <text x="0" y="-52" text-anchor="middle" fill="#15803d" font-size="13.5" font-weight="800">L₂₃ : Glissière 3D (O₄, <tspan font-style="italic" font-weight="800">x</tspan><tspan dx="-0.56em" dy="-7.5" font-size="70%" font-style="normal" font-weight="800">→</tspan><tspan dx="-0.04em" dy="10.5" font-size="74%" font-style="normal" font-weight="800">0</tspan><tspan dy="-3">&#8203;</tspan>)</text>
 
-    <!-- 3D Printhead & Conical Nozzle (Green E3) -->
+    <!-- 3D Printhead & Conical Nozzle (Green) -->
     <line x1="0" y1="16" x2="0" y2="62" stroke="#16a34a" stroke-width="4.5"/>
     <ellipse cx="0" cy="62" rx="14" ry="5" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
     <polygon points="-14,62 14,62 0,92" fill="#bbf7d0" stroke="#16a34a" stroke-width="2.5" stroke-linejoin="round"/>
-    <text x="22" y="76" fill="#15803d" font-size="14" font-weight="800">E₃ (Tête &amp; Buse 3D)</text>
+    <text x="22" y="76" fill="#15803d" font-size="14" font-weight="800">Chariot tête extrudeur</text>
   </g>
 
-  <!-- ==================== 6. PLATEAU Y 3D (E4, ORANGE) : GLISSIÈRE 3D L04 (O5, y0) ==================== -->
-  <!-- Situated on the central Y rail (from (600, 700) to (810, 560)), centered at O5 (720, 620) -->
+  <!-- ==================== 6. PLATEAU MOBILE 3D (ROSE CLAIR) : GLISSIÈRE 3D L04 (O5, y0) ==================== -->
   <g transform="translate(720, 620)">
-    <polygon points="-29,-1 1,-1 37,-25 7,-25" fill="#ffedd5" stroke="#ea580c" stroke-width="3" stroke-linejoin="round"/>
-    <polygon points="1,-1 37,-25 37,-3 1,21" fill="#fed7aa" stroke="#ea580c" stroke-width="3" stroke-linejoin="round"/>
-    <rect x="-29" y="-1" width="30" height="22" fill="#ffffff" stroke="#ea580c" stroke-width="3"/>
+    <polygon points="-29,-1 1,-1 37,-25 7,-25" fill="#fce7f3" stroke="#ec4899" stroke-width="3" stroke-linejoin="round"/>
+    <polygon points="1,-1 37,-25 37,-3 1,21" fill="#fbcfe8" stroke="#ec4899" stroke-width="3" stroke-linejoin="round"/>
+    <rect x="-29" y="-1" width="30" height="22" fill="#ffffff" stroke="#ec4899" stroke-width="3"/>
     <line x1="-14" y1="10" x2="-60" y2="40" stroke="#0f172a" stroke-width="4.5"/>
-    <circle cx="0" cy="-6" r="4.5" fill="#ffffff" stroke="#ea580c" stroke-width="2.5"/>
+    <circle cx="0" cy="-6" r="4.5" fill="#ffffff" stroke="#ec4899" stroke-width="2.5"/>
 
-    <!-- Vertical riser from slider O5 to the 3D Heated Bed Plate E4 -->
-    <line x1="4" y1="-13" x2="4" y2="-52" stroke="#ea580c" stroke-width="4.5"/>
+    <!-- Vertical riser from slider O5 to the 3D Heated Bed Plate -->
+    <line x1="4" y1="-13" x2="4" y2="-52" stroke="#ec4899" stroke-width="4.5"/>
 
-    <!-- 3D Heated Bed Parallelogram E4 in the (x0, y0) plane -->
-    <polygon points="-125,-32 105,-32 165,-72 -65,-72" fill="rgba(254, 215, 170, 0.78)" stroke="#ea580c" stroke-width="3.5" stroke-linejoin="round"/>
-    <text x="-10" y="-46" text-anchor="middle" fill="#9a3412" font-size="14" font-weight="800">E₄ (Plateau chauffant 3D)</text>
+    <!-- 3D Heated Bed Parallelogram in the (x0, y0) plane (Light Pink) -->
+    <polygon points="-125,-32 105,-32 165,-72 -65,-72" fill="rgba(251, 207, 232, 0.82)" stroke="#ec4899" stroke-width="3.5" stroke-linejoin="round"/>
+    <text x="-10" y="-46" text-anchor="middle" fill="#9d174d" font-size="14" font-weight="800">Plateau mobile (chauffé)</text>
 
     <!-- Translation arrow y4(t)·y0 strictly parallel to y0 (+45, -30) -->
-    <line x1="35" y1="15" x2="86" y2="-19" stroke="#ea580c" stroke-width="3.5" marker-end="url(#arr3-org)"/>
-    <text x="94" y="-16" fill="#c2410c" font-size="14" font-weight="800">y₄(t)·<tspan font-style="italic" font-weight="800">y</tspan><tspan dx="-0.56em" dy="-7.5" font-size="70%" font-style="normal" font-weight="800">→</tspan><tspan dx="-0.04em" dy="10.5" font-size="74%" font-style="normal" font-weight="800">0</tspan><tspan dy="-3">&#8203;</tspan></text>
+    <line x1="35" y1="15" x2="86" y2="-19" stroke="#ec4899" stroke-width="3.5" marker-end="url(#arr3-pnk)"/>
+    <text x="94" y="-16" fill="#be185d" font-size="14" font-weight="800">y₄(t)·<tspan font-style="italic" font-weight="800">y</tspan><tspan dx="-0.56em" dy="-7.5" font-size="70%" font-style="normal" font-weight="800">→</tspan><tspan dx="-0.04em" dy="10.5" font-size="74%" font-style="normal" font-weight="800">0</tspan><tspan dy="-3">&#8203;</tspan></text>
 
     <!-- Callout box for L04 -->
-    <rect x="65" y="4" width="310" height="46" rx="6" fill="#fff7ed" stroke="#ea580c" stroke-width="1.5"/>
-    <text x="220" y="23" text-anchor="middle" fill="#9a3412" font-size="13.5" font-weight="800">L₀₄ : Glissière 3D (O₅, <tspan font-style="italic" font-weight="800">y</tspan><tspan dx="-0.56em" dy="-7.5" font-size="70%" font-style="normal" font-weight="800">→</tspan><tspan dx="-0.04em" dy="10.5" font-size="74%" font-style="normal" font-weight="800">0</tspan><tspan dy="-3">&#8203;</tspan>) — Prisme [R₄]</text>
-    <text x="220" y="41" text-anchor="middle" fill="#c2410c" font-size="11.5" font-weight="700">Prisme aligné sur la fuyante longitudinale <tspan font-style="italic" font-weight="800">y</tspan><tspan dx="-0.56em" dy="-7.5" font-size="70%" font-style="normal" font-weight="800">→</tspan><tspan dx="-0.04em" dy="10.5" font-size="74%" font-style="normal" font-weight="800">0</tspan><tspan dy="-3">&#8203;</tspan></text>
+    <rect x="65" y="4" width="310" height="46" rx="6" fill="#fdf2f8" stroke="#f472b6" stroke-width="1.5"/>
+    <text x="220" y="23" text-anchor="middle" fill="#9d174d" font-size="13.5" font-weight="800">L₀₄ : Glissière 3D (O₅, <tspan font-style="italic" font-weight="800">y</tspan><tspan dx="-0.56em" dy="-7.5" font-size="70%" font-style="normal" font-weight="800">→</tspan><tspan dx="-0.04em" dy="10.5" font-size="74%" font-style="normal" font-weight="800">0</tspan><tspan dy="-3">&#8203;</tspan>)</text>
+    <text x="220" y="41" text-anchor="middle" fill="#be185d" font-size="11.5" font-weight="700">Prisme aligné sur la fuyante longitudinale <tspan font-style="italic" font-weight="800">y</tspan><tspan dx="-0.56em" dy="-7.5" font-size="70%" font-style="normal" font-weight="800">→</tspan><tspan dx="-0.04em" dy="10.5" font-size="74%" font-style="normal" font-weight="800">0</tspan><tspan dy="-3">&#8203;</tspan></text>
   </g>
 </svg>

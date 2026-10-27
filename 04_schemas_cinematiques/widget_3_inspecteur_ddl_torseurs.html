@@ -269,7 +269,7 @@ button.lumi-chip.is-active {
   <div class="widget-container">
     <div class="widget-header">
       <h2 class="widget-title">Creality Ender 3 — Modélisation Cinématique</h2>
-      <p class="widget-subtitle">Graphe des liaisons & Torseurs cinématiques (NF EN ISO 3952)</p>
+      <p class="widget-subtitle">Graphe des liaisons &amp; Torseurs cinématiques</p>
     </div>
 
     <div class="main-grid">
@@ -292,11 +292,11 @@ button.lumi-chip.is-active {
             <g class="edge-pill" id="pill-L23" onclick="selectLink('L23')"><rect x="208" y="61" width="34" height="18" rx="9"/><text x="225" y="70">L23</text></g>
             <g class="edge-pill" id="pill-L04" onclick="selectLink('L04')"><rect x="158" y="171" width="34" height="18" rx="9"/><text x="175" y="180">L04</text></g>
 
-            <g class="node-group" id="node-E0"><rect class="node-bg" x="65" y="162" width="70" height="36" rx="18"/><text class="node-text" x="100" y="175">E0 : Bâti</text><text class="node-sub" x="100" y="188">Structure</text></g>
-            <g class="node-group" id="node-E1"><rect class="node-bg" x="25" y="52" width="70" height="36" rx="18"/><text class="node-text" x="60" y="65">E1 : Vis Z</text><text class="node-sub" x="60" y="78">Moteur Z</text></g>
-            <g class="node-group" id="node-E2"><rect class="node-bg" x="135" y="52" width="70" height="36" rx="18"/><text class="node-text" x="170" y="65">E2 : Char. Z</text><text class="node-sub" x="170" y="78">Poutre X</text></g>
-            <g class="node-group" id="node-E3"><rect class="node-bg" x="245" y="52" width="70" height="36" rx="18"/><text class="node-text" x="280" y="65">E3 : Tête X</text><text class="node-sub" x="280" y="78">Extrudeur</text></g>
-            <g class="node-group" id="node-E4"><rect class="node-bg" x="215" y="162" width="70" height="36" rx="18"/><text class="node-text" x="250" y="175">E4 : Plateau</text><text class="node-sub" x="250" y="188">Axe Y</text></g>
+            <g class="node-group" id="node-E0"><rect class="node-bg" x="60" y="162" width="80" height="36" rx="18"/><text class="node-text" x="100" y="175">Châssis fixe</text><text class="node-sub" x="100" y="188">Aluminium</text></g>
+            <g class="node-group" id="node-E1"><rect class="node-bg" x="20" y="52" width="80" height="36" rx="18"/><text class="node-text" x="60" y="65">Vis centrale</text><text class="node-sub" x="60" y="78">Stepper Z</text></g>
+            <g class="node-group" id="node-E2"><rect class="node-bg" x="130" y="52" width="80" height="36" rx="18"/><text class="node-text" x="170" y="65">Traverse</text><text class="node-sub" x="170" y="78">Axe Z</text></g>
+            <g class="node-group" id="node-E3"><rect class="node-bg" x="240" y="52" width="80" height="36" rx="18"/><text class="node-text" x="280" y="65">Chariot tête</text><text class="node-sub" x="280" y="78">Extrudeur X</text></g>
+            <g class="node-group" id="node-E4"><rect class="node-bg" x="210" y="162" width="80" height="36" rx="18"/><text class="node-text" x="250" y="175">Plateau</text><text class="node-sub" x="250" y="188">Axe Y chauffé</text></g>
           </svg>
         </div>
       </div>
@@ -304,7 +304,7 @@ button.lumi-chip.is-active {
       <div class="inspector-card" id="inspectorCard">
         <div class="link-header">
           <div>
-            <h3 class="link-name" id="linkTitle">Liaison L01 — E0 / E1</h3>
+            <h3 class="link-name" id="linkTitle">Liaison L01 — Châssis / Vis centrale</h3>
             <span id="linkDesc" style="font-size: 12px; color: var(--on-surface-variant);">Pivot d'axe (O1, z0)</span>
           </div>
           <span class="link-type" id="linkTypeBadge">PIVOT</span>
@@ -415,14 +415,14 @@ button.lumi-chip.is-active {
     const LINKS_DATA = {
       L01: {
         id: 'L01',
-        title: 'Liaison L₀₁ — E₀ (Bâti) / E₁ (Vis mère Z) [R₁]',
+        title: 'Liaison L₀₁ — Châssis fixe / Vis centrale',
         type: 'PIVOT (Z)',
         desc: "Pivot d'axe (O₁, z₀)",
         nodes: ['E0', 'E1'],
         ddl: { Rx: 0, Ry: 0, Rz: 1, Tx: 0, Ty: 0, Tz: 0 },
         point: 'O₁ (et O₂)',
         base: 'B₀(x₀, y₀, z₀)',
-        sol: 'Guidage interne par les deux roulements à billes du moteur NEMA 17 Z + coupleur rigide fendu en aluminium (2 vis CHC M3).',
+        sol: 'Moteur stepper, axe Z : guidage par les roulements du moteur stepper Z + coupleur rigide fendu en aluminium.',
         getTorseur: function() {
           const w10 = -state.omega10;
           return { rx: '0', ry: '0', rz: w10.toFixed(1), tx: '0', ty: '0', tz: '0' };
@@ -431,14 +431,14 @@ button.lumi-chip.is-active {
       },
       L12: {
         id: 'L12',
-        title: 'Liaison L₁₂ — E₁ (Vis mère Z) / E₂ (Portique X)',
+        title: 'Liaison L₁₂ — Vis centrale / Traverse horizontale',
         type: 'HÉLICOÏDALE (Z)',
         desc: "Hélicoïdale d'axe (O₂, z₀), pas p_z = 8 mm/tr (filetage à droite)",
         nodes: ['E1', 'E2'],
         ddl: { Rx: 0, Ry: 0, Rz: '1*', Tx: 0, Ty: 0, Tz: '1*' },
         point: 'O₂',
         base: 'B₀(x₀, y₀, z₀)',
-        sol: 'Écrou trapézoïdal en laiton fixé sur la platine gauche du portique E₂ + vis trapézoïdale inox Tr8x8 (p_z = 8 mm/tr).',
+        sol: 'Écrou trapézoïdal en laiton fixé sur la traverse horizontale + vis centrale trapézoïdale inox Tr8x8 (p_z = 8 mm/tr).',
         getTorseur: function() {
           const omega21 = +state.omega10; // omega21 = -omega10 = +omega_m
           const v21 = getK() * omega21;
@@ -452,14 +452,14 @@ button.lumi-chip.is-active {
       },
       L02: {
         id: 'L02',
-        title: 'Liaison L₀₂ — E₀ (Bâti) / E₂ (Portique X) [R₂]',
+        title: 'Liaison L₀₂ — Châssis fixe / Traverse horizontale',
         type: 'GLISSIÈRE (Z)',
         desc: "Glissière équivalente de direction z₀ (centre O₃)",
         nodes: ['E0', 'E2'],
         ddl: { Rx: 0, Ry: 0, Rz: 0, Tx: 0, Ty: 0, Tz: 1 },
         point: 'Tout point (O₃, O₂)',
         base: 'B₀(x₀, y₀, z₀)',
-        sol: 'Guidage bilatéral par 6 galets V-wheels en POM (dont 2 sur excentriques) roulant sur les 2 montants verticaux V-Slot 2040.',
+        sol: 'Bouge de haut en bas (axe Z) et tient l\'extrudeur : guidage par galets V-wheels sur les montants en aluminium du châssis fixe.',
         getTorseur: function() {
           const v20 = getK() * state.omega10;
           return { rx: '0', ry: '0', rz: '0', tx: '0', ty: '0', tz: '+' + v20.toFixed(2) };
@@ -471,14 +471,14 @@ button.lumi-chip.is-active {
       },
       L23: {
         id: 'L23',
-        title: 'Liaison L₂₃ — E₂ (Portique X) / E₃ (Tête X) [R₃]',
+        title: 'Liaison L₂₃ — Traverse horizontale / Chariot tête extrudeur',
         type: 'GLISSIÈRE (X)',
         desc: "Glissière de direction x₀ (centre O₄)",
         nodes: ['E2', 'E3'],
         ddl: { Rx: 0, Ry: 0, Rz: 0, Tx: 1, Ty: 0, Tz: 0 },
         point: 'Tout point (O₄)',
         base: 'B₀(x₀, y₀, z₀)',
-        sol: '3 galets V-wheels en POM roulant sur le profilé horizontal X V-Slot 2020 + entraînement par courroie crantée GT2.',
+        sol: 'Bouge sur l\'axe X (droite / gauche) : 3 galets V-wheels roulant sur la traverse horizontale + courroie crantée GT2.',
         getTorseur: function() {
           return { rx: '0', ry: '0', rz: '0', tx: state.v32.toFixed(1), ty: '0', tz: '0' };
         },
@@ -486,14 +486,14 @@ button.lumi-chip.is-active {
       },
       L04: {
         id: 'L04',
-        title: 'Liaison L₀₄ — E₀ (Bâti) / E₄ (Plateau Y) [R₄]',
+        title: 'Liaison L₀₄ — Châssis fixe / Plateau mobile',
         type: 'GLISSIÈRE (Y)',
         desc: "Glissière de direction y₀ (centre O₅)",
         nodes: ['E0', 'E4'],
         ddl: { Rx: 0, Ry: 0, Rz: 0, Tx: 0, Ty: 1, Tz: 0 },
         point: 'Tout point (O₅)',
         base: 'B₀(x₀, y₀, z₀)',
-        sol: 'Plateau guidé par 4 galets V-wheels en POM sur le rail central V-Slot 4040 + entraînement par courroie crantée GT2.',
+        sol: 'Bouge sur l\'axe Y, il est chauffé : guidé par 4 galets V-wheels sur le rail central du châssis fixe + courroie crantée GT2.',
         getTorseur: function() {
           return { rx: '0', ry: '0', rz: '0', tx: '0', ty: state.v40.toFixed(1), tz: '0' };
         },

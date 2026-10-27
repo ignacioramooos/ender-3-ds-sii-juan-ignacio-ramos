@@ -401,25 +401,25 @@ button.lumi-btn--accent {
     <div class="header-card">
       <div>
         <h2 style="margin:0; font-size:18px;">Creality Ender 3 — Modèle Cinématique</h2>
-        <p style="margin:4px 0 0 0; font-size:13px; color:var(--on-surface-variant);">Schéma cinématique spatial 3D/2D et fiches de liaisons AFNOR/SII</p>
+        <p style="margin:4px 0 0 0; font-size:13px; color:var(--on-surface-variant);">Schéma cinématique spatial 3D/2D et fiches de liaisons</p>
       </div>
       <button id="viewToggleBtn" class="lumi-btn lumi-btn--accent">Vue 3D Isométrique</button>
     </div>
 
     <div id="viewport-zone" class="viewport-wrapper">
       <div class="joint-legend-bar">
-        <div class="joint-chip is-active" data-joint="L01"><span class="chip-dot" style="background:#2563eb;"></span>L01: Pivot (0/1)</div>
-        <div class="joint-chip" data-joint="L12"><span class="chip-dot" style="background:#dc2626;"></span>L12: Hélicoïdale (1/2)</div>
-        <div class="joint-chip" data-joint="L02"><span class="chip-dot" style="background:#dc2626;"></span>L02: Glissière Z (0/2)</div>
-        <div class="joint-chip" data-joint="L23"><span class="chip-dot" style="background:#16a34a;"></span>L23: Glissière X (2/3)</div>
-        <div class="joint-chip" data-joint="L04"><span class="chip-dot" style="background:#ea580c;"></span>L04: Glissière Y (0/4)</div>
+        <div class="joint-chip is-active" data-joint="L01"><span class="chip-dot" style="background:#2563eb;"></span>L01: Pivot (Châssis / Vis)</div>
+        <div class="joint-chip" data-joint="L12"><span class="chip-dot" style="background:#dc2626;"></span>L12: Hélicoïdale (Vis / Traverse)</div>
+        <div class="joint-chip" data-joint="L02"><span class="chip-dot" style="background:#dc2626;"></span>L02: Glissière Z (Châssis / Traverse)</div>
+        <div class="joint-chip" data-joint="L23"><span class="chip-dot" style="background:#16a34a;"></span>L23: Glissière X (Traverse / Chariot)</div>
+        <div class="joint-chip" data-joint="L04"><span class="chip-dot" style="background:#f472b6;"></span>L04: Glissière Y (Châssis / Plateau)</div>
       </div>
       <canvas id="vizCanvas"></canvas>
     </div>
 
     <div class="control-deck">
       <div class="control-row">
-        <label class="control-label" for="slider-z2">Hauteur Portique <i>z</i><sub>2</sub> (Axe Z / Vis 1)</label>
+        <label class="control-label" for="slider-z2">Hauteur Traverse horizontale <i>z</i><sub>2</sub> (Axe Z)</label>
         <div class="lumi-slider-container">
           <input type="range" id="slider-z2" class="lumi-slider" data-key="z2" min="20" max="90" value="55" step="1">
           <div id="slider-z2-val" class="lumi-slider-value">55 mm</div>
@@ -427,7 +427,7 @@ button.lumi-btn--accent {
       </div>
 
       <div class="control-row">
-        <label class="control-label" for="slider-x3">Position Chariot Tête <i>x</i><sub>3</sub> (Axe X)</label>
+        <label class="control-label" for="slider-x3">Position Chariot tête extrudeur <i>x</i><sub>3</sub> (Axe X)</label>
         <div class="lumi-slider-container">
           <input type="range" id="slider-x3" class="lumi-slider" data-key="x3" min="-45" max="45" value="0" step="1">
           <div id="slider-x3-val" class="lumi-slider-value">0 mm</div>
@@ -435,7 +435,7 @@ button.lumi-btn--accent {
       </div>
 
       <div class="control-row">
-        <label class="control-label" for="slider-y4">Position Plateau <i>y</i><sub>4</sub> (Axe Y)</label>
+        <label class="control-label" for="slider-y4">Position Plateau mobile <i>y</i><sub>4</sub> (Axe Y)</label>
         <div class="lumi-slider-container">
           <input type="range" id="slider-y4" class="lumi-slider" data-key="y4" min="-40" max="40" value="0" step="1">
           <div id="slider-y4-val" class="lumi-slider-value">0 mm</div>
@@ -445,12 +445,12 @@ button.lumi-btn--accent {
 
     <div class="sii-card">
       <div class="sii-header">
-        <span id="sii-title" class="sii-title">Fiche Liaison AFNOR — L₀₁</span>
-        <span id="sii-class" style="font-size:13px; font-family:var(--ff-mono); color:var(--primary);">Classes : E₀ (Bâti) / E₁ (Vis mère Z) [Repère R₁]</span>
+        <span id="sii-title" class="sii-title">Fiche Liaison — L₀₁</span>
+        <span id="sii-class" style="font-size:13px; font-family:var(--ff-mono); color:var(--primary);">Sous-ensembles : Châssis fixe / Vis centrale</span>
       </div>
       <div class="sii-grid">
         <div class="sii-info-box">
-          <div class="sii-info-label">Nom Normalisé &amp; Centre</div>
+          <div class="sii-info-label">Nom &amp; Centre</div>
           <div id="sii-name" class="sii-info-val">Liaison Pivot d'axe (O₁, z₀)</div>
         </div>
         <div class="sii-info-box">
@@ -459,8 +459,8 @@ button.lumi-btn--accent {
         </div>
       </div>
       <div class="sii-info-box">
-        <div class="sii-info-label">Torseur Cinématique Normalisé dans B₀(x₀, y₀, z₀)</div>
-        <div id="sii-torsor" class="torsor-matrix">{V(E₁/E₀)} = { [0, 0], [0, 0], [ω₁₀(t), 0] }_{O₁, B₀}</div>
+        <div class="sii-info-label">Torseur Cinématique dans B₀(x₀, y₀, z₀)</div>
+        <div id="sii-torsor" class="torsor-matrix">{V(Vis/Châssis)} = { [0, 0], [0, 0], [ω₁₀(t), 0] }_{O₁, B₀}</div>
       </div>
     </div>
   </div>
@@ -470,39 +470,39 @@ button.lumi-btn--accent {
 
     const JOINT_SPECS = {
       L01: {
-        title: "Liaison Pivot L₀₁ (Origine de R₁)",
-        classes: "Classes : E₀ (Bâti fixe) / E₁ (Arbre moteur & Vis mère Z)",
+        title: "Liaison Pivot L₀₁ (Centre O₁)",
+        classes: "Sous-ensembles : Châssis fixe / Vis centrale (Moteur stepper, axe Z)",
         name: "Liaison Pivot d'axe (O₁, z₀)",
         dof: "1 Rotation θ₁(t) = (x₀, x₁) / 0 Translation",
-        torsor: `{V(E₁/E₀)} = [   0        0   ]\n             [   0        0   ]\n             [ ω₁₀(t)     0   ]_(O₁, B₀)   avec ω₁₀(t) = dθ₁/dt`
+        torsor: `{V(Vis/Châssis)} = [   0        0   ]\n                   [   0        0   ]\n                   [ ω₁₀(t)     0   ]_(O₁, B₀)   avec ω₁₀(t) = dθ₁/dt`
       },
       L12: {
         title: "Liaison Hélicoïdale L₁₂ (Filet à droite Tr8x8)",
-        classes: "Classes : E₁ (Vis mère Z) / E₂ (Portique X & Écrou laiton)",
+        classes: "Sous-ensembles : Vis centrale / Traverse horizontale",
         name: "Liaison Hélicoïdale d'axe (O₂, z₀), pas p_z = 8 mm/tr",
         dof: "1 DoF couplé : v₂₁(t) = +(p_z / 2π) · ω₂₁(t)",
-        torsor: `{V(E₂/E₁)} = [   0               0            ]\n             [   0               0            ]\n             [ ω₂₁(t)   +(p_z/2π)·ω₂₁(t) ]_(O₂, B₀)   avec ω₂₁ = -ω₁₀`
+        torsor: `{V(Traverse/Vis)} = [   0               0            ]\n                    [   0               0            ]\n                    [ ω₂₁(t)   +(p_z/2π)·ω₂₁(t) ]_(O₂, B₀)   avec ω₂₁ = -ω₁₀`
       },
       L02: {
-        title: "Liaison Glissière L₀₂ (Origine de R₂)",
-        classes: "Classes : E₀ (Bâti fixe) / E₂ (Portique mobile X)",
+        title: "Liaison Glissière L₀₂ (Centre O₃)",
+        classes: "Sous-ensembles : Châssis fixe / Traverse horizontale",
         name: "Liaison Glissière de direction z₀ (centre O₃)",
         dof: "1 Translation verticale z₂(t) / 0 Rotation",
-        torsor: `{V(E₂/E₀)} = [  0       0     ]\n             [  0       0     ]\n             [  0    V_z(t)   ]_(∀P, B₀)   avec V_z(t) = dz₂/dt = -(p_z/2π)·ω₁₀`
+        torsor: `{V(Traverse/Châssis)} = [  0       0     ]\n                        [  0       0     ]\n                        [  0    V_z(t)   ]_(∀P, B₀)   avec V_z(t) = dz₂/dt = -(p_z/2π)·ω₁₀`
       },
       L23: {
-        title: "Liaison Glissière L₂₃ (Origine de R₃)",
-        classes: "Classes : E₂ (Portique mobile X) / E₃ (Chariot Tête & Buse)",
+        title: "Liaison Glissière L₂₃ (Centre O₄)",
+        classes: "Sous-ensembles : Traverse horizontale / Chariot tête extrudeur",
         name: "Liaison Glissière de direction x₀ (centre O₄)",
         dof: "1 Translation horizontale x₃(t) / 0 Rotation",
-        torsor: `{V(E₃/E₂)} = [  0    V_x(t)   ]\n             [  0       0     ]\n             [  0       0     ]_(∀P, B₀)   avec V_x(t) = dx₃/dt`
+        torsor: `{V(Chariot/Traverse)} = [  0    V_x(t)   ]\n                        [  0       0     ]\n                        [  0       0     ]_(∀P, B₀)   avec V_x(t) = dx₃/dt`
       },
       L04: {
-        title: "Liaison Glissière L₀₄ (Origine de R₄)",
-        classes: "Classes : E₀ (Bâti fixe) / E₄ (Plateau chauffant Y)",
+        title: "Liaison Glissière L₀₄ (Centre O₅)",
+        classes: "Sous-ensembles : Châssis fixe / Plateau mobile (chauffé)",
         name: "Liaison Glissière de direction y₀ (centre O₅)",
         dof: "1 Translation longitudinale y₄(t) / 0 Rotation",
-        torsor: `{V(E₄/E₀)} = [  0       0     ]\n             [  0    V_y(t)   ]\n             [  0       0     ]_(∀P, B₀)   avec V_y(t) = dy₄/dt`
+        torsor: `{V(Plateau/Châssis)} = [  0       0     ]\n                       [  0    V_y(t)   ]\n                       [  0       0     ]_(∀P, B₀)   avec V_y(t) = dy₄/dt`
       }
     };
 
@@ -510,7 +510,7 @@ button.lumi-btn--accent {
     const C_VIS      = 0x2563eb;
     const C_PORTIQUE = 0xdc2626;
     const C_CHARIOT  = 0x16a34a;
-    const C_PLATEAU  = 0xea580c;
+    const C_PLATEAU  = 0xf472b6;
 
     let scene, camera, renderer, controls;
     let groupBase, groupVis, groupPortique, groupChariot, groupPlateau;
